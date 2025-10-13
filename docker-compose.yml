@@ -29,10 +29,12 @@ services:
     image: postgres:15
     environment:
       POSTGRES_DB: qentry_db
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
 
 volumes:
   postgres_data:
