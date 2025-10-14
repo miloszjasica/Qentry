@@ -3,7 +3,7 @@ from .models import QR, Transaction
 
 # Register your models here.
 class QRAdmin(admin.ModelAdmin):
-    list_display = ('id_qr', 'balance', 'is_active', 'generated_at', 'id_event', 'id_user', 'qr_string')
+    list_display = ('id_qr', 'balance', 'is_active', 'user_role', 'generated_at', 'id_event', 'id_user', 'qr_string')
     search_fields = ('id_user__name', 'id_event__name', 'qr_string')
     list_filter = ('is_active', 'id_event')
     ordering = ('-generated_at',)
