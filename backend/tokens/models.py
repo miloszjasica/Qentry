@@ -5,7 +5,7 @@ from accounts.models import User
 # Create your models here.
 class QR(models.Model):
     id_qr = models.AutoField(primary_key=True)
-    balance = models.IntegerField(default=0)
+    balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     is_active = models.BooleanField(default=True)
     generated_at = models.DateTimeField(auto_now_add=True)
     id_event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='qrs')
