@@ -3,5 +3,6 @@ djangorestframework
 psycopg2-binary
 Pillow
 djangorestframework
+djangorestframework-simplejwt
 drf-spectacular
 ruff==0.6.8
