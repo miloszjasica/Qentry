@@ -4,7 +4,6 @@ from rest_framework.response import Response
 from accounts.models import User
 from events.models import Event
 from .models import QR
-from .serializers import PurchaseTokensSerializer
 from decimal import Decimal, ROUND_DOWN as decimal
 
 @extend_schema(
