@@ -4,3 +4,4 @@ psycopg2-binary
 Pillow
 djangorestframework
 drf-spectacular
+ruff==0.6.8
