@@ -1,0 +1,452 @@
+[
+  {
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+      "email": "anna.nowak@example.com",
+      "name": "Anna",
+      "surname": "Nowak",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T12:00:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+      "email": "jan.kowalski@example.com",
+      "name": "Jan",
+      "surname": "Kowalski",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T12:10:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 3,
+    "fields": {
+      "email": "maria.zielinska@example.com",
+      "name": "Maria",
+      "surname": "Zielińska",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T12:20:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 4,
+    "fields": {
+      "email": "piotr.wisniewski@example.com",
+      "name": "Piotr",
+      "surname": "Wiśniewski",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T12:30:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 5,
+    "fields": {
+      "email": "katarzyna.kaczmarek@example.com",
+      "name": "Katarzyna",
+      "surname": "Kaczmarek",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T12:40:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 6,
+    "fields": {
+      "email": "tomasz.jablonski@example.com",
+      "name": "Tomasz",
+      "surname": "Jabłoński",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T12:50:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 7,
+    "fields": {
+      "email": "monika.kowalczyk@example.com",
+      "name": "Monika",
+      "surname": "Kowalczyk",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T13:00:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 8,
+    "fields": {
+      "email": "marek.piotrowski@example.com",
+      "name": "Marek",
+      "surname": "Piotrowski",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T13:10:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 9,
+    "fields": {
+      "email": "ewa.lis@example.com",
+      "name": "Ewa",
+      "surname": "Lis",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T13:20:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 10,
+    "fields": {
+      "email": "andrzej.krawczyk@example.com",
+      "name": "Andrzej",
+      "surname": "Krawczyk",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T13:30:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 11,
+    "fields": {
+      "email": "magdalena.wojcik@example.com",
+      "name": "Magdalena",
+      "surname": "Wójcik",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T13:40:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 12,
+    "fields": {
+      "email": "krzysztof.wozniak@example.com",
+      "name": "Krzysztof",
+      "surname": "Woźniak",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T13:50:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 13,
+    "fields": {
+      "email": "justyna.sikora@example.com",
+      "name": "Justyna",
+      "surname": "Sikora",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T14:00:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 14,
+    "fields": {
+      "email": "piotr.marciniak@example.com",
+      "name": "Piotr",
+      "surname": "Marciniak",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T14:10:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 15,
+    "fields": {
+      "email": "agnieszka.krol@example.com",
+      "name": "Agnieszka",
+      "surname": "Król",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T14:20:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 16,
+    "fields": {
+      "email": "lukasz.malysz@example.com",
+      "name": "Łukasz",
+      "surname": "Małysz",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T14:30:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 17,
+    "fields": {
+      "email": "iwona.kaczor@gmail.com",
+      "name": "Iwona",
+      "surname": "Kaczor",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T14:40:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 18,
+    "fields": {
+      "email": "mateusz.sadowski@example.com",
+      "name": "Mateusz",
+      "surname": "Sadowski",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T14:50:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 19,
+    "fields": {
+      "email": "karolina.olszewska@example.com",
+      "name": "Karolina",
+      "surname": "Olszewska",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T15:00:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 20,
+    "fields": {
+      "email": "rafal.kaminska@gmail.com",
+      "name": "Rafał",
+      "surname": "Kamińska",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T15:10:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 21,
+    "fields": {
+      "email": "anna.baran@example.com",
+      "name": "Anna",
+      "surname": "Baran",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T15:20:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 22,
+    "fields": {
+      "email": "marcin.lisowski@example.com",
+      "name": "Marcin",
+      "surname": "Lisowski",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T15:30:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 23,
+    "fields": {
+      "email": "katarzyna.piasecka@example.com",
+      "name": "Katarzyna",
+      "surname": "Piasecka",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T15:40:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 24,
+    "fields": {
+      "email": "tomasz.gorski@example.com",
+      "name": "Tomasz",
+      "surname": "Górski",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T15:50:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 25,
+    "fields": {
+      "email": "magdalena.nowicka@example.com",
+      "name": "Magdalena",
+      "surname": "Nowicka",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T16:00:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 26,
+    "fields": {
+      "email": "grzegorz.kowal@o2.pl",
+      "name": "Grzegorz",
+      "surname": "Kowal",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T16:10:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 27,
+    "fields": {
+      "email": "iwona.kaczmarek@example.com",
+      "name": "Iwona",
+      "surname": "Kaczmarek",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T16:20:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 28,
+    "fields": {
+      "email": "marek.bartosz@example.com",
+      "name": "Marek",
+      "surname": "Bartosz",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T16:30:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 29,
+    "fields": {
+      "email": "agnieszka.kowalik@example.com",
+      "name": "Agnieszka",
+      "surname": "Kowalik",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T16:40:00Z"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 30,
+    "fields": {
+      "email": "lukasz.piotrowski@example.com",
+      "name": "Łukasz",
+      "surname": "Piotrowski",
+      "user_image": null,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$390000$EXAMPLE_HASH$EXAMPLE_HASH_VALUE",
+      "created_at": "2025-10-15T16:50:00Z"
+    }
+  }
+]
