@@ -1,25 +1,37 @@
-from rest_framework.views import APIView
+from rest_framework import generics
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import RegisterSerializer, LoginSerializer
 from drf_spectacular.utils import extend_schema
+from accounts.models import User
+from accounts.serializers import LogoutSerializer, UserRegistrationSerializer
+from rest_framework.views import APIView
 
-class RegisterView(APIView):
-    @extend_schema(request=RegisterSerializer, responses={201: RegisterSerializer})
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = [AllowAny]
+    serializer_class = UserRegistrationSerializer
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    permission_classes = [AllowAny]
+
+class LogoutView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    @extend_schema(
+        request=LogoutSerializer,
+        responses={205: None, 400: None}
+    )
     def post(self, request):
-        serializer = RegisterSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            return Response(RegisterSerializer(user).data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class LoginView(APIView):
-    @extend_schema(request=LoginSerializer, responses={200: "Login successful"})
-    def post(self, request):
-        serializer = LoginSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.validated_data['user']
-            return Response({"message": "Zalogowano pomyślnie", "user_id": user.id_user})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+        try:
+            refresh_token = request.data["refresh"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response({"detail": "Successfully logged out."}, status=status.HTTP_205_RESET_CONTENT)
+        except KeyError:
+            return Response({"error": "Refresh token is required."}, status=status.HTTP_400_BAD_REQUEST)
+        except TokenError:
+            return Response({"error": "Invalid or expired token."}, status=status.HTTP_400_BAD_REQUEST)
