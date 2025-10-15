@@ -10,7 +10,7 @@ from accounts.serializers import LogoutSerializer, UserRegistrationSerializer, U
 from rest_framework.views import APIView
 from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiResponse
 from django_filters.rest_framework import DjangoFilterBackend
-from django.shortcuts import get_object_or_404
+
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
