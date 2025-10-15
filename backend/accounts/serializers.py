@@ -5,10 +5,11 @@ from django.contrib.auth.hashers import make_password, check_password
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
+    wants_to_be_organizer = serializers.BooleanField(default=False)
 
     class Meta:
         model = User
-        fields = ['email', 'name', 'surname', 'password']
+        fields = ['email', 'name', 'surname', 'password', 'wants_to_be_organizer']
 
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
