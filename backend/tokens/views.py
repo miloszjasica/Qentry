@@ -11,11 +11,8 @@ from .models import Transaction
 from .serializers import TransactionSerializer
 from events.models import Attraction
 
-
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
 @extend_schema(
-    tags=['Tokens'],
+    tags=['Tokens'],    
     summary='Get balance for a user in an event',
     parameters=[
         OpenApiParameter(name='user_id', type=int, required=True, location=OpenApiParameter.PATH),
@@ -23,6 +20,8 @@ from events.models import Attraction
     ],
     responses={200: OpenApiResponse(description='User balance')}
 )
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def user_balance(request, user_id, id_event):
     try:
         user = User.objects.get(pk=user_id)
@@ -38,9 +37,6 @@ def user_balance(request, user_id, id_event):
     except QR.DoesNotExist:
         return Response({'error': 'QR not found for this user and event'}, status=404)
     
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
 @extend_schema(
     tags=['Tokens'],
     summary='Purchase tokens for a user in an event',
@@ -51,6 +47,8 @@ def user_balance(request, user_id, id_event):
     ],
     responses={200: OpenApiResponse(description='Tokens purchased successfully')}
 )
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def add_tokens(request, user_id, id_event):
     try:
         user = User.objects.get(pk=user_id)
@@ -87,6 +85,7 @@ def add_tokens(request, user_id, id_event):
     responses={200: OpenApiResponse(description='Transaction completed successfully')}
 )
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def new_transaction(request, user_id, id_attraction, id_event):
     try:
         user = User.objects.get(pk=user_id)
@@ -138,6 +137,7 @@ def new_transaction(request, user_id, id_attraction, id_event):
     responses={200: OpenApiResponse(description='Transaction details')}
 )
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get_transaction(request, transaction_id):
     try:
         transaction = Transaction.objects.get(pk=transaction_id)
@@ -162,6 +162,7 @@ def get_transaction(request, transaction_id):
     responses={200: OpenApiResponse(description='List of transactions')}
 )
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def list_transactions(request):
     user_id = request.query_params.get('user_id')
     id_event = request.query_params.get('id_event')
@@ -193,6 +194,7 @@ def list_transactions(request):
     responses={200: OpenApiResponse(description='List of user transactions')}
 )
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def user_transactions(request, user_id):
     try:
         user = User.objects.get(pk=user_id)
@@ -234,6 +236,7 @@ def user_transactions(request, user_id):
     responses={200: OpenApiResponse(description='List of attraction transactions')}
 )
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def attraction_transactions(request, id_attraction):
     try:
         attraction = Attraction.objects.get(pk=id_attraction)
