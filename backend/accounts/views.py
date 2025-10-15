@@ -74,7 +74,7 @@ class UserDetailView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAdminUser]
-    lookup_field = 'id'  # domyślnie to 'pk', ale można jawnie
+    lookup_field = 'id'  
 
 @extend_schema(summary="List all users (admin only)", responses=UserSerializer(many=True))
 class UserListView(generics.ListAPIView):
@@ -83,4 +83,4 @@ class UserListView(generics.ListAPIView):
     permission_classes = [IsAdminUser]
     filter_backends = [filters.SearchFilter, DjangoFilterBackend]
     search_fields = ['name', 'surname', 'email']
-    filterset_fields = ['name', 'surname', 'email']  # opcjonalnie
+    filterset_fields = ['name', 'surname', 'email']  
