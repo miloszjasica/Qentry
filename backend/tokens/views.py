@@ -7,7 +7,7 @@ from .models import QR
 from decimal import Decimal, ROUND_DOWN as decimal
 from .models import Transaction
 from .serializers import TransactionSerializer
-from events.models import Attraction
+from attractions.models import Attraction
 
 @extend_schema(
     tags=['Tokens'],

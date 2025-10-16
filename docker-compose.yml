@@ -40,5 +40,5 @@ services:
     ports:
       - "5431:5432"
 
-  volumes:
-      postgres_data:
+volumes:
+    postgres_data:
