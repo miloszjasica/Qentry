@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-$c2qk4j9i1jz#rs*@1*(2*t&6+td9*-@)y45js&*mj4j=6no)k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '10.0.2.2','192.168.201.1', '*']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'rest_framework_simplejwt.token_blacklist',
     'django_filters',
+    'corsheaders',
 
     # Custom apps
     'accounts',
@@ -59,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -127,7 +129,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -157,3 +158,6 @@ SIMPLE_JWT = {
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_BLACKLIST_ENABLED': True,
 }
+
+CORS_ALLOW_ALL_ORIGINS = True 
+
