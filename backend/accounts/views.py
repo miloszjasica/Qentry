@@ -8,7 +8,7 @@ from drf_spectacular.utils import extend_schema
 from accounts.models import User
 from accounts.serializers import LogoutSerializer, UserRegistrationSerializer, UserSerializer
 from rest_framework.views import APIView
-from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiResponse
+from drf_spectacular.utils import extend_schema_view, OpenApiResponse
 from django_filters.rest_framework import DjangoFilterBackend
 
 
