@@ -3,5 +3,8 @@ djangorestframework
 psycopg2-binary
 Pillow
 djangorestframework
+djangorestframework-simplejwt
+django-filter
+django-cors-headers
 drf-spectacular
 ruff==0.6.8

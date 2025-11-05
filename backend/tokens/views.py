@@ -1,38 +1,44 @@
 from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import permission_classes
 from accounts.models import User
-from events.models import Event
+from events.models import Event, Attraction
 from .models import QR
 from decimal import Decimal, ROUND_DOWN as decimal
 from .models import Transaction
 from .serializers import TransactionSerializer
 from attractions.models import Attraction
+from .serializers import BalanceSerializer, AddTokensSerializer, NewTransactionSerializer, ListTransactionsSerializer
 
 @extend_schema(
-    tags=['Tokens'],
+    tags=['Tokens'],    
     summary='Get balance for a user in an event',
     parameters=[
         OpenApiParameter(name='user_id', type=int, required=True, location=OpenApiParameter.PATH),
         OpenApiParameter(name='id_event', type=int, required=True, location=OpenApiParameter.PATH),
     ],
-    responses={200: OpenApiResponse(description='User balance')}
+    responses= {
+        200: OpenApiResponse(response=BalanceSerializer, description='User balance in event'),
+        }
 )
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def user_balance(request, user_id, id_event):
     try:
         user = User.objects.get(pk=user_id)
         event = Event.objects.get(pk=id_event)
         qr = QR.objects.get(id_user=user, id_event=event)
         
-        return Response({'balance': qr.balance})
-    
+        return Response(BalanceSerializer({"balance": qr.balance}).data)
+           
     except User.DoesNotExist:
-        return Response({'error': 'User not found'}, status=404)
+        return Response({'error': 'Nie znaleziono użytkownika'}, status=404)
     except Event.DoesNotExist:
-        return Response({'error': 'Event not found'}, status=404)
+        return Response({'error': 'Nie znaleziono wydarzenia'}, status=404)
     except QR.DoesNotExist:
-        return Response({'error': 'QR not found for this user and event'}, status=404)
+        return Response({'error': 'Nie znaleziono kodu QR dla użytkownika w tym wydarzeniu'}, status=404)
     
 @extend_schema(
     tags=['Tokens'],
@@ -42,9 +48,10 @@ def user_balance(request, user_id, id_event):
         OpenApiParameter(name='id_event', type=int, required=True, location=OpenApiParameter.PATH),
         OpenApiParameter(name='amount', type=float, required=False, location=OpenApiParameter.QUERY)
     ],
-    responses={200: OpenApiResponse(description='Tokens purchased successfully')}
+    responses={200: OpenApiResponse(response=AddTokensSerializer, description='Tokeny zakupione pomyślnie')}
 )
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def add_tokens(request, user_id, id_event):
     try:
         user = User.objects.get(pk=user_id)
@@ -60,15 +67,15 @@ def add_tokens(request, user_id, id_event):
         qr.balance += amount
         qr.save()
         
-        return Response({
-            'message': 'Tokens purchased successfully', 
-            'new_balance': qr.balance
-        })
+        return Response(AddTokensSerializer({
+            'new_balance': qr.balance,
+            'message': 'Tokeny zakupione pomyślnie'
+        }).data)
     
     except User.DoesNotExist:
-        return Response({'error': 'User not found'}, status=404)
+        return Response({'error': 'Nie znaleziono użytkownika'}, status=404)
     except Event.DoesNotExist:
-        return Response({'error': 'Event not found'}, status=404)
+        return Response({'error': 'Nie znaleziono wydarzenia'}, status=404)
 
 @extend_schema(
     tags=['Transactions'],
@@ -78,24 +85,26 @@ def add_tokens(request, user_id, id_event):
         OpenApiParameter(name='id_attraction', type=int, required=True, location=OpenApiParameter.PATH),
         OpenApiParameter(name='id_event', type=int, required=True, location=OpenApiParameter.PATH),
     ],
-    responses={200: OpenApiResponse(description='Transaction completed successfully')}
+    responses={200: OpenApiResponse(response=NewTransactionSerializer,  description='Tranzakcja zakończona sukcesem')}
 )
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def new_transaction(request, user_id, id_attraction, id_event):
     try:
         user = User.objects.get(pk=user_id)
         event = Event.objects.get(pk=id_event)
+        attraction = Attraction.objects.get(pk=id_attraction, id_event=event)
         qr = QR.objects.get(id_user=user, id_event=event)
         attraction = event.attractions.get(pk=id_attraction)
 
         if not qr.is_active:
-            return Response({'error': 'QR code is inactive'}, status=400)
+            return Response({'error': 'Kod QR jest nieaktywny'}, status=400)
         
         if not attraction.is_active:
-            return Response({'error': 'Attraction is inactive'}, status=400)
+            return Response({'error': 'Atrakcja jest nieaktywny'}, status=400)
         
         if qr.balance < attraction.price:
-            return Response({'error': 'Insufficient balance'}, status=400)
+            return Response({'error': 'Niewystarczające saldo użytkownika'}, status=400)
         
         qr.balance -= attraction.price
         qr.save()
@@ -108,20 +117,23 @@ def new_transaction(request, user_id, id_attraction, id_event):
             id_attraction=attraction
         )
         
-        return Response({
-            'message': 'Transaction completed successfully', 
+        return Response(NewTransactionSerializer({
+            'message': 'Transakcja zakończona sukcesem', 
             'new_balance': qr.balance,
-            'transaction_id': transaction.id_transaction
-        })
+            'balance': qr.balance + attraction.price,
+            'transaction_id': transaction.id_transaction,
+            'event_name': event.name,
+            'price': attraction.price
+        }).data)
     
     except User.DoesNotExist:
-        return Response({'error': 'User not found'}, status=404)
+        return Response({'error': 'Nie znaleziono użytkownika'}, status=404)
     except Event.DoesNotExist:
-        return Response({'error': 'Event not found'}, status=404)
+        return Response({'error': 'Nie znaleziono wydarzenia'}, status=404)
     except QR.DoesNotExist:
-        return Response({'error': 'QR not found for this user and event'}, status=404)
+        return Response({'error': 'Kod QR nieaktywny'}, status=404)
     except event.attractions.model.DoesNotExist:
-        return Response({'error': 'Attraction not found in this event'}, status=404)
+        return Response({'error': 'Nie znaleziono atrakcji'}, status=404)
 
 @extend_schema(
     tags=['Transactions'],
@@ -129,21 +141,16 @@ def new_transaction(request, user_id, id_attraction, id_event):
     parameters=[
         OpenApiParameter(name='transaction_id', type=int, required=True, location=OpenApiParameter.PATH),
     ],
-    responses={200: OpenApiResponse(description='Transaction details')}
+    responses={200: OpenApiResponse(response=TransactionSerializer, description='Transaction details')}
 )
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get_transaction(request, transaction_id):
     try:
         transaction = Transaction.objects.get(pk=transaction_id)
-        return Response({
-            'transaction_id': transaction.id_transaction,
-            'user': transaction.id_user.name,
-            'attraction': transaction.id_attraction.name,
-            'price': transaction.id_attraction.price,
-            'date': transaction.date
-        })
+        return Response(TransactionSerializer(transaction).data)
     except Transaction.DoesNotExist:
-        return Response({'error': 'Transaction not found'}, status=404)
+        return Response({'error': 'Nie znaleziono tranzakcji'}, status=404)
     
 @extend_schema(
     tags=['Transactions'],
@@ -153,9 +160,10 @@ def get_transaction(request, transaction_id):
         OpenApiParameter(name='id_event', type=int, required=False, location=OpenApiParameter.QUERY),
         OpenApiParameter(name='id_attraction', type=int, required=False, location=OpenApiParameter.QUERY),
     ],
-    responses={200: OpenApiResponse(description='List of transactions')}
+    responses={200: OpenApiResponse(response=ListTransactionsSerializer,  description='List of transactions')}
 )
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def list_transactions(request):
     user_id = request.query_params.get('user_id')
     id_event = request.query_params.get('id_event')
@@ -164,15 +172,13 @@ def list_transactions(request):
     transactions = Transaction.objects.all()
 
     if user_id:
-        transactions = transactions.filter(id_user__id_user=user_id)
+        transactions = transactions.filter(id_user=user_id)
     if id_event:
         transactions = transactions.filter(id_attraction__id_event__id_event=id_event)
     if id_attraction:
         transactions = transactions.filter(id_attraction__id_attraction=id_attraction)
 
-    serialized_transactions = TransactionSerializer(transactions, many=True).data
-
-    return Response(serialized_transactions)
+    return Response(ListTransactionsSerializer({'transactions': transactions}).data)
 
 @extend_schema(
     tags=['Transactions'],
@@ -184,9 +190,10 @@ def list_transactions(request):
         OpenApiParameter(name='date_from', type=str, required=False, location=OpenApiParameter.QUERY, description="Filter from date (YYYY-MM-DD)"),
         OpenApiParameter(name='date_to', type=str, required=False, location=OpenApiParameter.QUERY, description="Filter to date (YYYY-MM-DD)"),
     ],
-    responses={200: OpenApiResponse(description='List of user transactions')}
+    responses={200: OpenApiResponse(response=TransactionSerializer,  description='List of user transactions')}
 )
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def user_transactions(request, user_id):
     try:
         user = User.objects.get(pk=user_id)
@@ -210,10 +217,9 @@ def user_transactions(request, user_id):
             transactions = transactions.order_by('-date')
         
 
-        serialized_transactions = TransactionSerializer(transactions, many=True).data
-        return Response(serialized_transactions)
+        return Response(TransactionSerializer(transactions, many=True).data)
     except User.DoesNotExist:
-        return Response({'error': 'User not found'}, status=404)
+        return Response({'error': 'Nie znaleziono użytkownika'}, status=404)
     
 @extend_schema(
     tags=['Transactions'],
@@ -225,9 +231,10 @@ def user_transactions(request, user_id):
         OpenApiParameter(name='date_from', type=str, required=False, location=OpenApiParameter.QUERY, description="Filter from date (YYYY-MM-DD)"),
         OpenApiParameter(name='date_to', type=str, required=False, location=OpenApiParameter.QUERY, description="Filter to date (YYYY-MM-DD)"),
     ],
-    responses={200: OpenApiResponse(description='List of attraction transactions')}
+    responses={200: OpenApiResponse(response=TransactionSerializer ,description='List of attraction transactions')}
 )
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def attraction_transactions(request, id_attraction):
     try:
         attraction = Attraction.objects.get(pk=id_attraction)
@@ -252,5 +259,5 @@ def attraction_transactions(request, id_attraction):
         
         serialized_transactions = TransactionSerializer(transactions, many=True).data
         return Response(serialized_transactions)
-    except Attraction.model.DoesNotExist:
-        return Response({'error': 'Attraction not found'}, status=404)
+    except Attraction.DoesNotExist:
+        return Response({'error': 'Nie znaleziono atrakcji'}, status=404)
