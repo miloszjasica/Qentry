@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
 from accounts.models import User
-from events.models import Event, Attraction
+from events.models import Event
 from .models import QR
 from decimal import Decimal, ROUND_DOWN as decimal
 from .models import Transaction
