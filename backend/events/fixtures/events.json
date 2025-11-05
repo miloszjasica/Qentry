@@ -1,22 +1,9 @@
 [
   {
     "model": "events.event",
-    "pk": 1,
-    "fields": {
-      "name": "Koncert Rockowy",
-      "description": "Energetyczny koncert rockowy z najlepszymi zespołami.",
-      "created_at": "2025-10-01T10:00:00Z",
-      "is_active": true,
-      "location": "Stadion Narodowy",
-      "start_date": "2025-11-01",
-      "end_date": "2025-11-02",
-      "participants": 5000
-    }
-  },
-  {
-    "model": "events.event",
     "pk": 2,
     "fields": {
+      "user_id": 1,
       "name": "Festiwal Jazzowy",
       "description": "Relaksująca muzyka jazzowa na świeżym powietrzu.",
       "created_at": "2025-10-02T10:00:00Z",
@@ -31,6 +18,7 @@
     "model": "events.event",
     "pk": 3,
     "fields": {
+      "user_id": 2,
       "name": "Kiermasz Świąteczny",
       "description": "Świąteczne stoiska, muzyka i atrakcje dla dzieci.",
       "created_at": "2025-10-03T10:00:00Z",
@@ -45,6 +33,7 @@
     "model": "events.event",
     "pk": 4,
     "fields": {
+      "user_id": 2,
       "name": "Maraton Miejski",
       "description": "Bieg uliczny dla profesjonalistów i amatorów.",
       "created_at": "2025-10-04T10:00:00Z",
@@ -59,6 +48,7 @@
     "model": "events.event",
     "pk": 5,
     "fields": {
+      "user_id": 3,
       "name": "Pokaz Filmowy",
       "description": "Premiera nowego filmu familijnego.",
       "created_at": "2025-10-05T10:00:00Z",
@@ -73,6 +63,7 @@
     "model": "events.event",
     "pk": 6,
     "fields": {
+      "user_id": 3,
       "name": "Festiwal Jedzenia",
       "description": "Smaki świata w jednym miejscu.",
       "created_at": "2025-10-06T10:00:00Z",
@@ -81,367 +72,6 @@
       "start_date": "2025-11-25",
       "end_date": "2025-11-26",
       "participants": 1500
-    }
-  },
-
-  {
-    "model": "events.attraction",
-    "pk": 1,
-    "fields": {
-      "name": "Scena Główna",
-      "description": "Najważniejsza scena z największymi zespołami.",
-      "is_active": true,
-      "price": 150,
-      "id_event": 1,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 2,
-    "fields": {
-      "name": "Strefa VIP",
-      "description": "Specjalna strefa dla VIP z najlepszymi miejscami.",
-      "is_active": true,
-      "price": 300,
-      "id_event": 1,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 3,
-    "fields": {
-      "name": "Food Trucki",
-      "description": "Różnorodne jedzenie dla uczestników.",
-      "is_active": true,
-      "price": 20,
-      "id_event": 1,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 4,
-    "fields": {
-      "name": "Strefa Chill",
-      "description": "Miejsce do odpoczynku i relaksu.",
-      "is_active": true,
-      "price": 0,
-      "id_event": 2,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 5,
-    "fields": {
-      "name": "Jazzowe Warsztaty",
-      "description": "Nauka gry na instrumentach jazzowych.",
-      "is_active": true,
-      "price": 50,
-      "id_event": 2,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 6,
-    "fields": {
-      "name": "Stoisko Świąteczne",
-      "description": "Rękodzieło i ozdoby świąteczne.",
-      "is_active": true,
-      "price": 10,
-      "id_event": 3,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 7,
-    "fields": {
-      "name": "Karuzela",
-      "description": "Dla dzieci i dorosłych.",
-      "is_active": true,
-      "price": 5,
-      "id_event": 3,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 8,
-    "fields": {
-      "name": "Bieg Główny",
-      "description": "Dystans maratoński 42 km.",
-      "is_active": true,
-      "price": 30,
-      "id_event": 4,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 9,
-    "fields": {
-      "name": "Bieg Rekreacyjny",
-      "description": "Dystans 5 km dla wszystkich.",
-      "is_active": true,
-      "price": 10,
-      "id_event": 4,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 10,
-    "fields": {
-      "name": "Seans Filmowy",
-      "description": "Premiera filmu familijnego.",
-      "is_active": true,
-      "price": 25,
-      "id_event": 5,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 11,
-    "fields": {
-      "name": "Spotkanie z Aktorami",
-      "description": "Q&A z aktorami filmu.",
-      "is_active": true,
-      "price": 40,
-      "id_event": 5,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 12,
-    "fields": {
-      "name": "Kuchnie Świata",
-      "description": "Degustacja potraw z różnych krajów.",
-      "is_active": true,
-      "price": 20,
-      "id_event": 6,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 13,
-    "fields": {
-      "name": "Pokaz Gotowania",
-      "description": "Szefowie kuchni przygotowują potrawy na żywo.",
-      "is_active": true,
-      "price": 15,
-      "id_event": 6,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 14,
-    "fields": {
-      "name": "Strefa Degustacji",
-      "description": "Próbki różnych potraw i napojów.",
-      "is_active": true,
-      "price": 10,
-      "id_event": 6,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 15,
-    "fields": {
-      "name": "Koncert Jazzowy",
-      "description": "Wieczorny koncert na Festiwalu Jazzowym.",
-      "is_active": true,
-      "price": 60,
-      "id_event": 2,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 16,
-    "fields": {
-      "name": "Pokaz Świateł",
-      "description": "Pokaz iluminacji na Kiermaszu Świątecznym.",
-      "is_active": true,
-      "price": 0,
-      "id_event": 3,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 17,
-    "fields": {
-      "name": "Strefa Fitness",
-      "description": "Ćwiczenia i zajęcia dla uczestników Maratonu.",
-      "is_active": true,
-      "price": 5,
-      "id_event": 4,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 18,
-    "fields": {
-      "name": "Strefa Rodzinna",
-      "description": "Zabawy dla dzieci i rodziców.",
-      "is_active": true,
-      "price": 0,
-      "id_event": 3,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 19,
-    "fields": {
-      "name": "Strefa Plażowa",
-      "description": "Relaks w namiotach plażowych.",
-      "is_active": true,
-      "price": 10,
-      "id_event": 1,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 20,
-    "fields": {
-      "name": "Strefa Medytacji",
-      "description": "Warsztaty medytacji i relaksu.",
-      "is_active": true,
-      "price": 15,
-      "id_event": 2,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 21,
-    "fields": {
-      "name": "Stoisko Zabawek",
-      "description": "Zabawki dla dzieci na Kiermaszu.",
-      "is_active": true,
-      "price": 5,
-      "id_event": 3,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 22,
-    "fields": {
-      "name": "Strefa Chillout",
-      "description": "Odpoczynek dla biegaczy i uczestników.",
-      "is_active": true,
-      "price": 0,
-      "id_event": 4,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 23,
-    "fields": {
-      "name": "Warsztaty Kulinarne",
-      "description": "Gotowanie na Festiwalu Jedzenia.",
-      "is_active": true,
-      "price": 30,
-      "id_event": 6,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 24,
-    "fields": {
-      "name": "Pokaz Filmowy dla Dzieci",
-      "description": "Seans filmu animowanego.",
-      "is_active": true,
-      "price": 15,
-      "id_event": 5,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 25,
-    "fields": {
-      "name": "Spotkanie z Autorami",
-      "description": "Spotkanie i podpisywanie książek.",
-      "is_active": true,
-      "price": 20,
-      "id_event": 3,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 26,
-    "fields": {
-      "name": "Strefa Gier",
-      "description": "Gry planszowe i video dla uczestników.",
-      "is_active": true,
-      "price": 10,
-      "id_event": 1,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 27,
-    "fields": {
-      "name": "Pokaz Tańca",
-      "description": "Pokaz tańca nowoczesnego.",
-      "is_active": true,
-      "price": 25,
-      "id_event": 2,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 28,
-    "fields": {
-      "name": "Strefa Sportowa",
-      "description": "Aktywności sportowe dla dzieci i dorosłych.",
-      "is_active": true,
-      "price": 15,
-      "id_event": 4,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 29,
-    "fields": {
-      "name": "Pokaz Sztucznych Ogni",
-      "description": "Pokaz na zakończenie Festiwalu Jedzenia.",
-      "is_active": true,
-      "price": 0,
-      "id_event": 6,
-      "counter": 0
-    }
-  },
-  {
-    "model": "events.attraction",
-    "pk": 30,
-    "fields": {
-      "name": "Strefa Relaksu",
-      "description": "Miejsce odpoczynku podczas koncertu rockowego.",
-      "is_active": true,
-      "price": 0,
-      "id_event": 1,
-      "counter": 0
     }
   }
 ]

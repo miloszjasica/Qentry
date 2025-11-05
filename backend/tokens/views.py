@@ -132,7 +132,7 @@ def new_transaction(request, user_id, id_attraction, id_event):
             }).data)
         
         else:
-            return Response({'error': 'Nie możesz pobierać opłat jako gość i sprzedający tokeny'}, status=403)
+            return Response({'error': 'Nie możesz pobierać opłat jako gość lub sprzedający tokeny'}, status=403)
         
     except User.DoesNotExist:
         return Response({'error': 'Nie znaleziono użytkownika'}, status=404)
@@ -155,9 +155,13 @@ def new_transaction(request, user_id, id_attraction, id_event):
 @permission_classes([IsAuthenticated])
 def get_transaction(request, transaction_id):
     try:
-        transaction = Transaction.objects.get(pk=transaction_id)
+        transaction = Transaction.objects.select_related('id_attraction__id_event').get(pk=transaction_id)
         user = User.objects.get(pk=request.user.id)
-        if user.role == 'organizer':
+        if user.wants_to_be_organizer == 'True':
+            if transaction.id_attraction.id_event.user_id != user.id:
+                return Response({'error': 'Nie masz uprawnień do przeglądania tej transakcji'}, status=403)
+            return Response(TransactionSerializer(transaction).data)
+        elif user.role == 'admin':
             return Response(TransactionSerializer(transaction).data)
         else:
             return Response({'error': 'Nie masz uprawnień do przeglądania tej transakcji'}, status=403)
@@ -192,14 +196,13 @@ def list_transactions(request):
 
     return Response(ListTransactionsSerializer({'transactions': transactions}).data)
 
-#Nie wiem czy tego nie trzeba bedzie zabezpieczyc dla admina albo organizatora
 @extend_schema(
     tags=['Transactions'],
     summary='Get all transactions of user',
     parameters=[
         OpenApiParameter(name='user_id', type=int, required=True, location=OpenApiParameter.PATH),
+        OpenApiParameter(name='id_event', type=int, required=True, location=OpenApiParameter.PATH),
         OpenApiParameter(name='ordering', type=str, required=False, location=OpenApiParameter.QUERY, description="Ordering by date: 'date' or '-date'"),
-        OpenApiParameter(name='Event name', type=str, required=False, location=OpenApiParameter.QUERY),
         OpenApiParameter(name='date_from', type=str, required=False, location=OpenApiParameter.QUERY, description="Filter from date (YYYY-MM-DD)"),
         OpenApiParameter(name='date_to', type=str, required=False, location=OpenApiParameter.QUERY, description="Filter to date (YYYY-MM-DD)"),
     ],
@@ -207,12 +210,20 @@ def list_transactions(request):
 )
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def user_transactions(request, user_id):
+def user_transactions(request, user_id, id_event):
     try:
-        user = User.objects.get(pk=user_id)
-        transactions = Transaction.objects.filter(id_user=user)
+        target_user = User.objects.get(pk=user_id)
+        event = Event.objects.get(pk=id_event)
+        requesting_user = request.user
+
+        if event.user_id.id == requesting_user.id or requesting_user.role == 'admin':
+            pass
+        else:
+            return Response({'error': 'Nie masz uprawnień do przeglądania transakcji tego użytkownika'}, status=403)
+
+        transactions = Transaction.objects.filter(id_user=target_user, id_attraction__id_event=event)
+
         ordering = request.query_params.get('ordering')
-        event_name = request.query_params.get('Event name')
         date_from = request.query_params.get('date_from')
         date_to = request.query_params.get('date_to')
 
@@ -221,18 +232,17 @@ def user_transactions(request, user_id):
         if date_to:
             transactions = transactions.filter(date__date__lte=date_to)
 
-        if event_name:
-            transactions = transactions.filter(id_attraction__id_event__name__icontains=event_name)
-
         if ordering in ['date', '-date']:
             transactions = transactions.order_by(ordering)
         else:
             transactions = transactions.order_by('-date')
-        
 
         return Response(TransactionSerializer(transactions, many=True).data)
+
     except User.DoesNotExist:
         return Response({'error': 'Nie znaleziono użytkownika'}, status=404)
+    except Event.DoesNotExist:
+        return Response({'error': 'Nie znaleziono eventu'}, status=404)
 
 @extend_schema(
     tags=['Transactions'],
@@ -250,7 +260,9 @@ def user_transactions(request, user_id):
 @permission_classes([IsAuthenticated])
 def attraction_transactions(request, id_attraction):
     try:
-        attraction = Attraction.objects.get(pk=id_attraction)
+        attraction = Attraction.objects.filter(pk=id_attraction, id_event__user_id=request.user.id).first()
+        if not attraction:
+            return Response({'error': 'Nie masz uprawnień do przeglądania tej atrakcji'}, status=403)
         transactions = Transaction.objects.filter(id_attraction=attraction)
         ordering = request.query_params.get('ordering')
         event_name = request.query_params.get('Event name')

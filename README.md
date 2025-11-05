@@ -13,6 +13,7 @@ docker compose up
 ```bash
 docker compose exec backend python manage.py loaddata accounts.json
 docker compose exec backend python manage.py loaddata events.json
+docker compose exec backend python manage.py loaddata attractions.json
 docker compose exec backend python manage.py loaddata tokens.json
 
 ```
