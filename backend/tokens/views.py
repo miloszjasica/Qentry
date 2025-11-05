@@ -42,7 +42,7 @@ def user_balance(request, user_id, id_event):
     
 @extend_schema(
     tags=['Tokens'],
-    summary='Purchase tokens for a user in an event',
+    summary='Add tokens for a user in an event',
     parameters=[
         OpenApiParameter(name='user_id', type=int, required=True, location=OpenApiParameter.PATH),
         OpenApiParameter(name='id_event', type=int, required=True, location=OpenApiParameter.PATH),
@@ -58,19 +58,22 @@ def add_tokens(request, user_id, id_event):
         event = Event.objects.get(pk=id_event)
         qr, created = QR.objects.get_or_create(id_user=user, id_event=event)
         
-        amount = request.query_params.get('amount')
-        amount = Decimal(str(amount)).quantize(Decimal('0.01'), rounding=decimal)
-        #COMMENTED FOR TESTING PURPOSES
-        # if amount <= 0:
-        #     return Response({'error': 'Amount must be greater than zero'}, status=400)
+        if qr.user_role != 'guest':
 
-        qr.balance += amount
-        qr.save()
-        
-        return Response(AddTokensSerializer({
-            'new_balance': qr.balance,
-            'message': 'Tokeny zakupione pomyślnie'
-        }).data)
+            amount = request.query_params.get('amount')
+            amount = Decimal(str(amount)).quantize(Decimal('0.01'), rounding=decimal)
+            if amount <= 0:
+                return Response({'error': 'Amount must be greater than zero'}, status=400)
+
+            qr.balance += amount
+            qr.save()
+            
+            return Response(AddTokensSerializer({
+                'new_balance': qr.balance,
+                'message': 'Tokeny zakupione pomyślnie'
+            }).data)
+        else:
+            return Response({'error': 'Nie możesz sprzedawać tokenów jako gość'}, status=403)
     
     except User.DoesNotExist:
         return Response({'error': 'Nie znaleziono użytkownika'}, status=404)
@@ -97,35 +100,40 @@ def new_transaction(request, user_id, id_attraction, id_event):
         qr = QR.objects.get(id_user=user, id_event=event)
         attraction = event.attractions.get(pk=id_attraction)
 
-        if not qr.is_active:
-            return Response({'error': 'Kod QR jest nieaktywny'}, status=400)
+        if qr.user_role != 'guest':
+
+            if not qr.is_active:
+                return Response({'error': 'Kod QR jest nieaktywny'}, status=400)
+            
+            if not attraction.is_active:
+                return Response({'error': 'Atrakcja jest nieaktywny'}, status=400)
+            
+            if qr.balance < attraction.price:
+                return Response({'error': 'Niewystarczające saldo użytkownika'}, status=400)
+            
+            qr.balance -= attraction.price
+            qr.save()
+            
+            attraction.counter += 1
+            attraction.save()
+            
+            transaction = Transaction.objects.create(
+                id_user=user,
+                id_attraction=attraction
+            )
+            
+            return Response(NewTransactionSerializer({
+                'message': 'Transakcja zakończona sukcesem', 
+                'new_balance': qr.balance,
+                'balance': qr.balance + attraction.price,
+                'transaction_id': transaction.id_transaction,
+                'event_name': event.name,
+                'price': attraction.price
+            }).data)
         
-        if not attraction.is_active:
-            return Response({'error': 'Atrakcja jest nieaktywny'}, status=400)
+        else:
+            return Response({'error': 'Nie możesz pobierać opłat jako gość'}, status=403)
         
-        if qr.balance < attraction.price:
-            return Response({'error': 'Niewystarczające saldo użytkownika'}, status=400)
-        
-        qr.balance -= attraction.price
-        qr.save()
-        
-        attraction.counter += 1
-        attraction.save()
-        
-        transaction = Transaction.objects.create(
-            id_user=user,
-            id_attraction=attraction
-        )
-        
-        return Response(NewTransactionSerializer({
-            'message': 'Transakcja zakończona sukcesem', 
-            'new_balance': qr.balance,
-            'balance': qr.balance + attraction.price,
-            'transaction_id': transaction.id_transaction,
-            'event_name': event.name,
-            'price': attraction.price
-        }).data)
-    
     except User.DoesNotExist:
         return Response({'error': 'Nie znaleziono użytkownika'}, status=404)
     except Event.DoesNotExist:
@@ -135,6 +143,7 @@ def new_transaction(request, user_id, id_attraction, id_event):
     except event.attractions.model.DoesNotExist:
         return Response({'error': 'Nie znaleziono atrakcji'}, status=404)
 
+#Nie wiem czy tego nie trzeba bedzie zabezpieczyc dla admina albo organizatora
 @extend_schema(
     tags=['Transactions'],
     summary='Get transaction by id',
@@ -154,9 +163,9 @@ def get_transaction(request, transaction_id):
     
 @extend_schema(
     tags=['Transactions'],
-    summary='Get all transactions',
+    summary='Get all your transactions',
     parameters=[
-        OpenApiParameter(name='user_id', type=int, required=False, location=OpenApiParameter.QUERY),
+        #OpenApiParameter(name='user_id', type=int, required=False, location=OpenApiParameter.QUERY),
         OpenApiParameter(name='id_event', type=int, required=False, location=OpenApiParameter.QUERY),
         OpenApiParameter(name='id_attraction', type=int, required=False, location=OpenApiParameter.QUERY),
     ],
@@ -169,7 +178,7 @@ def list_transactions(request):
     id_event = request.query_params.get('id_event')
     id_attraction = request.query_params.get('id_attraction')
  
-    transactions = Transaction.objects.all()
+    transactions = Transaction.objects.filter(id_user=request.user)
 
     if user_id:
         transactions = transactions.filter(id_user=user_id)
@@ -180,6 +189,7 @@ def list_transactions(request):
 
     return Response(ListTransactionsSerializer({'transactions': transactions}).data)
 
+#Nie wiem czy tego nie trzeba bedzie zabezpieczyc dla admina albo organizatora
 @extend_schema(
     tags=['Transactions'],
     summary='Get all transactions of user',
@@ -220,7 +230,7 @@ def user_transactions(request, user_id):
         return Response(TransactionSerializer(transactions, many=True).data)
     except User.DoesNotExist:
         return Response({'error': 'Nie znaleziono użytkownika'}, status=404)
-    
+
 @extend_schema(
     tags=['Transactions'],
     summary='Get all transactions of attraction',
@@ -259,5 +269,6 @@ def attraction_transactions(request, id_attraction):
         
         serialized_transactions = TransactionSerializer(transactions, many=True).data
         return Response(serialized_transactions)
+    
     except Attraction.DoesNotExist:
         return Response({'error': 'Nie znaleziono atrakcji'}, status=404)

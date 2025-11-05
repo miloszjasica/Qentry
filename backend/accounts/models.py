@@ -19,6 +19,11 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    USER_ROLE_CHOICES = [
+        ('admin', 'Administrator'),
+        ('user', 'User'),
+    ]
+        
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=255)
     surname = models.CharField(max_length=255)
@@ -27,6 +32,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=timezone.now)
     wants_to_be_organizer = models.BooleanField(default=False)
+    role = models.CharField(max_length=20, choices=USER_ROLE_CHOICES, default='user')
 
     objects = UserManager()
 
@@ -35,3 +41,4 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f"{self.name} {self.surname}"
+    

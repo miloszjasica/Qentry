@@ -5,11 +5,16 @@ from accounts.models import User
 
 # Create your models here.
 class QR(models.Model):
+    USER_ROLE_CHOICES = [
+        ('guest', 'Gość'),
+        ('staff', 'Personel'),
+        ('token_seller' ,'Kasjer')
+    ]
     id_qr = models.AutoField(primary_key=True)
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     is_active = models.BooleanField(default=True)
     generated_at = models.DateTimeField(auto_now_add=True)
-    user_role = models.CharField(max_length=50, default='guest')
+    user_role = models.CharField(max_length=20, choices=USER_ROLE_CHOICES, default='guest')
     id_event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='qrs')
     id_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='qrs')
     qr_string = models.CharField(max_length=255, unique=True)
