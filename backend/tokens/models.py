@@ -8,7 +8,8 @@ class QR(models.Model):
     USER_ROLE_CHOICES = [
         ('guest', 'Gość'),
         ('staff', 'Personel'),
-        ('token_seller' ,'Kasjer')
+        ('token_taker', 'Pobierający tokeny'),
+        ('token_seller', 'Kasjer')
     ]
     id_qr = models.AutoField(primary_key=True)
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)

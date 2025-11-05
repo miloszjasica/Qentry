@@ -58,7 +58,7 @@ def add_tokens(request, user_id, id_event):
         event = Event.objects.get(pk=id_event)
         qr, created = QR.objects.get_or_create(id_user=user, id_event=event)
         
-        if qr.user_role != 'guest':
+        if qr.user_role == 'token_seller' or qr.user_role == 'staff':
 
             amount = request.query_params.get('amount')
             amount = Decimal(str(amount)).quantize(Decimal('0.01'), rounding=decimal)
