@@ -1,5 +1,6 @@
 from django.db import models
-from events.models import Event, Attraction
+from events.models import Event
+from attractions.models import Attraction
 from accounts.models import User
 
 # Create your models here.
@@ -21,6 +22,7 @@ class Transaction(models.Model):
     id_transaction = models.AutoField(primary_key=True)
     id_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='transactions')
     id_attraction = models.ForeignKey(Attraction, on_delete=models.CASCADE, related_name='transactions')
+
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

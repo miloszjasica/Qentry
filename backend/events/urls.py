@@ -1,7 +1,13 @@
 from django.urls import path
-from .views import get_events,create_event
+from . import views
 
 urlpatterns = [
-    path('', get_events, name='get-events'),
-    path('create/', create_event, name='create-event'),
+    path('', views.get_events),
+    path('<int:id>/', views.get_event_details),
+    path('create/', views.create_event),
+    path('<int:id>/update/', views.update_event),
+    path('<int:id>/delete/', views.delete_event),
+    path('<int:id>/clone/', views.clone_event),
+    path('<int:id>/open/', views.open_event),
+    path('<int:id>/close/', views.close_event),
 ]

@@ -9,6 +9,7 @@ from .models import QR
 from decimal import Decimal, ROUND_DOWN as decimal
 from .models import Transaction
 from .serializers import TransactionSerializer
+from attractions.models import Attraction
 from .serializers import BalanceSerializer, AddTokensSerializer, NewTransactionSerializer, ListTransactionsSerializer
 
 @extend_schema(

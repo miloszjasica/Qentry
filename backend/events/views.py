@@ -56,7 +56,7 @@ def create_event(request):
     POST /events
     Tworzy nowy event (tylko dla organizatora lub admina).
     """
-    user = request.user
+    #user = request.user
 
     # # Sprawdzenie ról użytkownika
     # if not (user.is_staff or getattr(user, 'role', '') == 'organizer'):
@@ -68,3 +68,101 @@ def create_event(request):
         return Response(EventSerializer(event).data, status=status.HTTP_201_CREATED)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@extend_schema(
+    tags=['Events'],
+    summary='Get event details',
+    responses={200: EventSerializer, 404: OpenApiResponse(description='Event not found')}
+)
+@api_view(['GET'])
+def get_event_details(request, id):
+    try:
+        event = Event.objects.get(pk=id)
+    except Event.DoesNotExist:
+        return Response({'error': 'Event not found'}, status=status.HTTP_404_NOT_FOUND)
+    return Response(EventSerializer(event).data)
+
+
+@extend_schema(
+    tags=['Events'],
+    summary='Update event',
+    request=EventSerializer,
+    responses={200: EventSerializer, 400: OpenApiResponse(description='Invalid data')}
+)
+@api_view(['PATCH'])
+def update_event(request, id):
+    try:
+        event = Event.objects.get(pk=id)
+    except Event.DoesNotExist:
+        return Response({'error': 'Event not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = EventSerializer(event, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@extend_schema(
+    tags=['Events'],
+    summary='Delete event',
+    responses={204: OpenApiResponse(description='Event deleted')}
+)
+@api_view(['DELETE'])
+def delete_event(request, id):
+    try:
+        event = Event.objects.get(pk=id)
+    except Event.DoesNotExist:
+        return Response({'error': 'Event not found'}, status=status.HTTP_404_NOT_FOUND)
+    event.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@extend_schema(
+    tags=['Events'],
+    summary='Clone event',
+    responses={201: EventSerializer}
+)
+@api_view(['POST'])
+def clone_event(request, id):
+    try:
+        event = Event.objects.get(pk=id)
+    except Event.DoesNotExist:
+        return Response({'error': 'Event not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    event.pk = None
+    event.name += " (Clone)"
+    event.save()
+    return Response(EventSerializer(event).data, status=status.HTTP_201_CREATED)
+
+
+@extend_schema(
+    tags=['Events'],
+    summary='Open event',
+    responses={200: OpenApiResponse(description='Event opened')}
+)
+@api_view(['POST'])
+def open_event(request, id):
+    try:
+        event = Event.objects.get(pk=id)
+    except Event.DoesNotExist:
+        return Response({'error': 'Event not found'}, status=status.HTTP_404_NOT_FOUND)
+    event.is_active = True
+    event.save()
+    return Response({'message': 'Event opened'}, status=status.HTTP_200_OK)
+
+
+@extend_schema(
+    tags=['Events'],
+    summary='Close event',
+    responses={200: OpenApiResponse(description='Event closed')}
+)
+@api_view(['POST'])
+def close_event(request, id):
+    try:
+        event = Event.objects.get(pk=id)
+    except Event.DoesNotExist:
+        return Response({'error': 'Event not found'}, status=status.HTTP_404_NOT_FOUND)
+    event.is_active = False
+    event.save()
+    return Response({'message': 'Event closed'}, status=status.HTTP_200_OK)

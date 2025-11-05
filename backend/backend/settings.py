@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'accounts',
     'events',
     'tokens',
+    'attractions',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
