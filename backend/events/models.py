@@ -1,8 +1,9 @@
 from django.db import models
-
+from accounts.models import User
 
 class Event(models.Model):
     id_event = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
