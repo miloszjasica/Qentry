@@ -4,17 +4,17 @@ from .models import User
 
 class UserAdmin(BaseUserAdmin):
     model = User
-    list_display = ('email', 'name', 'surname', 'is_staff', 'is_active')
+    list_display = ('id', 'email', 'name', 'surname', 'is_staff', 'is_active')
     list_filter = ('is_staff', 'is_active')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Informacje personalne', {'fields': ('name', 'surname', 'user_image')}),
-        ('Uprawnienia', {'fields': ('is_staff', 'is_active', 'is_superuser', 'groups', 'user_permissions')}),
+        ('Uprawnienia', {'fields': ('is_staff', 'is_active', 'role', 'wants_to_be_organizer', 'is_superuser', 'groups', 'user_permissions')}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'name', 'surname', 'password1', 'role', 'password2', 'is_staff', 'is_active')}
+            'fields': ('id', 'email', 'name', 'surname', 'password1', 'role', 'password2', 'is_staff', 'is_active')}
         ),
     )
     search_fields = ('email',)
