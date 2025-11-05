@@ -100,7 +100,7 @@ def new_transaction(request, user_id, id_attraction, id_event):
         qr = QR.objects.get(id_user=user, id_event=event)
         attraction = event.attractions.get(pk=id_attraction)
 
-        if qr.user_role != 'guest':
+        if qr.user_role == 'token_taker' or qr.user_role == 'staff':
 
             if not qr.is_active:
                 return Response({'error': 'Kod QR jest nieaktywny'}, status=400)
@@ -132,7 +132,7 @@ def new_transaction(request, user_id, id_attraction, id_event):
             }).data)
         
         else:
-            return Response({'error': 'Nie możesz pobierać opłat jako gość'}, status=403)
+            return Response({'error': 'Nie możesz pobierać opłat jako gość i sprzedający tokeny'}, status=403)
         
     except User.DoesNotExist:
         return Response({'error': 'Nie znaleziono użytkownika'}, status=404)
@@ -143,7 +143,6 @@ def new_transaction(request, user_id, id_attraction, id_event):
     except event.attractions.model.DoesNotExist:
         return Response({'error': 'Nie znaleziono atrakcji'}, status=404)
 
-#Nie wiem czy tego nie trzeba bedzie zabezpieczyc dla admina albo organizatora
 @extend_schema(
     tags=['Transactions'],
     summary='Get transaction by id',
@@ -157,7 +156,11 @@ def new_transaction(request, user_id, id_attraction, id_event):
 def get_transaction(request, transaction_id):
     try:
         transaction = Transaction.objects.get(pk=transaction_id)
-        return Response(TransactionSerializer(transaction).data)
+        user = User.objects.get(pk=request.user.id)
+        if user.role == 'organizer':
+            return Response(TransactionSerializer(transaction).data)
+        else:
+            return Response({'error': 'Nie masz uprawnień do przeglądania tej transakcji'}, status=403)
     except Transaction.DoesNotExist:
         return Response({'error': 'Nie znaleziono tranzakcji'}, status=404)
     
