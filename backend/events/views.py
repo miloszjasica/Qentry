@@ -2,8 +2,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiResponse
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.decorators import permission_classes
 from .models import Event
 from .serializers import EventSerializer
+from utils.geo import get_locations, distance
 
 
 @extend_schema(
@@ -166,3 +169,70 @@ def close_event(request, id):
     event.is_active = False
     event.save()
     return Response({'message': 'Event closed'}, status=status.HTTP_200_OK)
+
+
+def get_client_ip(request):
+    """Pobiera prawdziwy adres IP użytkownika, nawet za proxy."""
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+@extend_schema(
+    tags=['Events'],
+    summary='Get nearby events',
+    description='Zwraca eventy w pobliżu użytkownika na podstawie jego IP.',
+    parameters=[
+        OpenApiParameter(
+            name='radius',
+            description='Promień wyszukiwania w km (domyślnie 10 km)',
+            required=False,
+            type=float
+        ),
+    ],
+    responses={200: OpenApiResponse(response=EventSerializer, description='Lista pobliskich eventów')}
+)
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_nearby_events(request):
+    """
+    Automaticly fetches user location based on IP and returns events within a specified radius.
+    """
+
+    try:
+        radius = float(request.query_params.get('radius', 10)) #default
+    except ValueError:
+        return Response({'error': 'Nieprawidłowy format parametru radius'}, status=status.HTTP_400_BAD_REQUEST)
+
+    ip_address = get_client_ip(request)
+
+    # only for tests
+    if (
+        not ip_address
+        or ip_address in ['127.0.0.1', '0.0.0.0', 'localhost']
+        or ip_address.startswith('172.')
+        or ip_address.startswith('192.')
+        or ip_address.startswith('10.')
+    ):
+        ip_address = '89.64.0.0'  # Public IP (Poznan)
+
+    user_lat, user_lon = get_locations(ip_address)
+    if user_lat is None or user_lon is None:
+        return Response({'error': 'Nie udało się ustalić lokalizacji użytkownika'}, status=status.HTTP_400_BAD_REQUEST)
+
+    nearby_events = []
+    for event in Event.objects.filter(is_active=True):
+        if hasattr(event, "latitude") and hasattr(event, "longitude") and event.latitude and event.longitude:
+            dist = distance(user_lat, user_lon, event.latitude, event.longitude)
+            if dist <= radius:
+                nearby_events.append(event)
+
+    serializer = EventSerializer(nearby_events, many=True)
+    return Response({
+        "user_location": {"latitude": user_lat, "longitude": user_lon, "ip": ip_address},
+        "radius_km": radius,
+        "events_count": len(nearby_events),
+        "events": serializer.data
+    })
