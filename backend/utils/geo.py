@@ -3,25 +3,16 @@ from math import radians, cos, sin, asin, sqrt
 
 def get_locations(ip_address):
     try:
-        response = requests.get(f"https://ipapi.co/{ip_address}/json/")
-
+        response = requests.get(f"https://ipwho.is/{ip_address}")
         if response.status_code == 200:
             data = response.json()
-            latitude = data.get("latitude")
-            longitude = data.get("longitude")
-
-            if latitude and longitude:
-                return float(latitude), float(longitude)
-
-            loc = data.get("loc")
-            if loc:
-                lat, lon = map(float, loc.split(","))
-                return lat, lon
-
+            if data.get("success"):
+                latitude = data.get("latitude")
+                longitude = data.get("longitude")
+                return latitude, longitude
     except Exception as e:
-        print(f"Error fetching geolocation data: {e}")
-
-    return None, None
+        print(f"Error fetching location for IP {ip_address}: {e}")
+    return 52.2297, 21.0122  # Warszawa, if location can't be fetched
 
 
 

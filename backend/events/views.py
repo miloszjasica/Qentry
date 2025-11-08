@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import permission_classes
 from .models import Event
-from .serializers import EventSerializer
+from .serializers import EventSerializer, EventWithDistanceSerializer
 from utils.geo import get_locations, distance
 
 
@@ -208,31 +208,29 @@ def get_nearby_events(request):
 
     ip_address = get_client_ip(request)
 
-    # only for tests
-    if (
-        not ip_address
-        or ip_address in ['127.0.0.1', '0.0.0.0', 'localhost']
-        or ip_address.startswith('172.')
-        or ip_address.startswith('192.')
-        or ip_address.startswith('10.')
-    ):
-        ip_address = '89.64.0.0'  # Public IP (Poznan)
+    # # only for tests
+    # if (
+    #     not ip_address
+    #     or ip_address in ['127.0.0.1', '0.0.0.0', 'localhost']
+    #     or ip_address.startswith('172.')
+    #     or ip_address.startswith('192.')
+    #     or ip_address.startswith('10.')
+    # ):
+    #     ip_address = '89.64.0.0'  # Public IP (Wroclaw)
+    # print(f"User IP: {ip_address}")
 
     user_lat, user_lon = get_locations(ip_address)
     if user_lat is None or user_lon is None:
         return Response({'error': 'Nie udało się ustalić lokalizacji użytkownika'}, status=status.HTTP_400_BAD_REQUEST)
 
     nearby_events = []
-    for event in Event.objects.filter(is_active=True):
-        if hasattr(event, "latitude") and hasattr(event, "longitude") and event.latitude and event.longitude:
-            dist = distance(user_lat, user_lon, event.latitude, event.longitude)
-            if dist <= radius:
-                nearby_events.append(event)
+    for event in Event.objects.filter(is_active=True).exclude(latitude__isnull=True, longitude__isnull=True):
+        dist = distance(user_lat, user_lon, event.latitude, event.longitude)
+        if dist <= radius:
+            event.distance_km = dist
+            nearby_events.append(event)
 
-    serializer = EventSerializer(nearby_events, many=True)
-    return Response({
-        "user_location": {"latitude": user_lat, "longitude": user_lon, "ip": ip_address},
-        "radius_km": radius,
-        "events_count": len(nearby_events),
-        "events": serializer.data
-    })
+    nearby_events.sort(key=lambda x: x.distance_km)
+
+    serializer = EventWithDistanceSerializer(nearby_events, many=True)
+    return Response(serializer.data)
