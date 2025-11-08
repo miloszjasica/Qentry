@@ -15,7 +15,6 @@ def get_locations(ip_address):
     return 52.2297, 21.0122  # Warszawa, if location can't be fetched
 
 
-
 def distance(lat1, lon1, lat2, lon2):
     """
     Oblicza odległość między dwoma punktami (w km) 
@@ -28,3 +27,13 @@ def distance(lat1, lon1, lat2, lon2):
     c = 2 * asin(sqrt(a)) 
     r = 6371  #radius of earth in kilometers
     return c * r
+
+
+def get_client_ip(request):
+    """Pobiera adres IP użytkownika"""
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip

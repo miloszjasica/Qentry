@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import permission_classes
 from .models import Event
 from .serializers import EventSerializer, EventWithDistanceSerializer
-from utils.geo import get_locations, distance
+from utils.geo import get_locations, distance, get_client_ip
 
 
 @extend_schema(
@@ -169,16 +169,6 @@ def close_event(request, id):
     event.is_active = False
     event.save()
     return Response({'message': 'Event closed'}, status=status.HTTP_200_OK)
-
-
-def get_client_ip(request):
-    """Pobiera prawdziwy adres IP użytkownika, nawet za proxy."""
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    return ip
 
 @extend_schema(
     tags=['Events'],
