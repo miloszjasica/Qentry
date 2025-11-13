@@ -5,6 +5,7 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = '__all__'
+        read_only_fields = ['user_id']
 
     def validate(self, data):
         if data['start_date'] > data['end_date']:
@@ -20,3 +21,8 @@ class EventWithDistanceSerializer(serializers.ModelSerializer):
 
     def get_distance_km(self, obj):
         return obj.distance_km
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        validated_data['user_id'] = user
+        return super().create(validated_data)
