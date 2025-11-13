@@ -13,6 +13,32 @@ from attractions.models import Attraction
 from .serializers import BalanceSerializer, AddTokensSerializer, NewTransactionSerializer, ListTransactionsSerializer
 
 @extend_schema(
+    tags=['Tokens'],
+    summary='Your balance in an event',
+    parameters=[
+        OpenApiParameter(name='id_event', type=int, required=True, location=OpenApiParameter.PATH),
+    ],
+    responses= {
+        200: OpenApiResponse(response=BalanceSerializer, description='Your balance in event'),
+        }
+)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def my_balance(request, id_event):
+    try:
+        event = Event.objects.get(pk=id_event)
+        qr = QR.objects.get(id_user=request.user, id_event=event)
+
+
+        
+        return Response(BalanceSerializer({"balance": qr.balance}).data)
+           
+    except Event.DoesNotExist:
+        return Response({'error': 'Nie znaleziono wydarzenia'}, status=404)
+    except QR.DoesNotExist:
+        return Response({'error': 'Nie znaleziono kodu QR dla użytkownika w tym wydarzeniu'}, status=404)
+
+@extend_schema(
     tags=['Tokens'],    
     summary='Get balance for a user in an event',
     parameters=[
@@ -27,12 +53,16 @@ from .serializers import BalanceSerializer, AddTokensSerializer, NewTransactionS
 @permission_classes([IsAuthenticated])
 def user_balance(request, user_id, id_event):
     try:
+        operator = request.user
         user = User.objects.get(pk=user_id)
         event = Event.objects.get(pk=id_event)
+        operator_qr = QR.objects.get(id_user=operator, id_event=event)
         qr = QR.objects.get(id_user=user, id_event=event)
-        
-        return Response(BalanceSerializer({"balance": qr.balance}).data)
-           
+
+        if operator_qr.user_role in ['token_taker', 'staff', 'token_seller'] or operator.role == 'admin':
+            return Response(BalanceSerializer({"balance": qr.balance}).data)
+        else:
+            return Response({'error': 'Nie masz uprawnień do przeglądania salda użytkownika'}, status=403)
     except User.DoesNotExist:
         return Response({'error': 'Nie znaleziono użytkownika'}, status=404)
     except Event.DoesNotExist:
@@ -54,11 +84,13 @@ def user_balance(request, user_id, id_event):
 @permission_classes([IsAuthenticated])
 def add_tokens(request, user_id, id_event):
     try:
+        operator = request.user
         user = User.objects.get(pk=user_id)
         event = Event.objects.get(pk=id_event)
-        qr, created = QR.objects.get_or_create(id_user=user, id_event=event)
+        operator_qr = QR.objects.get(id_user=operator, id_event=event)
+        qr = QR.objects.get(id_user=user, id_event=event)
         
-        if qr.user_role == 'token_seller' or qr.user_role == 'staff':
+        if operator_qr.user_role == 'token_seller' or operator_qr.user_role == 'staff':
 
             amount = request.query_params.get('amount')
             amount = Decimal(str(amount)).quantize(Decimal('0.01'), rounding=decimal)
@@ -73,12 +105,14 @@ def add_tokens(request, user_id, id_event):
                 'message': 'Tokeny zakupione pomyślnie'
             }).data)
         else:
-            return Response({'error': 'Nie możesz sprzedawać tokenów jako gość'}, status=403)
+            return Response({'error': 'Nie możesz sprzedawać tokenów jako gość lub kasjer'}, status=403)
     
     except User.DoesNotExist:
         return Response({'error': 'Nie znaleziono użytkownika'}, status=404)
     except Event.DoesNotExist:
         return Response({'error': 'Nie znaleziono wydarzenia'}, status=404)
+    except QR.DoesNotExist:
+        return Response({'error': 'Nie znaleziono kodu QR użytkownika w tym wydarzeniu'}, status=404)
 
 @extend_schema(
     tags=['Transactions'],
@@ -94,13 +128,15 @@ def add_tokens(request, user_id, id_event):
 @permission_classes([IsAuthenticated])
 def new_transaction(request, user_id, id_attraction, id_event):
     try:
+        operator = request.user
         user = User.objects.get(pk=user_id)
         event = Event.objects.get(pk=id_event)
         attraction = Attraction.objects.get(pk=id_attraction, id_event=event)
         qr = QR.objects.get(id_user=user, id_event=event)
+        operator_qr = QR.objects.get(id_user=operator, id_event=event)
         attraction = event.attractions.get(pk=id_attraction)
 
-        if qr.user_role == 'token_taker' or qr.user_role == 'staff':
+        if operator_qr.user_role == 'token_taker' or operator_qr.user_role == 'staff':
 
             if not qr.is_active:
                 return Response({'error': 'Kod QR jest nieaktywny'}, status=400)
@@ -156,10 +192,8 @@ def new_transaction(request, user_id, id_attraction, id_event):
 def get_transaction(request, transaction_id):
     try:
         transaction = Transaction.objects.select_related('id_attraction__id_event').get(pk=transaction_id)
-        user = User.objects.get(pk=request.user.id)
-        if user.wants_to_be_organizer == 'True':
-            if transaction.id_attraction.id_event.user_id != user.id:
-                return Response({'error': 'Nie masz uprawnień do przeglądania tej transakcji'}, status=403)
+        user = request.user
+        if user.role == 'organizer' and transaction.id_attraction.id_event.user_id == user:
             return Response(TransactionSerializer(transaction).data)
         elif user.role == 'admin':
             return Response(TransactionSerializer(transaction).data)
@@ -212,17 +246,17 @@ def list_transactions(request):
 @permission_classes([IsAuthenticated])
 def user_transactions(request, user_id, id_event):
     try:
-        target_user = User.objects.get(pk=user_id)
         event = Event.objects.get(pk=id_event)
-        requesting_user = request.user
+        user = request.user
 
-        if event.user_id.id == requesting_user.id or requesting_user.role == 'admin':
-            pass
-        else:
+        if not (user.role == 'organizer' and event.user_id == user) or user.role == 'admin':
             return Response({'error': 'Nie masz uprawnień do przeglądania transakcji tego użytkownika'}, status=403)
+        
+        transactions = Transaction.objects.filter(id_user=user, id_attraction__id_event=event).select_related('id_attraction__id_event')
 
-        transactions = Transaction.objects.filter(id_user=target_user, id_attraction__id_event=event)
-
+        if not transactions.exists():
+            return Response({'messege': 'Nie znaleziono transakcji dla tego użytkownika w tym wydarzeniu'}, status=200)
+        
         ordering = request.query_params.get('ordering')
         date_from = request.query_params.get('date_from')
         date_to = request.query_params.get('date_to')

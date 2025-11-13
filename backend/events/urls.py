@@ -10,4 +10,5 @@ urlpatterns = [
     path('<int:id>/clone/', views.clone_event),
     path('<int:id>/open/', views.open_event),
     path('<int:id>/close/', views.close_event),
+    path('nearby-events/', views.get_nearby_events),
 ]
