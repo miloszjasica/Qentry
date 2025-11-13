@@ -16,7 +16,7 @@ class Event(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     participants = models.IntegerField(default=0)
-    #image = models.URLField(max_length=500, null=True, blank=True)
+    image = models.URLField(max_length=500, null=True, blank=True)
 
     def __str__(self):
         return self.name
