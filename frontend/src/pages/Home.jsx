@@ -14,7 +14,8 @@ export default function Home() {
   }, []);
 
  return (
-    <div style={{ padding: "0 0 128px 128px" }}>  
+    
+    <div style={{ marginLeft: '256px', padding: '32px' }}>  
       <h1 style={{color: 'black', fontSize: 20, fontWeight: '400', fontFamily: 'Arimo', wordWrap: 'break-word'}}>Odkryj wydarzenia</h1>
       <div style={{width: '100%', color: '#4A5565', fontSize: 16, fontFamily: 'Arimo', fontWeight: '400', wordWrap: 'break-word'}}>Znaleziono {events.length} wydarzeń</div>
 
