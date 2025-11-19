@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiResponse
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.decorators import permission_classes
 from .models import Event
 from .serializers import EventSerializer, EventWithDistanceSerializer
 from utils.geo import get_locations, distance, get_client_ip
@@ -12,26 +13,70 @@ from .permissions import IsOwnerOrAdmin
 @extend_schema(
     tags=['Events'],
     summary='Get list of events',
-    description='Zwraca listę eventów z możliwością filtrowania po lokalizacji i aktywności.',
+    description='Zwraca listę eventów z możliwością filtrowania po niektórych polach z modelu event.',
     parameters=[
-        OpenApiParameter(name='location', description='Filtr po lokalizacji', required=False, type=str),
-        OpenApiParameter(name='is_active', description='Filtr po statusie aktywności (true/false)', required=False, type=bool),
+        OpenApiParameter(
+            name='name',
+            description='Filtr po nazwie wydarzenia (wyszukiwanie częściowe)',
+            required=False,
+            type=str
+        ),
+        OpenApiParameter(
+            name='location',
+            description='Filtr po lokalizacji (wyszukiwanie częściowe)',
+            required=False,
+            type=str
+        ),
+        OpenApiParameter(
+            name='category',
+            description='Filtr po kategorii wydarzenia',
+            required=False,
+            type=str,
+            enum=[
+                "music", "art", "food", "sport", "business", "theatre",
+                "tech", "wellness", "gaming", "film", "fashion", "books", "other"
+            ]
+        ),
+        OpenApiParameter(
+            name='date',
+            description='Filtr po dacie (eventy aktywne w danym dniu, format YYYY-MM-DD)',
+            required=False,
+            type=str,
+        ),
+        OpenApiParameter(
+            name='is_active',
+            description='Filtr po statusie aktywności (true/false)',
+            required=False,
+            type=bool
+        ),
     ],
     responses={200: OpenApiResponse(response=EventSerializer, description='Lista eventów')},
 )
 @api_view(['GET'])
 def get_events(request):
-
     queryset = Event.objects.all()
 
-    # Filtry z parametrów zapytania
+    # Nowe filtry
+    name = request.query_params.get('name')
     location = request.query_params.get('location')
     is_active = request.query_params.get('is_active')
+    category = request.query_params.get('category')
+    date = request.query_params.get('date')
+
+    if name:
+        queryset = queryset.filter(name__icontains=name)
 
     if location:
         queryset = queryset.filter(location__icontains=location)
+
     if is_active is not None:
-        queryset = queryset.filter(is_active=is_active.lower() == 'true')
+        queryset = queryset.filter(is_active=is_active.lower() == "true")
+
+    if category:
+        queryset = queryset.filter(category=category)
+
+    if date:
+        queryset = queryset.filter(start_date__lte=date, end_date__gte=date)
 
     serializer = EventSerializer(queryset, many=True)
     return Response(serializer.data)

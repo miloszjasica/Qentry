@@ -4,6 +4,23 @@ from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderTimedOut, GeocoderUnavailable
 
 class Event(models.Model):
+
+    CATEGORY_CHOICES = [
+        ("music", "Muzyka"),
+        ("art", "Sztuka"),
+        ("food", "Jedzenie"),
+        ("sport", "Sport"),
+        ("business", "Business"),
+        ("theatre", "Teatr"),
+        ("tech", "Technologia"),
+        ("wellness", "Wellness"),
+        ("gaming", "Gaming"),
+        ("film", "Film"),
+        ("fashion", "Moda"),
+        ("books", "Książki"),
+        ("other", "Inne"),
+    ]
+
     id_event = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
@@ -17,6 +34,7 @@ class Event(models.Model):
     end_date = models.DateField()
     participants = models.IntegerField(default=0)
     image = models.URLField(max_length=500, null=True, blank=True)
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default="other")
 
     def __str__(self):
         return self.name
