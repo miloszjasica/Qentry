@@ -4,11 +4,9 @@ from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiRespon
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import permission_classes
+from .models import Event
 from .serializers import EventSerializer, EventWithDistanceSerializer
 from utils.geo import get_locations, distance, get_client_ip
-from rest_framework.permissions import IsAuthenticated
-from .models import Event
-from .serializers import EventSerializer
 from .permissions import IsOwnerOrAdmin
 
 
