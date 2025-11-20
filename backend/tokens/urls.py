@@ -10,4 +10,8 @@ urlpatterns = [
     path('transactions/', views.list_transactions, name='list-transactions'),
     path('users/<int:user_id>/<int:id_event>/transactions/', views.user_transactions, name='user-transactions'),
     path('attractions/<int:id_attraction>/transactions/', views.attraction_transactions, name='history-attraction-transactions'),
+    path('events/<int:event_id>/join/', views.join_event, name='join-event'),
+    path('events/my/', views.my_events, name='my-events'),
+    path('events/<int:event_id>/leave/', views.leave_event, name='leave-event'),
+    path('qr/<int:qr_id>/image/', views.get_qr_image, name='qr-image'),
 ]

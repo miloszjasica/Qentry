@@ -3,14 +3,19 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
+from rest_framework import status
 from accounts.models import User
 from events.models import Event
 from .models import QR
 from decimal import Decimal, ROUND_DOWN as decimal
 from .models import Transaction
-from .serializers import TransactionSerializer
+from .serializers import TransactionSerializer,QRSerializer
 from attractions.models import Attraction
 from .serializers import BalanceSerializer, AddTokensSerializer, NewTransactionSerializer, ListTransactionsSerializer
+from django.http import FileResponse, Http404, HttpResponse
+import uuid
+import qrcode
+from io import BytesIO
 
 @extend_schema(
     tags=['Tokens'],
@@ -321,3 +326,130 @@ def attraction_transactions(request, id_attraction):
     
     except Attraction.DoesNotExist:
         return Response({'error': 'Nie znaleziono atrakcji'}, status=404)
+
+@extend_schema(
+    tags=['Events'],
+    summary='Zapisz zalogowanego użytkownika na event',
+    parameters=[
+        OpenApiParameter(
+            name='event_id',
+            type=int,
+            required=True,
+            location=OpenApiParameter.PATH
+        )
+    ],
+    responses={
+        201: OpenApiResponse(response=QRSerializer, description="Użytkownik zapisany na event"),
+        400: OpenApiResponse(description="Użytkownik już zapisany"),
+        404: OpenApiResponse(description="Event nie istnieje")
+    }
+)
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def join_event(request, event_id):
+    user = request.user
+
+    try:
+        event = Event.objects.get(pk=event_id)
+    except Event.DoesNotExist:
+        return Response(
+            {"error": "Event nie istnieje"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    if QR.objects.filter(id_user=user, id_event=event).exists():
+        return Response(
+            {"error": "Już jesteś zapisany na ten event"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    qr_code = str(uuid.uuid4())
+
+    qr = QR.objects.create(
+        id_user=user,
+        id_event=event,
+        qr_string=qr_code
+    )
+
+    return Response(
+        QRSerializer(qr).data,
+        status=status.HTTP_201_CREATED
+    )
+
+@extend_schema(
+    tags=['Events'],
+    summary='Lista eventów na które zapisany jest zalogowany użytkownik',
+    responses={
+        200: OpenApiResponse(response=QRSerializer, description='Lista zapisów użytkownika')
+    }
+)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def my_events(request):
+    user = request.user
+    qrs = QR.objects.select_related('id_event').filter(id_user=user)
+    return Response(QRSerializer(qrs, many=True).data)
+
+@extend_schema(
+    tags=['Events'],
+    summary='Usuń zapis/wycofaj uczestnictwo w evencie',
+    parameters=[
+        OpenApiParameter(
+            name='event_id',
+            type=int,
+            required=True,
+            location=OpenApiParameter.PATH
+        )
+    ],
+    responses={
+        200: OpenApiResponse(description="Uczestnictwo usunięte"),
+        404: OpenApiResponse(description="Nie znaleziono zapisu"),
+    }
+)
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def leave_event(request, event_id):
+    user = request.user
+
+    try:
+        qr = QR.objects.get(id_user=user, id_event_id=event_id)
+        qr.delete()
+        return Response({"message": "Wypisano z eventu"}, status=200)
+
+    except QR.DoesNotExist:
+        return Response(
+            {"error": "Nie jesteś zapisany na ten event"},
+            status=404
+        )
+
+@extend_schema(
+    tags=['Events'],
+    summary='QR przypisany do eventu',
+    parameters=[
+        OpenApiParameter("qr_id", int, required=True, location=OpenApiParameter.PATH)
+    ]
+)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_qr_image(request, qr_id):
+    try:
+        qr = QR.objects.get(pk=qr_id, id_user=request.user)
+
+        qr_code = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4
+        )
+        qr_code.add_data(qr.qr_string)
+        qr_code.make(fit=True)
+        img = qr_code.make_image()
+
+        buffer = BytesIO()
+        img.save(buffer, format='PNG')
+        buffer.seek(0)
+
+        return HttpResponse(buffer, content_type='image/png')
+
+    except QR.DoesNotExist:
+        return HttpResponse(status=404)
