@@ -2,6 +2,7 @@ from django.db import models
 from events.models import Event
 from attractions.models import Attraction
 from accounts.models import User
+from django.core.files.base import ContentFile
 
 # Create your models here.
 class QR(models.Model):
@@ -19,9 +20,11 @@ class QR(models.Model):
     id_event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='qrs')
     id_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='qrs')
     qr_string = models.CharField(max_length=255, unique=True)
+    qr_image = models.ImageField(upload_to='qr_codes/', null=True, blank=True)
 
     def __str__(self):
         return f"QR {self.id_qr} - {self.id_user.name}"
+
 
 
 class Transaction(models.Model):

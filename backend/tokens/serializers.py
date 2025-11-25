@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Transaction
+from .models import QR
 
 class BalanceSerializer(serializers.Serializer):
     balance = serializers.DecimalField(max_digits=10, decimal_places=2)
@@ -29,3 +30,9 @@ class TransactionSerializer(serializers.ModelSerializer):
     
 class ListTransactionsSerializer(serializers.Serializer):
     transactions = TransactionSerializer(many=True)
+
+class QRSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = QR
+        fields = '__all__'
+        read_only_fields = ['id_qr', 'generated_at', 'qr_string', 'id_user']
