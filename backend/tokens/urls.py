@@ -3,9 +3,9 @@ from . import views
 
 urlpatterns = [
     path('events/<int:id_event>/balance/', views.my_balance, name='my-event-balance'),
-    path('users/<int:user_id>/<int:id_event>/', views.user_balance, name='user-balance'),
-    path('users/<int:user_id>/<int:id_event>/add/', views.add_tokens, name='add-tokens'),
-    path('transactions/<int:user_id>/<int:id_event>/<int:id_attraction>/', views.new_transaction, name='new-transaction'),
+    path('users/<str:qr_string>/<int:id_event>/', views.user_balance, name='user-balance'),
+    path('users/<str:qr_string>/<int:id_event>/add/', views.add_tokens, name='add-tokens'),
+    path('transactions/<str:qr_string>/<int:id_attraction>/', views.new_transaction, name='new-transaction'),
     path('transactions/<int:transaction_id>/', views.get_transaction, name='transaction-details'),
     path('transactions/', views.list_transactions, name='list-transactions'),
     path('users/<int:user_id>/<int:id_event>/transactions/', views.user_transactions, name='user-transactions'),
