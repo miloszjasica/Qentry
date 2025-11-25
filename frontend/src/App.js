@@ -4,7 +4,6 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import { BrowserRouter as Router } from 'react-router-dom';
 import { useState } from "react";
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
         <div style={{ flex: 1 }}>
           <Routes>
 
-            <Route path="/" element={<Home />} />
+            {/* <Route path="/" element={<Home search={search} />} /> */}
 
             <Route path="/login" element={<Login />} />
 
