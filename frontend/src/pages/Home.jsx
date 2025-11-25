@@ -1,37 +1,57 @@
 import { useEffect, useState } from "react";
 import EventCard from "../components/EventCard";
 
-export default function Home() {
+export default function Home({ search }) {
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:8000/events/")
-      .then(response => response.json())
-      .then(data => {
-        setEvents(data);
-      })
-      .catch(err => console.error("Error fetching events:", err));
-  }, []);
+    const delay = setTimeout(() => {
+      const fetchEvents = async () => {
+        setLoading(true);
 
- return (
-    
-    <div style={{ marginLeft: '256px', padding: '32px' }}>  
-      <h1 style={{color: 'black', fontSize: 20, fontWeight: '400', fontFamily: 'Arimo', wordWrap: 'break-word'}}>Odkryj wydarzenia</h1>
-      <div style={{width: '100%', color: '#4A5565', fontSize: 16, fontFamily: 'Arimo', fontWeight: '400', wordWrap: 'break-word'}}>Znaleziono {events.length} wydarzeń</div>
+        const url =
+          search.trim() === ""
+            ? "http://localhost:8000/events/"
+            : `http://localhost:8000/events/?name=${encodeURIComponent(search)}`;
 
-      {events.length === 0 ? (
-        <p>No events found.</p>
-      ) : (
-        <div style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "24px",
-        }}>
-          {events.map(event => (
-            <EventCard key={event.id_event} event={event}/>
-          ))}
-        </div>
-      )}
+        const token = localStorage.getItem("token");
+        const headers = {
+          "Accept": "application/json"
+        };
+        if (token) {
+          headers["Authorization"] = `Bearer ${token}`;
+        }
+
+        try {
+          const res = await fetch(url, { headers });
+          if (!res.ok) {
+            throw new Error(`Błąd HTTP: ${res.status}`);
+          }
+
+          const data = await res.json();
+          setEvents(data);
+        } catch (err) {
+          console.error("Błąd pobierania eventów:", err);
+          setEvents([]);
+        }
+
+        setLoading(false);
+      };
+      fetchEvents();
+    }, 500);
+
+    return () => clearTimeout(delay);
+  }, [search]);
+
+  return (
+    <div style={{ padding: "20px", display: "flex", flexWrap: "wrap", gap: "20px" }}>
+      {loading && <div>Ładowanie...</div>}
+      {!loading && events.length === 0 && <div>Brak wyników</div>}
+
+      {events.map(ev => (
+        <EventCard key={ev.id_event} event={ev} />
+      ))}
     </div>
   );
 }
