@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import EventCard from "../components/EventCard";
+import EventModal from "../components/EventModal";
 
 export default function Home({ search }) {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -50,8 +52,9 @@ export default function Home({ search }) {
       {!loading && events.length === 0 && <div>Brak wyników</div>}
 
       {events.map(ev => (
-        <EventCard key={ev.id_event} event={ev} />
-      ))}
+        <EventCard key={ev.id_event} event={ev} onOpen={setSelectedEvent} />
+         ))}
+        <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
     </div>
   );
 }
