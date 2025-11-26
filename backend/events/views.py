@@ -49,6 +49,12 @@ from .permissions import IsOwnerOrAdmin
             required=False,
             type=bool
         ),
+        OpenApiParameter(
+            name='user_id',
+            description='Filtr po ID użytkownika tworzącego event',
+            required=False,
+            type=int
+        ),
     ],
     responses={200: OpenApiResponse(response=EventSerializer, description='Lista eventów')},
 )
@@ -56,12 +62,12 @@ from .permissions import IsOwnerOrAdmin
 def get_events(request):
     queryset = Event.objects.all()
 
-    # Nowe filtry
     name = request.query_params.get('name')
     location = request.query_params.get('location')
     is_active = request.query_params.get('is_active')
     category = request.query_params.get('category')
     date = request.query_params.get('date')
+    user_id = request.query_params.get('user_id')
 
     if name:
         queryset = queryset.filter(name__icontains=name)
@@ -77,6 +83,9 @@ def get_events(request):
 
     if date:
         queryset = queryset.filter(start_date__lte=date, end_date__gte=date)
+
+    if user_id:
+        queryset = queryset.filter(user_id=user_id)
 
     serializer = EventSerializer(queryset, many=True)
     return Response(serializer.data)
