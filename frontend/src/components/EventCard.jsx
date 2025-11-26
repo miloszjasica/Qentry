@@ -11,8 +11,8 @@ export default function EventCard({ event }) {
                 src={imageUrl} 
                 alt={event.name} 
                 style={{ 
-                    width: "100%", 
-                    height: "auto", 
+                    width: "314px", 
+                    height: "177px", 
                     objectFit: "cover",
                     borderTopLeftRadius: "14px",
                     borderTopRightRadius: "14px",

@@ -189,7 +189,7 @@ export default function Navbar() {
                 }}
               >
                 <img 
-                  src={user ? "/logout.svg" : "/login-icon.png"} //dodac ikony
+                  src={user ? "/logout.svg" : "/logout.svg"} //dodac ikony
                   alt={user ? "Wyloguj" : "Zaloguj"} 
                   style={{ width: '20px', height: '20px', marginRight: '12px' }} 
                 />
