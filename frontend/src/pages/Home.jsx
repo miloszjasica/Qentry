@@ -17,12 +17,12 @@ export default function Home({ search }) {
             ? "http://localhost:8000/events/"
             : `http://localhost:8000/events/?name=${encodeURIComponent(search)}`;
 
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("access");
         const headers = {
           "Accept": "application/json"
         };
         if (token) {
-          headers["Authorization"] = `Bearer ${token}`;
+          headers["Authorization"] = `Bearer ${token}`; 
         }
 
         try {

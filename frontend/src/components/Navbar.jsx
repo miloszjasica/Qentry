@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({ isExpanded, setIsExpanded }) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:8000/api/users/me/", {
       headers: {
         "Accept": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("token")}`
+        "Authorization": `Bearer ${localStorage.getItem("access")}`
       }
     })
     .then(res => res.json())
@@ -24,7 +24,9 @@ export default function Navbar() {
     <nav style={{
       display: "flex",
       flexDirection: "column",
-      width: "256px",
+      width: isExpanded ? 256 : 80,
+      transition: "width 0.3s",
+      overflow: "visible",
       height: "100vh",
       background: "#544E61",
       boxShadow: "2px 0 8px rgba(0,0,0,0.1)",
@@ -32,6 +34,32 @@ export default function Navbar() {
       top: 0,
       left: 0,
     }}>
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          style={{
+            position: "absolute",
+            top: "75px",
+            right: "-12px",
+            background: "#9893DA",
+            border: "none",
+            color: "white",
+            cursor: "pointer",
+            fontSize: "24px",
+            borderRadius: "50%",
+            width: "24px",
+            height: "24px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 1000
+          }}
+        >
+          <img
+            src={isExpanded ? "/>.svg" : "/<.svg"}
+            alt={isExpanded ? "Collapse" : "Expand"}
+            style={{ width: "16px", height: "16px" }}
+          />
+        </button>
 
       <div style={{
         width: '100%',
@@ -43,7 +71,7 @@ export default function Navbar() {
       }}>
         <div style={{width: 64, height: 24, display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
           <div style={{color: 'white', fontSize: 16, fontFamily: 'Arimo', fontWeight: '400', paddingLeft: 24, paddingRight: 24}}>
-            QentRy
+            {isExpanded && <div>QentRy</div>}
           </div>
         </div>
       </div>
@@ -63,7 +91,7 @@ export default function Navbar() {
           {({ isActive }) => (
             <>
               <img src="/Home.png" alt="Home Page" style={{ width: '20px', height: '20px', marginRight: "12px", filter: isActive ? "none" : "invert(1)" }} />
-              <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white' }}>Strona Główna</div>
+              {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>Strona Główna</div>}
             </>
           )}
         </NavLink>
@@ -81,7 +109,7 @@ export default function Navbar() {
           {({ isActive }) => (
             <>
               <img src="/heart.png" alt="Favorites" style={{ width: '20px', height: '20px', marginRight: "12px", filter: isActive ? "invert(1)" : "brightness(100%)" }} />
-              <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white' }}>Polubione</div>
+              {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>Polubione</div>}
             </>
           )}
         </NavLink>
@@ -99,7 +127,7 @@ export default function Navbar() {
           {({ isActive }) => (
             <>
               <img src="/Saved.png" alt="Saved" style={{ width: '20px', height: '20px', marginRight: "12px", filter: isActive ? "invert(1)" : "brightness(100%)" }} />
-              <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white' }}>Biorę udział</div>
+              {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>Biorę udział</div>}
             </>
           )}
         </NavLink>
@@ -117,7 +145,7 @@ export default function Navbar() {
           {({ isActive }) => (
             <>
               <img src="/Localization.png" alt="Nearby" style={{ width: '20px', height: '20px', marginRight: "12px", filter: isActive ? "invert(1)" : "brightness(100%)" }} />
-              <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white' }}>W pobliżu</div>
+              {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>W pobliżu</div>}
             </>
           )}
         </NavLink>
@@ -134,7 +162,7 @@ export default function Navbar() {
           {({ isActive }) => (
             <>
               <img src="/Profile.png" alt="Profile" style={{ width: '20px', height: '20px', marginRight: "12px", filter: isActive ? "invert(1)" : "brightness(100%)" }} />
-              <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white' }}>Profil</div>
+              {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>Profil</div>}
             </>
           )}
         </NavLink>
@@ -151,7 +179,7 @@ export default function Navbar() {
             marginTop: "24px"
           }}>
             <img src="/plus.png" alt="Dodaj wydarzenie" style={{ width: '20px', height: '20px', marginRight: "12px", filter: "brightness(100%)" }} />
-            <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: 'white' }}>Dodaj wydarzenie</div>
+            {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>Dodaj wydarzenie</div>}
           </NavLink>
         )}
 
@@ -193,7 +221,8 @@ export default function Navbar() {
                   alt={user ? "Wyloguj" : "Zaloguj"} 
                   style={{ width: '20px', height: '20px', marginRight: '12px' }} 
                 />
-                {user ? "Wyloguj" : "Zaloguj"}
+                {isExpanded && (user ? "Wyloguj" : "Zaloguj")}
+
               </button>
           </div>
         </div>
