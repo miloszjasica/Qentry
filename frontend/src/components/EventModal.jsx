@@ -9,7 +9,7 @@ export default function EventModal({ event, onClose }) {
     const category = event.category || "Inne";
 
     async function handleJoin() {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("access");
         if (!token) {
             alert("Musisz być zalogowany, aby zmienić udział w wydarzeniu.");
             return;
@@ -152,8 +152,8 @@ export default function EventModal({ event, onClose }) {
             <button
                 onClick={() => alert("Tutaj wygenerujesz QR")}
                 style={{
-                width: "48px",
-                height: "48px",
+                width: "52px",
+                height: "52px",
                 borderRadius: "10px",
                 background: "white",
                 border: "1px solid #D1D5DC",
@@ -169,8 +169,8 @@ export default function EventModal({ event, onClose }) {
             <button
                 onClick={() => alert("Tutaj dodasz do polubionych")}
                 style={{
-                width: "48px",
-                height: "48px",
+                width: "52px",
+                height: "52px",
                 borderRadius: "10px",
                 background: "white",
                 border: "1px solid #D1D5DC",

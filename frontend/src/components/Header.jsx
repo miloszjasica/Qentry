@@ -1,11 +1,11 @@
-export default function Header({ user, search, setSearch }) {
+export default function Header({ user, search, setSearch, isExpanded }) {
 
   return (
     <div
       style={{
         position: "fixed",
         top: 0,
-        left: "256px",
+        left: isExpanded ? 256 : 80,
         right: 0,
         height: "72px",
         background: "white",
@@ -15,7 +15,8 @@ export default function Header({ user, search, setSearch }) {
         paddingLeft: "40px",
         paddingRight: "40px",
         justifyContent: "space-between",
-        zIndex: 100
+        zIndex: 100,
+        transition: "left 0.3s"
       }}
     >
       <div style={{ fontSize: 24, fontFamily: "Arimo" }}>
