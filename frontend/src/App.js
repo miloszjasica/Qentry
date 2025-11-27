@@ -4,33 +4,30 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import { BrowserRouter as Router } from 'react-router-dom';
 import { useState } from "react";
 
 function App() {
-
   const [search, setSearch] = useState("");
 
   return (
     <Router>
-      <div style={{ display: "flex" }}>
+      {/* Usuń outer div style={{ display: "flex" }} jeśli ma sens tylko dla layoutu Home */}
+      <Header search={search} setSearch={setSearch} />
+      <Navbar />
 
-        <div style={{ flex: 1 }}>
-          <Routes>
+      {/* Dynamiczny Kontent */}
+      <div style={{ flex: 1, marginLeft: "256px", marginTop: "72px" }}>
 
-            <Route path="/" element={<Home />} />
+        <Routes>
+          {/* Użyj elementu Home z propsem 'search' tylko na ścieżce głównej */}
+          <Route path="/" element={<Home search={search} />} />
 
-            <Route path="/login" element={<Login />} />
-
-            <Route path="/register" element={<Register />} />
-          </Routes>
-        </div>
+          {/* Na tych ścieżkach renderuj tylko komponent Login/Register */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
       </div>
-        <Navbar />
-        <Header search={search} setSearch={setSearch} />
-        <div style={{ flex: 1, marginLeft: "256px", marginTop: "72px" }}>
-          <Home search={search} />
-        </div>
+
     </Router>
   );
 }

@@ -1,0 +1,21 @@
+# ==================================
+# PLIKI DO IGNOROWANIA PRZEZ DOCKERA
+# ==================================
+
+# 1. Ignorowanie katalogów z zależnościami
+# To jest kluczowe, aby rozwiązać błąd z przesyłaniem kontekstu
+**/node_modules
+**/build
+**/dist
+
+# 2. Ignorowanie katalogów kodu źródłowego, które są kopiowane później
+# (Upewnij się, że nie ignorujesz katalogów, które są potrzebne na wczesnym etapie!)
+
+# 3. Ignorowanie folderów specyficznych dla Pythona/Django
+__pycache__/
+
+# 4. Inne pliki systemowe i logi
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

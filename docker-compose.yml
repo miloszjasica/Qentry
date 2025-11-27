@@ -22,7 +22,6 @@ services:
       dockerfile: frontend/Dockerfile
     volumes:
       - ./frontend:/app
-      - /app/node_modules
     ports:
       - "3000:3000"
     stdin_open: true
@@ -35,9 +34,9 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
     ports:
       - "5432:5432"
 
 volumes:
-    postgres_data:
+  postgres_data:
