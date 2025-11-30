@@ -4,13 +4,11 @@ import EventModal from "../components/EventModal";
 
 export default function Home({ search }) {
   const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
     const delay = setTimeout(() => {
       const fetchEvents = async () => {
-        setLoading(true);
 
         const url =
           search.trim() === ""
@@ -38,7 +36,6 @@ export default function Home({ search }) {
           setEvents([]);
         }
 
-        setLoading(false);
       };
       fetchEvents();
     }, 500);
@@ -48,9 +45,6 @@ export default function Home({ search }) {
 
   return (
     <div style={{ padding: "20px", display: "flex", flexWrap: "wrap", gap: "20px" }}>
-      {loading && <div>Ładowanie...</div>}
-      {!loading && events.length === 0 && <div>Brak wyników</div>}
-
       {events.map(ev => (
         <EventCard key={ev.id_event} event={ev} onOpen={setSelectedEvent} />
          ))}
