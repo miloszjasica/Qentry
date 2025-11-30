@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
+import NearbyEvents from "./pages/NearbyEvents";
 import { useState } from "react";
 
 function App() {
@@ -29,7 +30,12 @@ function App() {
         <Navbar isExpanded={isSidebarExpanded} setIsExpanded={setIsSidebarExpanded}/>
         <Header search={search} setSearch={setSearch} isExpanded={isSidebarExpanded} />
         <div style={{ flex: 1, marginLeft: isSidebarExpanded ? 256 : 80, transition: "margin-left 0.3s", marginTop: "72px", overflow: "visible" }}>
-          <Home search={search} />
+          <Routes>
+            <Route path="/" element={<Home search={search} />} />
+            {/* <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} /> */}
+            <Route path="/w-poblizu" element={<NearbyEvents search={search} />} />
+          </Routes>
         </div>
     </Router>
   );

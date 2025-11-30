@@ -132,7 +132,7 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
           )}
         </NavLink>
 
-        <NavLink to="/w-pobliżu" style={({ isActive }) => ({
+        <NavLink to="/w-poblizu" style={({ isActive }) => ({
           padding: '12px 16px',
           display: "flex",
           alignItems: 'center',
