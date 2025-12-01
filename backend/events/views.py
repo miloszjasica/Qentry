@@ -275,6 +275,12 @@ def close_event(request, id):
             required=False,
             type=float
         ),
+        OpenApiParameter(
+            name='name',
+            description='Filtr po nazwie wydarzenia',
+            required=False,
+            type=str
+        ),
     ],
     responses={200: OpenApiResponse(response=EventSerializer, description='Lista pobliskich eventów')}
 )
@@ -289,6 +295,8 @@ def get_nearby_events(request):
         radius = float(request.query_params.get('radius', 10)) #default
     except ValueError:
         return Response({'error': 'Nieprawidłowy format parametru radius'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    name_filter = request.query_params.get('name', '')
 
     ip_address = get_client_ip(request)
 
@@ -309,6 +317,8 @@ def get_nearby_events(request):
 
     nearby_events = []
     for event in Event.objects.filter(is_active=True).exclude(latitude__isnull=True, longitude__isnull=True):
+        if name_filter and name_filter.lower() not in event.name.lower():
+            continue
         dist = distance(user_lat, user_lon, event.latitude, event.longitude)
         if dist <= radius:
             event.distance_km = dist

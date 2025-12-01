@@ -8,7 +8,7 @@ COPY frontend/tailwind.config.js ./
 
 RUN npm install
 
-COPY frontend /app/
+COPY frontend/ ./
 
 EXPOSE 3000
 

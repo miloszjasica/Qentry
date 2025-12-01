@@ -47,7 +47,7 @@ def my_balance(request, id_event):
     tags=['Tokens'],    
     summary='Get balance for a user in an event',
     parameters=[
-        OpenApiParameter(name='user_id', type=int, required=True, location=OpenApiParameter.PATH),
+        OpenApiParameter(name='qr_string', type=str, required=True, location=OpenApiParameter.PATH),
         OpenApiParameter(name='id_event', type=int, required=True, location=OpenApiParameter.PATH),
     ],
     responses= {
@@ -56,20 +56,17 @@ def my_balance(request, id_event):
 )
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def user_balance(request, user_id, id_event):
+def user_balance(request, qr_string, id_event):
     try:
         operator = request.user
-        user = User.objects.get(pk=user_id)
         event = Event.objects.get(pk=id_event)
         operator_qr = QR.objects.get(id_user=operator, id_event=event)
-        qr = QR.objects.get(id_user=user, id_event=event)
-
+        qr = QR.objects.get(qr_string=qr_string, id_event=event)
+        
         if operator_qr.user_role in ['token_taker', 'staff', 'token_seller'] or operator.role == 'admin':
             return Response(BalanceSerializer({"balance": qr.balance}).data)
         else:
             return Response({'error': 'Nie masz uprawnień do przeglądania salda użytkownika'}, status=403)
-    except User.DoesNotExist:
-        return Response({'error': 'Nie znaleziono użytkownika'}, status=404)
     except Event.DoesNotExist:
         return Response({'error': 'Nie znaleziono wydarzenia'}, status=404)
     except QR.DoesNotExist:
@@ -79,7 +76,7 @@ def user_balance(request, user_id, id_event):
     tags=['Tokens'],
     summary='Add tokens for a user in an event',
     parameters=[
-        OpenApiParameter(name='user_id', type=int, required=True, location=OpenApiParameter.PATH),
+        OpenApiParameter(name='qr_string', type=str, required=True, location=OpenApiParameter.PATH),
         OpenApiParameter(name='id_event', type=int, required=True, location=OpenApiParameter.PATH),
         OpenApiParameter(name='amount', type=float, required=False, location=OpenApiParameter.QUERY)
     ],
@@ -87,13 +84,12 @@ def user_balance(request, user_id, id_event):
 )
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def add_tokens(request, user_id, id_event):
+def add_tokens(request, qr_string, id_event):
     try:
         operator = request.user
-        user = User.objects.get(pk=user_id)
         event = Event.objects.get(pk=id_event)
         operator_qr = QR.objects.get(id_user=operator, id_event=event)
-        qr = QR.objects.get(id_user=user, id_event=event)
+        qr = QR.objects.get(qr_string=qr_string, id_event=event)
         
         if operator_qr.user_role == 'token_seller' or operator_qr.user_role == 'staff':
 
@@ -123,23 +119,20 @@ def add_tokens(request, user_id, id_event):
     tags=['Transactions'],
     summary='New transaction for a user in an attraction',
     parameters=[
-        OpenApiParameter(name='user_id', type=int, required=True, location=OpenApiParameter.PATH),
+        OpenApiParameter(name='qr_string', type=str, required=True, location=OpenApiParameter.PATH),
         OpenApiParameter(name='id_attraction', type=int, required=True, location=OpenApiParameter.PATH),
-        OpenApiParameter(name='id_event', type=int, required=True, location=OpenApiParameter.PATH),
     ],
     responses={200: OpenApiResponse(response=NewTransactionSerializer,  description='Tranzakcja zakończona sukcesem')}
 )
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def new_transaction(request, user_id, id_attraction, id_event):
+def new_transaction(request, qr_string, id_attraction):
     try:
         operator = request.user
-        user = User.objects.get(pk=user_id)
-        event = Event.objects.get(pk=id_event)
+        qr = QR.objects.get(qr_string=qr_string)
+        event = qr.id_event
         attraction = Attraction.objects.get(pk=id_attraction, id_event=event)
-        qr = QR.objects.get(id_user=user, id_event=event)
         operator_qr = QR.objects.get(id_user=operator, id_event=event)
-        attraction = event.attractions.get(pk=id_attraction)
 
         if operator_qr.user_role == 'token_taker' or operator_qr.user_role == 'staff':
 
@@ -159,7 +152,7 @@ def new_transaction(request, user_id, id_attraction, id_event):
             attraction.save()
             
             transaction = Transaction.objects.create(
-                id_user=user,
+                id_user=qr.id_user,
                 id_attraction=attraction
             )
             
@@ -177,8 +170,6 @@ def new_transaction(request, user_id, id_attraction, id_event):
         
     except User.DoesNotExist:
         return Response({'error': 'Nie znaleziono użytkownika'}, status=404)
-    except Event.DoesNotExist:
-        return Response({'error': 'Nie znaleziono wydarzenia'}, status=404)
     except QR.DoesNotExist:
         return Response({'error': 'Kod QR nieaktywny'}, status=404)
     except event.attractions.model.DoesNotExist:
