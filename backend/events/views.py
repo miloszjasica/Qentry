@@ -4,7 +4,9 @@ from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiRespon
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import permission_classes
+from django.utils import timezone
 from .models import Event
+from tokens.models import QR
 from .serializers import EventSerializer, EventWithDistanceSerializer
 from utils.geo import get_locations, distance, get_client_ip
 from .permissions import IsOwnerOrAdmin
@@ -60,6 +62,9 @@ from .permissions import IsOwnerOrAdmin
 )
 @api_view(['GET'])
 def get_events(request):
+    #today = timezone.now().date()
+    #queryset = Event.objects.filter(end_date__gte=today)
+
     queryset = Event.objects.all()
 
     name = request.query_params.get('name')
@@ -357,6 +362,16 @@ def close_event(request, id):
             required=False,
             type=str
         ),
+        OpenApiParameter(
+            name='category',
+            description='Filtr po kategorii wydarzenia',
+            required=False,
+            type=str,
+            enum=[
+                "music", "art", "food", "sport", "business", "theatre",
+                "tech", "wellness", "gaming", "film", "fashion", "books", "other"
+            ]
+        ),
     ],
     responses={200: OpenApiResponse(response=EventSerializer, description='Lista pobliskich eventów')}
 )
@@ -371,6 +386,8 @@ def get_nearby_events(request):
         radius = float(request.query_params.get('radius', 10)) #default
     except ValueError:
         return Response({'error': 'Nieprawidłowy format parametru radius'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    category = request.query_params.get('category', '')
     
     name_filter = request.query_params.get('name', '')
 
@@ -395,6 +412,8 @@ def get_nearby_events(request):
     for event in Event.objects.filter(is_active=True).exclude(latitude__isnull=True, longitude__isnull=True):
         if name_filter and name_filter.lower() not in event.name.lower():
             continue
+        if category and event.category != category:
+            continue
         dist = distance(user_lat, user_lon, event.latitude, event.longitude)
         if dist <= radius:
             event.distance_km = dist
@@ -404,3 +423,19 @@ def get_nearby_events(request):
 
     serializer = EventWithDistanceSerializer(nearby_events, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def event_status(request, event_id):
+    user = request.user
+    try:
+        event = Event.objects.get(pk=event_id)
+    except Event.DoesNotExist:
+        return Response(
+            {"error": "Event nie istnieje"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    is_joined = QR.objects.filter(id_user=user, id_event=event).exists()
+
+    return Response({"is_joined": is_joined}, status=status.HTTP_200_OK)
