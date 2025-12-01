@@ -1,8 +1,10 @@
 FROM node:20
 
 WORKDIR /app
-
 COPY frontend/package*.json ./
+COPY frontend/postcss.config.js ./
+COPY frontend/tailwind.config.js ./
+
 
 RUN npm install
 
