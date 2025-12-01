@@ -2,6 +2,7 @@ from django.db import models
 from accounts.models import User
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderTimedOut, GeocoderUnavailable
+from django.utils import timezone
 
 class Event(models.Model):
 
@@ -52,3 +53,8 @@ class Event(models.Model):
                 print(f"Error geocoding location '{self.location}': {e}")
 
         super().save(*args, **kwargs)
+
+    @staticmethod
+    def deactivate_finished_events():
+        today = timezone.now().date()
+        Event.objects.filter(end_date__lt=today, is_active=True).update(is_active=False)

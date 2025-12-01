@@ -11,4 +11,5 @@ urlpatterns = [
     path('<int:id>/open/', views.open_event),
     path('<int:id>/close/', views.close_event),
     path('nearby-events/', views.get_nearby_events),
+    path('organizer-events/', views.get_organizer_events),
 ]
