@@ -1,19 +1,21 @@
+import { Music, Brush, Coffee, Activity, Briefcase, Theater, Cpu, Heart, Gamepad, Film, ShoppingBag, BookOpen, MoreHorizontal } from "lucide-react";
+
 export default function CategoryBar({ selected, onSelect }) {
   const categories = [
-    { id: "all", label: "Wszystkie" },
-    { id: "music", label: "Muzyka" },
-    { id: "art", label: "Sztuka" },
-    { id: "food", label: "Jedzenie" },
-    { id: "sport", label: "Sport" },
-    { id: "business", label: "Biznes" },
-    { id: "theatre", label: "Teatr" },
-    { id: "tech", label: "Technologia" },
-    { id: "wellness", label: "Wellness" },
-    { id: "gaming", label: "Gaming" },
-    { id: "film", label: "Film" },
-    { id: "fashion", label: "Moda" },
-    { id: "books", label: "Książki" },
-    { id: "other", label: "Inne" },
+    { id: "all", label: "Wszystkie", icon: MoreHorizontal },
+    { id: "music", label: "Muzyka", icon: Music },
+    { id: "art", label: "Sztuka", icon: Brush },
+    { id: "food", label: "Jedzenie", icon: Coffee },
+    { id: "sport", label: "Sport", icon: Activity },
+    { id: "business", label: "Biznes", icon: Briefcase },
+    { id: "theatre", label: "Teatr", icon: Theater },
+    { id: "tech", label: "Technologia", icon: Cpu },
+    { id: "wellness", label: "Wellness", icon: Heart },
+    { id: "gaming", label: "Gaming", icon: Gamepad },
+    { id: "film", label: "Film", icon: Film },
+    { id: "fashion", label: "Moda", icon: ShoppingBag },
+    { id: "books", label: "Książki", icon: BookOpen },
+    { id: "other", label: "Inne", icon: MoreHorizontal },
   ];
 
   return (
@@ -23,25 +25,36 @@ export default function CategoryBar({ selected, onSelect }) {
       marginBottom: "20px",
       overflowX: "auto",
       paddingBottom: "10px",
+      position: "relative",
+      flexWrap: "wrap"
     }}>
-      {categories.map(cat => (
-        <div
-          key={cat.id}
-          onClick={() => onSelect(cat.id)}
-          style={{
-            padding: "10px 16px",
-            borderRadius: "14px",
-            background: selected === cat.id ? "#544E61" : "#E5E3E8",
-            color: selected === cat.id ? "white" : "#333",
-            fontFamily: "Arimo",
-            fontSize: "14px",
-            cursor: "pointer",
-            whiteSpace: "nowrap",
-          }}
-        >
-          {cat.label}
-        </div>
-      ))}
+      {categories.map(cat => {
+        const Icon = cat.icon;
+        return (
+          <div
+            key={cat.id}
+            onClick={() => onSelect(cat.id)}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              padding: "8px 16px",
+              borderRadius: "10px",
+              borderColor: "#E5E7EB",
+              background: selected === cat.id ? "#9893DA" : "#FFFFFF",
+              color: selected === cat.id ? "white" : "#333",
+              fontFamily: "Arimo",
+              fontSize: "14px",
+              cursor: "pointer",
+              whiteSpace: "nowrap",
+              outline: "1.11px solid #E5E7EB",
+              outlifetOffset: "-1.11px",
+            }}
+          >
+            <Icon size={16} /> {cat.label}
+          </div>
+        );
+      })}
     </div>
   );
 }

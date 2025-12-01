@@ -1,5 +1,5 @@
 export default function Header({ user, search, setSearch, isExpanded }) {
-
+      console.log("User prop:", user);
   return (
     <div
       style={{

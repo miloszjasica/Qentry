@@ -1,43 +1,60 @@
 import { useEffect, useState } from "react";
 import EventCard from "../components/EventCard";
 import EventModal from "../components/EventModal";
+import CategoryBar from "../components/CategoryBar";
 
 export default function NearbyEvents({ search, radius = 30 }) {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [category, setCategory] = useState("all");
 
   useEffect(() => {
-    const fetchNearbyEvents = async () => {
-      const token = localStorage.getItem("access");
-      const headers = { "Accept": "application/json" };
-      if (token) headers["Authorization"] = `Bearer ${token}`;
+    const delay = setTimeout(() => {
+      const fetchNearbyEvents = async () => {
+        const token = localStorage.getItem("access");
 
-      try {
-        const params = new URLSearchParams();
-        params.append("radius", radius);
-        if (search?.trim()) params.append("name", search.trim());
+        let url = `http://localhost:8000/events/nearby-events/?radius=${radius}`;
 
-        const res = await fetch(`http://localhost:8000/events/nearby-events/?${params.toString()}`, { headers });
-        if (!res.ok) throw new Error(`Błąd HTTP: ${res.status}`);
+        if (category !== "all") {
+          url += `&category=${category}`;
+        }
 
-        const data = await res.json();
-        setEvents(data);
-      } catch (err) {
-        console.error("Błąd pobierania wydarzeń w pobliżu:", err);
-        setEvents([]);
-      }
-    };
+        if (search?.trim()) {
+          url += `&name=${encodeURIComponent(search.trim())}`;
+        }
 
-    fetchNearbyEvents();
-  }, [search, radius]);
+        const headers = { "Accept": "application/json" };
+        if (token) headers["Authorization"] = `Bearer ${token}`;
+
+        try {
+          const res = await fetch(url, { headers });
+          if (!res.ok) throw new Error(`Błąd HTTP: ${res.status}`);
+
+          const data = await res.json();
+          setEvents(data);
+        } catch (err) {
+          console.error("Błąd pobierania wydarzeń w pobliżu:", err);
+          setEvents([]);
+        }
+      };
+
+      fetchNearbyEvents();
+    }, 300);
+
+    return () => clearTimeout(delay);
+  }, [search, category, radius]);
 
   return (
-    <div style={{ padding: "20px", display: "flex", flexWrap: "wrap", gap: "20px" }}>
-      {events.length === 0 && <div>Brak wyników</div>}
+    <div style={{ padding: "20px" }}>
+      <CategoryBar selected={category} onSelect={setCategory} />
 
-      {events.map(ev => (
-        <EventCard key={ev.id_event} event={ev} onOpen={setSelectedEvent} />
-      ))}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", marginTop: "20px" }}>
+        {events.length === 0 && <div>Brak wyników</div>}
+
+        {events.map(ev => (
+          <EventCard key={ev.id_event} event={ev} onOpen={setSelectedEvent} />
+        ))}
+      </div>
 
       <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
     </div>
