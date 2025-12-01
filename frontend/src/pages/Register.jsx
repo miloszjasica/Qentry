@@ -1,76 +1,69 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../api/auth";
+import { RegisterView } from "../components/RegisterView";
 import LogoutButton from "../components/LogoutButton";
+import { motion } from "framer-motion";
 
 export default function Register() {
-  const [form, setForm] = useState({ email: "", password: "", name: "", surname: "" });
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState(null);
+  const [apiError, setApiError] = useState(null);
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleRegister = async (e) => {
-    e.preventDefault();
+  // Funkcja odbierająca DANE Z FORMULARZA (w tym wants_to_be_organizer)
+  const handleRegisterSubmit = async (formData) => {
     try {
-      await registerUser(form);
-      setSuccess(true);
-      setError(null);
+      // formData teraz zawiera: { name, surname, email, password, wants_to_be_organizer }
+      await registerUser(formData);
+      setApiError(null);
 
+      alert("Rejestracja udana! Zostaniesz przeniesiony do strony logowania.");
       navigate("/login");
+
     } catch (err) {
       if (err.response && err.response.data) {
         const backendErrors = err.response.data;
         let messages = [];
         for (const key in backendErrors) {
-          const value = backendErrors[key];
-          if (Array.isArray(value)) {
-            messages.push(`${key}: ${value.join(", ")}`);
-          } else {
-            messages.push(`${key}: ${value}`);
-          }
+           messages.push(`${key}: ${Array.isArray(backendErrors[key]) ? backendErrors[key].join(", ") : backendErrors[key]}`);
         }
-        setError(messages.join(" | "));
+        setApiError(messages.join(" | "));
       } else {
-        setError("Błąd rejestracji. Sprawdź dane.");
+        setApiError("Błąd rejestracji. Spróbuj ponownie.");
       }
-      setSuccess(false);
     }
+  };
+
+  const handleBack = () => {
+    navigate("/");
+  };
+
+  const handleSwitchToLogin = () => {
+    navigate("/login");
   };
 
   const isLoggedIn = !!localStorage.getItem("access");
 
   if (isLoggedIn) {
     return (
-      <motion.div className="flex items-center justify-center min-h-screen">
-        <p className="text-center text-xl font-semibold">
+      <motion.div
+        className="flex flex-col items-center justify-center min-h-screen"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
+        <p className="text-center text-xl font-semibold mb-4">
           Jesteś już zalogowany
         </p>
-          <LogoutButton></LogoutButton>
+        <LogoutButton />
       </motion.div>
     );
   }
 
   return (
-    <motion.div className="flex items-center justify-center min-h-screen bg-gray-100 p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Rejestracja</h2>
-
-        {success && <p className="text-green-600 text-center mb-3">Rejestracja udana!</p>}
-        {error && <p className="text-red-500 text-center mb-3">{error}</p>}
-
-        <form onSubmit={handleRegister} className="space-y-4">
-          <input name="name" type="text" placeholder="Imię" value={form.name} onChange={handleChange} className="w-full p-3 border rounded-xl" />
-          <input name="surname" type="text" placeholder="Nazwisko" value={form.surname} onChange={handleChange} className="w-full p-3 border rounded-xl" />
-          <input name="email" type="email" placeholder="Email" value={form.email} onChange={handleChange} className="w-full p-3 border rounded-xl" />
-          <input name="password" type="password" placeholder="Hasło" value={form.password} onChange={handleChange} className="w-full p-3 border rounded-xl" />
-          <button type="submit" className="w-full p-3 rounded-xl bg-black text-white font-semibold">Zarejestruj</button>
-        </form>
-      </div>
-    </motion.div>
+    <RegisterView
+      onRegisterSubmit={handleRegisterSubmit}
+      apiError={apiError}
+      onBack={handleBack}
+      onSwitchToLogin={handleSwitchToLogin}
+    />
   );
 }

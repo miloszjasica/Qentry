@@ -1,58 +1,60 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { login } from "../api/auth";
-import LogoutButton from "../components/LogoutButton";
+import { login } from "../api/auth"; // Zakładam, że ścieżka do API jest poprawna
+import LogoutButton from "../components/LogoutButton"; // Zakładam, że komponent istnieje
+import { LoginView } from "../components/LoginView"; // Importujemy nowy komponent
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
+  // UWAGA: Stan email i password przeniesiono do LoginView
+  const [apiError, setApiError] = useState(null);
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  const handleLoginSubmit = async (email, password) => {
     try {
+      // Wywołanie API z danymi z LoginView
       const res = await login(email, password);
       localStorage.setItem("access", res.data.access);
       localStorage.setItem("refresh", res.data.refresh);
-      setError(null);
-      navigate("/");
+      setApiError(null);
+      navigate("/"); // Przekierowanie do strony głównej
     } catch (err) {
       if (err.response && err.response.data) {
-        setError(JSON.stringify(err.response.data));
+        // Przygotowanie błędu do wyświetlenia w LoginView
+        setApiError(JSON.stringify(err.response.data));
       } else {
-        setError("Błąd logowania");
+        setApiError("Błąd logowania. Spróbuj ponownie.");
       }
     }
+  };
+
+  const handleBack = () => {
+    navigate("/"); // Zgodnie z Twoją logiką
+  };
+
+  const handleSwitchToRegister = () => {
+    navigate("/register"); // Zakładam, że masz ścieżkę do rejestracji
   };
 
   const isLoggedIn = !!localStorage.getItem("access");
 
   if (isLoggedIn) {
     return (
-      <motion.div className="flex items-center justify-center min-h-screen">
-        <p className="text-center text-xl font-semibold">
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <p className="text-center text-xl font-semibold mb-4">
           Jesteś już zalogowany
         </p>
-          <LogoutButton></LogoutButton>
-      </motion.div>
+        {/* Zakładam, że LogoutButton ma odpowiednie style */}
+        <LogoutButton />
+      </div>
     );
   }
 
   return (
-    <motion.div className="flex items-center justify-center min-h-screen bg-gray-100 p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Logowanie</h2>
-        {error && <p className="text-red-500 text-center mb-3">{error}</p>}
-        <form onSubmit={handleLogin} className="space-y-4">
-          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-3 border rounded-xl" />
-          <input type="password" placeholder="Hasło" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full p-3 border rounded-xl" />
-          <button type="submit" className="w-full p-3 rounded-xl bg-black text-white font-semibold">Zaloguj</button>
-
-        </form>
-
-      </div>
-    </motion.div>
+    <LoginView
+      onLoginSubmit={handleLoginSubmit}
+      apiError={apiError}
+      onBack={handleBack}
+      onSwitchToRegister={handleSwitchToRegister}
+    />
   );
 }
