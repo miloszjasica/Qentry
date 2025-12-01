@@ -12,4 +12,5 @@ urlpatterns = [
     path('<int:id>/close/', views.close_event),
     path('nearby-events/', views.get_nearby_events),
     path('organizer-events/', views.get_organizer_events),
-]
+    path('events/<int:event_id>/status/', views.event_status,)
+    ]

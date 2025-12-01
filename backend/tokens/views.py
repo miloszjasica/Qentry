@@ -370,6 +370,24 @@ def join_event(request, event_id):
 @extend_schema(
     tags=['Events'],
     summary='Lista eventów na które zapisany jest zalogowany użytkownik',
+    parameters=[
+        OpenApiParameter(
+            name='name',
+            description='Filtr po nazwie wydarzenia',
+            required=False,
+            type=str
+        ),
+        OpenApiParameter(
+            name='category',
+            description='Filtr po kategorii wydarzenia',
+            required=False,
+            type=str,
+            enum=[
+                "music", "art", "food", "sport", "business", "theatre",
+                "tech", "wellness", "gaming", "film", "fashion", "books", "other"
+            ]
+        ),
+    ],
     responses={
         200: OpenApiResponse(response=QRSerializer, description='Lista zapisów użytkownika')
     }
@@ -379,6 +397,15 @@ def join_event(request, event_id):
 def my_events(request):
     user = request.user
     qrs = QR.objects.select_related('id_event').filter(id_user=user)
+    category = request.query_params.get('category', '')
+    name_filter = request.query_params.get('name', '')
+    
+    if name_filter:
+        qrs = qrs.filter(id_event__name__icontains=name_filter)
+
+    if category:
+        qrs = qrs.filter(id_event__category=category)
+    
     return Response(QRSerializer(qrs, many=True).data)
 
 @extend_schema(
