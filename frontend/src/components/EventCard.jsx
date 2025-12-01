@@ -1,4 +1,4 @@
-export default function EventCard({ event, onOpen }) {
+export default function EventCard({ event, onOpen, onCategoryClick }) {
     const imageUrl = event.image 
     ? event.image 
     : "/ImageWithFallback.png";

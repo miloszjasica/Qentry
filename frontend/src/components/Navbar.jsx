@@ -192,12 +192,26 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
         }}>
           <div style={{display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', width: '100%'}}>
               <button
-                onClick={() => {
+                onClick={async () => {
                   if (user) {
-                    localStorage.removeItem("token");
-                    window.location.reload();
+                    try {
+                      await fetch("http://localhost:8000/api/users/logout/", {
+                        method: "POST",
+                        headers: {
+                          "Accept": "application/json",
+                          "Content-Type": "application/json",
+                          "Authorization": `Bearer ${localStorage.getItem("access")}`
+                        }
+                      });
+                    } catch (error) {
+                      console.error("Logout error:", error);
+                    }
+                    localStorage.removeItem("access");
+                    localStorage.removeItem("refresh");
+                    setUser(null);
+                    window.location.href = "/";
                   } else {
-                    window.location.href = "/"; //trzeba dodac link do logowania
+                    window.location.href = "/login";
                   }
                 }}
                 style={{
@@ -217,7 +231,7 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
                 }}
               >
                 <img 
-                  src={user ? "/logout.svg" : "/logout.svg"} //dodac ikony
+                  src={user ? "/logout.svg" : "/logout.svg"}
                   alt={user ? "Wyloguj" : "Zaloguj"} 
                   style={{ width: '20px', height: '20px', marginRight: '12px' }} 
                 />
