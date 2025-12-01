@@ -1,48 +1,75 @@
-import { useState} from "react";
+import { useEffect, useState} from "react";
 
 export default function EventModal({ event, onClose }) {
-    const [isJoined, setIsJoined] = useState(event?.is_joined ?? false);
+    const [isJoined, setIsJoined] = useState(false);
+    const token = localStorage.getItem("access")
+    const [showQR, setShowQR] = useState(false);
 
-    if (!event) return null;
+    useEffect(() => {  
+      if (!event || !token) return;
+
+      const fetchStatus = async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:8000/events/events/${event.id_event}/status/`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          if (!response.ok) throw new Error("Błąd pobierania statusu");
+          const data = await response.json();
+          setIsJoined(data.is_joined);
+        } catch (err) {
+          console.error(err);
+        }
+      };
+
+      fetchStatus();
+    }, [event, token]);
+
+    if (!event) return null; 
   
     const imageUrl = event.image ? event.image : "/ImageWithFallback.png";
     const category = event.category || "Inne";
 
     async function handleJoin() {
-        const token = localStorage.getItem("access");
-        if (!token) {
-            alert("Musisz być zalogowany, aby zmienić udział w wydarzeniu.");
-            return;
-        }
+    const token = localStorage.getItem("access");
+      if (!token) {
+          alert("Musisz być zalogowany, aby zmienić udział w wydarzeniu.");
+          return;
+      }
 
-        const endpoint = isJoined
-            ? `http://localhost:8000/api/tokens/events/${event.id_event}/leave/`
-            : `http://localhost:8000/api/tokens/events/${event.id_event}/join/`;
+      const endpoint = isJoined
+          ? `http://localhost:8000/api/tokens/events/${event.id_event}/leave/`
+          : `http://localhost:8000/api/tokens/events/${event.id_event}/join/`;
 
-        try {
-            const response = await fetch(endpoint, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            });
+      const method = isJoined ? "DELETE" : "POST";
 
-            if (!response.ok) {
-            throw new Error(`Błąd HTTP: ${response.status}`);
-            }
+     try {
+      const response = await fetch(endpoint, {
+        method: method,
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
 
-            setIsJoined(!isJoined);
+      if (!response.ok) {
+        throw new Error(`Błąd HTTP: ${response.status}`);
+      }
 
-            alert(isJoined
-            ? "Wypisałeś się z wydarzenia"
-            : "Pomyślnie dołączyłeś do wydarzenia!"
-            );
-        } catch (error) {
-            console.error("Błąd podczas zmiany statusu uczestnictwa:", error);
-            alert("Wystąpił błąd. Spróbuj ponownie później.");
-        }
-        }
+      setIsJoined(!isJoined);
+
+      alert(isJoined
+        ? "Wypisałeś się z wydarzenia"
+        : "Pomyślnie dołączyłeś do wydarzenia!"
+      );
+    } catch (error) {
+      console.error("Błąd podczas zmiany statusu uczestnictwa:", error);
+      alert("Wystąpił błąd. Spróbuj ponownie później.");
+    }
+  }
+
 
   return (
     <div style={styles.overlay} onClick={onClose}>
