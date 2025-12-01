@@ -1,11 +1,11 @@
-export default function EventCard({ event }) {
+export default function EventCard({ event, onOpen, onCategoryClick }) {
     const imageUrl = event.image 
     ? event.image 
     : "/ImageWithFallback.png";
     const category = event.category || "Inne";
 
   return (
-    <div >
+    <div onClick={() => onOpen(event)} style={{ cursor: "pointer" }}>
         <div style={{ position: "relative" }}>
             <img 
                 src={imageUrl} 

@@ -90,6 +90,82 @@ def get_events(request):
     serializer = EventSerializer(queryset, many=True)
     return Response(serializer.data)
 
+@extend_schema(
+    tags=['Events'],
+    summary='Get list of organizer events',
+    description='Zwraca listę eventów stworzonych przez organizatora z możliwością filtrowania po niektórych polach z modelu event.',
+    parameters=[
+        OpenApiParameter(
+            name='name',
+            description='Filtr po nazwie wydarzenia (wyszukiwanie częściowe)',
+            required=False,
+            type=str
+        ),
+        OpenApiParameter(
+            name='location',
+            description='Filtr po lokalizacji (wyszukiwanie częściowe)',
+            required=False,
+            type=str
+        ),
+        OpenApiParameter(
+            name='category',
+            description='Filtr po kategorii wydarzenia',
+            required=False,
+            type=str,
+            enum=[
+                "music", "art", "food", "sport", "business", "theatre",
+                "tech", "wellness", "gaming", "film", "fashion", "books", "other"
+            ]
+        ),
+        OpenApiParameter(
+            name='date',
+            description='Filtr po dacie (eventy aktywne w danym dniu, format YYYY-MM-DD)',
+            required=False,
+            type=str,
+        ),
+        OpenApiParameter(
+            name='is_active',
+            description='Filtr po statusie aktywności (true/false)',
+            required=False,
+            type=bool
+        ),
+    ],
+    responses={200: OpenApiResponse(response=EventSerializer, description='Lista eventów')},
+)
+@api_view(['GET'])
+def get_organizer_events(request):
+    try:
+        queryset = Event.objects.filter(user_id=request.user.id)
+        user = request.user
+
+        name = request.query_params.get('name')
+        location = request.query_params.get('location')
+        is_active = request.query_params.get('is_active')
+        category = request.query_params.get('category')
+        date = request.query_params.get('date')
+
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+
+        if location:
+            queryset = queryset.filter(location__icontains=location)
+
+        if is_active is not None:
+            queryset = queryset.filter(is_active=is_active.lower() == "true")
+
+        if category:
+            queryset = queryset.filter(category=category)
+
+        if date:
+            queryset = queryset.filter(start_date__lte=date, end_date__gte=date)
+
+        if user.role != ['organizer', 'admin']:
+            serializer = EventSerializer(queryset, many=True)
+            return Response(serializer.data)
+        else:
+            return Response({'error': 'You have to be an organizer'}, status=status.HTTP_403_FORBIDDEN)
+    except Exception as e:
+        return Response({'error'}, status=status.HTTP_400_BAD_REQUEST)
 
 @extend_schema(
     tags=['Events'],
@@ -275,6 +351,12 @@ def close_event(request, id):
             required=False,
             type=float
         ),
+        OpenApiParameter(
+            name='name',
+            description='Filtr po nazwie wydarzenia',
+            required=False,
+            type=str
+        ),
     ],
     responses={200: OpenApiResponse(response=EventSerializer, description='Lista pobliskich eventów')}
 )
@@ -289,6 +371,8 @@ def get_nearby_events(request):
         radius = float(request.query_params.get('radius', 10)) #default
     except ValueError:
         return Response({'error': 'Nieprawidłowy format parametru radius'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    name_filter = request.query_params.get('name', '')
 
     ip_address = get_client_ip(request)
 
@@ -309,6 +393,8 @@ def get_nearby_events(request):
 
     nearby_events = []
     for event in Event.objects.filter(is_active=True).exclude(latitude__isnull=True, longitude__isnull=True):
+        if name_filter and name_filter.lower() not in event.name.lower():
+            continue
         dist = distance(user_lat, user_lon, event.latitude, event.longitude)
         if dist <= radius:
             event.distance_km = dist
