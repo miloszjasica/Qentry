@@ -52,3 +52,11 @@ class AssignRoleSerializer(serializers.Serializer):
     role = serializers.ChoiceField(choices=[
         'guest', 'staff', 'token_taker', 'token_seller'
     ])
+
+class EventUserRoleSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(source="id_user.email")
+    role = serializers.CharField(source="user_role")
+
+    class Meta:
+        model = QR
+        fields = ["email", "role"]

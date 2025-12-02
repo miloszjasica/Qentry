@@ -9,7 +9,7 @@ from events.models import Event
 from .models import QR
 from decimal import Decimal, ROUND_DOWN as decimal
 from .models import Transaction
-from .serializers import AssignRoleSerializer, TransactionSerializer,QRSerializer
+from .serializers import AssignRoleSerializer, EventUserRoleSerializer, TransactionSerializer,QRSerializer
 from attractions.models import Attraction
 from .serializers import BalanceSerializer, AddTokensSerializer, NewTransactionSerializer, ListTransactionsSerializer
 from django.http import FileResponse, Http404, HttpResponse
@@ -526,6 +526,35 @@ def assign_role(request, event_id):
             "role": role,
             "event_id": event_id
         })
+
+    except Exception as e:
+        return Response({"error": str(e)}, status=500)
+
+@extend_schema(
+    tags=['Events'],
+    summary='Lista użytkowników z rolami w evencie',
+    parameters=[
+        OpenApiParameter(
+            name='event_id',
+            type=int,
+            location=OpenApiParameter.PATH,
+            required=True,
+            description="ID wydarzenia"
+        )
+    ],
+    responses={
+        200: EventUserRoleSerializer(many=True),
+        404: OpenApiResponse(description="Nie znaleziono eventu lub użytkowników"),
+    }
+)
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_event_roles(request, event_id):
+    try:
+        roles = QR.objects.filter(id_event_id=event_id)
+
+        serializer = EventUserRoleSerializer(roles, many=True)
+        return Response(serializer.data)
 
     except Exception as e:
         return Response({"error": str(e)}, status=500)
