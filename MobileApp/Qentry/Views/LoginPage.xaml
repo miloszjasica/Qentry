@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Qentry.ViewModels"
+             x:Class="Qentry.Views.LoginPage">
+
+    <ScrollView>
+        <VerticalStackLayout 
+            Padding="30"
+            Spacing="20"
+            VerticalOptions="Center">
+
+            <Label 
+                Text="Zaloguj się"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <Entry 
+                Placeholder="Email"
+                Text="{Binding Email}"
+                Keyboard="Email"
+                ClearButtonVisibility="WhileEditing" />
+
+            <Entry 
+                Placeholder="Hasło"
+                Text="{Binding Password}"
+                IsPassword="True"
+                ClearButtonVisibility="WhileEditing" />
+
+            <Button 
+                Text="Zaloguj"
+                Command="{Binding LoginCommand}"
+                IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBooleanConverter}, FallbackValue=True}"
+                BackgroundColor="#0078D7"
+                TextColor="White"
+                CornerRadius="8"
+                HeightRequest="48"/>
+
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox IsChecked="{Binding RememberMe}" />
+                <Label Text="Nie wylogowuj mnie" VerticalTextAlignment="Center"/>
+            </HorizontalStackLayout>
+
+            <ActivityIndicator 
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                Color="#0078D7" />
+
+            <Label 
+                Text="{Binding Message}"
+                TextColor="Red"
+                HorizontalOptions="Center"
+                FontSize="Medium" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

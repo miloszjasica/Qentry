@@ -22,6 +22,7 @@ services:
       dockerfile: frontend/Dockerfile
     volumes:
       - ./frontend:/app
+      - /app/node_modules
     ports:
       - "3000:3000"
     stdin_open: true

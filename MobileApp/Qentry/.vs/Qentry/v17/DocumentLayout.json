@@ -1,0 +1,160 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\services\\tokensservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:services\\tokensservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\services\\eventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:services\\eventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\viewmodels\\calendarviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:viewmodels\\calendarviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\views\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:views\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\views\\savedeventspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:views\\savedeventspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\viewmodels\\savedeventsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:viewmodels\\savedeventsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\views\\savedeventspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:views\\savedeventspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TokensService.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Services\\TokensService.cs",
+              "RelativeDocumentMoniker": "Services\\TokensService.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Services\\TokensService.cs",
+              "RelativeToolTip": "Services\\TokensService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T09:07:17.465Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SavedEventsPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\SavedEventsPage.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\SavedEventsPage.xaml.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\SavedEventsPage.xaml.cs",
+              "RelativeToolTip": "Views\\SavedEventsPage.xaml.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAiwCsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T08:47:51.4Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SavedEventsPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\SavedEventsPage.xaml",
+              "RelativeDocumentMoniker": "Views\\SavedEventsPage.xaml",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\SavedEventsPage.xaml",
+              "RelativeToolTip": "Views\\SavedEventsPage.xaml",
+              "ViewState": "AgIAAM4AAAAAAAAAAAAgwOQAAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-02T08:47:46.478Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EventService.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Services\\EventService.cs",
+              "RelativeDocumentMoniker": "Services\\EventService.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Services\\EventService.cs",
+              "RelativeToolTip": "Services\\EventService.cs",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAAAKwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T18:07:09.446Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\MainPage.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\MainPage.xaml.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\MainPage.xaml.cs",
+              "RelativeToolTip": "Views\\MainPage.xaml.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAAAF4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T17:57:41.528Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SavedEventsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\ViewModels\\SavedEventsViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\SavedEventsViewModel.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\ViewModels\\SavedEventsViewModel.cs",
+              "RelativeToolTip": "ViewModels\\SavedEventsViewModel.cs",
+              "ViewState": "AgIAAKoAAAAAAAAAAAAAANEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T17:54:11.437Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CalendarViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\ViewModels\\CalendarViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\CalendarViewModel.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\ViewModels\\CalendarViewModel.cs",
+              "RelativeToolTip": "ViewModels\\CalendarViewModel.cs",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAqwKwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T17:52:46.739Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\MainPage.xaml",
+              "RelativeDocumentMoniker": "Views\\MainPage.xaml",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\MainPage.xaml",
+              "RelativeToolTip": "Views\\MainPage.xaml",
+              "ViewState": "AgIAAPEAAAAAAAAAAAAgwBoBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-01T17:02:34.117Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

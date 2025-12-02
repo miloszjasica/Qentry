@@ -1,0 +1,66 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 x:Class="Qentry.Views.EventDetailsPage">
+	
+	<ScrollView>
+		<VerticalStackLayout Padding="20" Spacing="15">
+
+			<!-- Tytuł -->
+			<Label Text="{Binding Event.Name}"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="White"/>
+
+			<!-- Lokalizacja -->
+			<Label Text="{Binding Event.Location}"
+                   TextColor="#DDDDDD"/>
+
+			<!-- Daty -->
+			<Label Text="{Binding Event.StartDate, StringFormat='Start: {0:dd MMM yyyy}'}"
+                   TextColor="#FF6666"/>
+			<Label Text="{Binding Event.EndDate, StringFormat='Koniec: {0:dd MMM yyyy}'}"
+                   TextColor="#FF6666"/>
+
+			<!-- Opis -->
+			<Label Text="Opis:"
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   TextColor="White"/>
+			<Label Text="{Binding Event.Description}"
+                   TextColor="#CCCCCC"/>
+
+			<!-- ATRAKCJE -->
+			<Label Text="Atrakcje:"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   Margin="0,10,0,0"/>
+
+			<CollectionView ItemsSource="{Binding Attractions}">
+				<CollectionView.ItemTemplate>
+					<DataTemplate>
+						<Frame BackgroundColor="#333"
+                               Padding="10"
+                               CornerRadius="10"
+                               Margin="0,5">
+
+							<VerticalStackLayout>
+								<Label Text="{Binding Name}"
+                                       FontAttributes="Bold"
+                                       FontSize="18"
+                                       TextColor="White"/>
+								<Label Text="{Binding Description}"
+                                       TextColor="#CCCCCC"/>
+								<Label Text="{Binding Price, StringFormat='Cena: {0} zł'}"
+                                       TextColor="#FFDD55"/>
+							</VerticalStackLayout>
+
+						</Frame>
+					</DataTemplate>
+				</CollectionView.ItemTemplate>
+			</CollectionView>
+
+		</VerticalStackLayout>
+	</ScrollView>
+	
+</ContentPage>

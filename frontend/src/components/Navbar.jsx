@@ -1,24 +1,53 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Navbar({ isExpanded, setIsExpanded }) {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  // funkcja do pobrania aktualnego użytkownika
+  const fetchUser = async () => {
+    const token = localStorage.getItem("access");
+    if (!token) return setUser(null);
+
+    try {
+      const res = await fetch("http://localhost:8000/api/users/me/", {
+        headers: { "Authorization": `Bearer ${token}` },
+      });
+      const data = await res.json();
+      if (!data.detail) setUser(data);
+      else setUser(null);
+    } catch (err) {
+      console.error(err);
+      setUser(null);
+    }
+  };
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/users/me/", {
-      headers: {
-        "Accept": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("access")}`
-      }
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (!data.detail) {
-        setUser(data);
-      }
-    })
-    .catch(err => console.error("Fetch error:", err));
+    fetchUser();
   }, []);
+
+  const handleLogout = async () => {
+    if (user) {
+      try {
+        await fetch("http://localhost:8000/api/users/logout/", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${localStorage.getItem("access")}`,
+            "Content-Type": "application/json",
+          },
+        });
+      } catch (err) {
+        console.error(err);
+      }
+      localStorage.removeItem("access");
+      localStorage.removeItem("refresh");
+      setUser(null);
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
     <nav style={{
@@ -55,7 +84,7 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
           }}
         >
           <img
-            src={isExpanded ? "/>.svg" : "/<.svg"}
+            src={isExpanded ? "/arrowLeft.svg" : "/arrowRight.svg"}
             alt={isExpanded ? "Collapse" : "Expand"}
             style={{ width: "16px", height: "16px" }}
           />
@@ -114,7 +143,7 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
           )}
         </NavLink>
 
-        <NavLink to="/biorę-udział" style={({ isActive }) => ({
+        <NavLink to="/biore-udzial" style={({ isActive }) => ({
           padding: '12px 16px',
           display: "flex",
           alignItems: 'center',
