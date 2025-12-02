@@ -15,5 +15,5 @@ urlpatterns = [
     path('events/<int:event_id>/leave/', views.leave_event, name='leave-event'),
     path('qr/<int:qr_id>/image/', views.get_qr_image, name='qr-image'),
     path("events/<int:event_id>/assign-role/", views.assign_role, name="assign_role"),
-    path("tokens/events/<int:event_id>/roles/", views.get_event_roles, name="get_event_roles"),
+    path("events/<int:event_id>/roles/", views.get_event_roles, name="get_event_roles"),
 ]
