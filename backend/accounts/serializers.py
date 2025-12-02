@@ -19,5 +19,5 @@ class LogoutSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'name', 'surname', 'user_image', 'role']  
+        fields = ['id', 'email', 'name', 'surname', 'user_image', 'role','wants_to_be_organizer']
         read_only_fields = ['id', 'email']
