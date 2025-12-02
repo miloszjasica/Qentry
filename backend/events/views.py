@@ -439,3 +439,29 @@ def event_status(request, event_id):
     is_joined = QR.objects.filter(id_user=user, id_event=event).exists()
 
     return Response({"is_joined": is_joined}, status=status.HTTP_200_OK)
+
+@extend_schema(
+    tags=['Events'],
+    summary='Get user events where user has a role other than guest',
+    description='Zwraca listę eventów, na których zalogowany użytkownik posiada rolę inną niż "guest".',
+    responses={200: OpenApiResponse(response=EventSerializer, description='Lista eventów')},
+)
+@api_view(['GET'])
+def get_user_events_with_role(request):
+    try:
+        user = request.user
+
+        qr_records = QR.objects.filter(
+            id_user=user,
+            user_role__in=['staff', 'token_taker', 'token_seller']
+        )
+
+        events = Event.objects.filter(
+            id_event__in=qr_records.values('id_event')
+        ).distinct()
+
+        serializer = EventSerializer(events, many=True)
+        return Response(serializer.data)
+
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
