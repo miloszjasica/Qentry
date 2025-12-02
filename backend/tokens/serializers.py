@@ -37,3 +37,9 @@ class QRSerializer(serializers.ModelSerializer):
         model = QR
         fields = '__all__'
         read_only_fields = ['id_qr', 'generated_at', 'qr_string', 'id_user']
+
+class AssignRoleSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    role = serializers.ChoiceField(choices=[
+        'guest', 'staff', 'token_taker', 'token_seller'
+    ])
