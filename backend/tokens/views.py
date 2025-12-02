@@ -9,7 +9,7 @@ from events.models import Event
 from .models import QR
 from decimal import Decimal, ROUND_DOWN as decimal
 from .models import Transaction
-from .serializers import TransactionSerializer,QRSerializer
+from .serializers import AssignRoleSerializer, TransactionSerializer,QRSerializer
 from attractions.models import Attraction
 from .serializers import BalanceSerializer, AddTokensSerializer, NewTransactionSerializer, ListTransactionsSerializer
 from django.http import FileResponse, Http404, HttpResponse
@@ -471,3 +471,61 @@ def get_qr_image(request, qr_id):
 
     except QR.DoesNotExist:
         return HttpResponse(status=404)
+
+@extend_schema(
+    tags=['Events'],
+    summary='Przypisanie użytkownikowi roli w evencie na podstawie emaila',
+    parameters=[
+        OpenApiParameter(
+            name='event_id',
+            type=int,
+            required=True,
+            location=OpenApiParameter.PATH,
+            description="ID wydarzenia"
+        )
+    ],
+    request=AssignRoleSerializer,
+    responses={
+        200: OpenApiResponse(description="Rola została przypisana"),
+        400: OpenApiResponse(description="Błędne dane lub brak emaila/roli"),
+        404: OpenApiResponse(description="Nie znaleziono użytkownika lub QR"),
+        500: OpenApiResponse(description="Błąd serwera")
+    }
+)
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def assign_role(request, event_id):
+    email = request.data.get("email")
+    role = request.data.get("role")
+
+    if not email:
+        return Response({"error": "Email is required"}, status=400)
+
+    if role not in dict(QR.USER_ROLE_CHOICES):
+        return Response({"error": "Invalid role"}, status=400)
+
+    try:
+        user = User.objects.get(email=email)
+    except User.DoesNotExist:
+        return Response({"error": "User with this email does not exist"}, status=404)
+
+    try:
+        qr, created = QR.objects.get_or_create(
+            id_event_id=event_id,
+            id_user=user,
+            defaults={"user_role": role}
+        )
+
+        if not created:
+            qr.user_role = role
+            qr.save()
+
+        return Response({
+            "message": "Role assigned successfully",
+            "email": email,
+            "role": role,
+            "event_id": event_id
+        })
+
+    except Exception as e:
+        return Response({"error": str(e)}, status=500)
