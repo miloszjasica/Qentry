@@ -1,0 +1,41 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Qentry.ViewModels"
+             xmlns:components="clr-namespace:Qentry.Views.Controls"
+             x:Class="Qentry.Views.ProfilePage">
+    <Grid>
+        <VerticalStackLayout 
+            Padding="30"
+            Spacing="25"
+            VerticalOptions="Center">
+
+            <Label 
+                Text="{Binding ProfileVM.User.Name}"
+                FontSize="26"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" 
+                TextColor="Green"/>
+
+            <Label 
+                Text="{Binding ProfileVM.User.Email}"
+                HorizontalOptions="Center"
+                FontSize="16"
+                TextColor="Gray" />
+
+            <Button 
+                Text="Wyloguj"
+                Command="{Binding LogoutVM.LogoutCommand}"
+                BackgroundColor="#E81123"
+                TextColor="White"
+                CornerRadius="8"
+                HeightRequest="48"
+                HorizontalOptions="Center" />
+
+            <ActivityIndicator 
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                Color="#E81123" />
+        </VerticalStackLayout>
+        <components:CustomBottomNavBar VerticalOptions="End" />
+    </Grid>
+</ContentPage>

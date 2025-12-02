@@ -1,0 +1,280 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:Qentry.Views.Controls"
+             xmlns:viewmodels="clr-namespace:Qentry.ViewModels"
+             xmlns:views="clr-namespace:Qentry.Views"
+             x:Class="Qentry.Views.SavedEventsPage"
+             x:Name="SavedEventsRoot"
+             BackgroundColor="{StaticResource BgColor}">
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Spacing="0">
+
+                <!-- Kalendarz -->
+                <Grid Margin="0,50,0,0">
+                    <views:HorizontalCalendarView 
+                        x:Name="Calendar"
+                        SelectedDay="{Binding SelectedDay, Mode=TwoWay}" />
+                </Grid>
+
+                <!-- Pole wyszukiwania -->
+                <Border StrokeShape="RoundRectangle 28"
+                        Stroke="{StaticResource Primary}"
+                        StrokeThickness="1"
+                        Margin="30,20">
+
+                    <Grid ColumnDefinitions="Auto,*,Auto"
+                          HeightRequest="40"
+                          Padding="20,0,0,0">
+
+                        <ImageButton Source="filter.png"
+                                     WidthRequest="24"
+                                     HeightRequest="24"
+                                     BackgroundColor="Transparent"
+                                     Command="{Binding ToggleFilterPanelCommand}" />
+
+                        <Entry x:Name="SearchEntry"
+                               Grid.Column="1"
+                               Text="{Binding SearchQuery, Mode=TwoWay}"
+                               Placeholder="Wyszukaj wydarzenie"
+                               TextColor="Black" />
+
+                        <ImageButton Grid.Column="2"
+                                     Source="search.png"
+                                     WidthRequest="24"
+                                     HeightRequest="24"
+                                     BackgroundColor="Transparent"
+                                     Command="{Binding SearchCommand}" />
+                    </Grid>
+                </Border>
+
+                <!-- Panel filtrów -->
+                <StackLayout IsVisible="{Binding IsFilterPanelVisible}"
+                             Padding="20"
+                             Spacing="10">
+
+                    <Label Text="Filtruj według kategorii:"
+                           FontAttributes="Bold"
+                           TextColor="Black" />
+
+                    <CollectionView ItemsSource="{Binding Categories}"
+                                    SelectionMode="Single"
+                                    SelectedItem="{Binding SelectedCategory}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" />
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Padding="8"
+                                       Margin="5"
+                                       CornerRadius="10"
+                                       BackgroundColor="{StaticResource BgColor}"
+                                       BorderColor="{StaticResource Primary}">
+                                    <Label Text="{Binding}" TextColor="Black" />
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Label Text="Filtruj według lokalizacji:"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+
+                    <Entry Text="{Binding LocationFilter, Mode=TwoWay}"
+                           Placeholder="Wpisz lokalizację"
+                           TextColor="Black"/>
+
+                    <Label Text="Filtruj po dacie:"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+
+                    <Entry Text="{Binding ManualDateFilter, Mode=TwoWay}"
+                           Placeholder="Wpisz datę (RRRR-MM-DD)"
+                           Keyboard="Chat"
+                           TextColor="Black"/>
+
+                    <Button Text="Resetuj filtry"
+                            WidthRequest="150"
+                            Margin="0,10,0,0"
+                            BackgroundColor="{StaticResource Color2}"
+                            TextColor="Black"
+                            CornerRadius="10"
+                            Command="{Binding ResetFiltersCommand}" />
+                </StackLayout>
+
+                <!-- Lista wydarzeń -->
+                <Border Background="{StaticResource Primary}"
+                        Stroke="{StaticResource Primary}"
+                        StrokeThickness="2"
+                        MinimumHeightRequest="{Binding ScreenHeight}"
+                        StrokeShape="RoundRectangle 50,50,0,0">
+
+                    <Grid>
+                        <VerticalStackLayout>
+
+                            <!-- Przełącznik: zapisane/archiwum -->
+                            <Border HeightRequest="60"
+                                    Stroke="Transparent"
+                                    StrokeShape="RoundRectangle 50">
+
+                                <Border BackgroundColor="{StaticResource Quaternary}"
+                                        WidthRequest="355"
+                                        Stroke="Transparent"
+                                        Padding="3"
+                                        HorizontalOptions="Center"
+                                        StrokeShape="RoundRectangle 50">
+
+                                    <Grid ColumnDefinitions="*,*">
+
+                                        <!-- Zapisane -->
+                                        <Border BackgroundColor="{Binding IsCreatedSelected, Converter={StaticResource BoolToColorConverter}, ConverterParameter=Selected}"
+                                                StrokeThickness="0"
+                                                StrokeShape="RoundRectangle 50"
+                                                VerticalOptions="Fill"
+                                                HorizontalOptions="Fill">
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ShowCreatedCommand}" />
+                                            </Border.GestureRecognizers>
+
+                                            <Label Text="Zapisane wydarzenia"
+                                                   TextColor="{Binding IsCreatedSelected, Converter={StaticResource BoolToTextColorConverter}}"
+                                                   FontAttributes="Bold"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center" />
+                                        </Border>
+
+                                        <!-- Archiwum -->
+                                        <Border Grid.Column="1"
+                                                BackgroundColor="{Binding IsArchivedSelected, Converter={StaticResource BoolToColorConverter}, ConverterParameter=Selected}"
+                                                StrokeThickness="0"
+                                                StrokeShape="RoundRectangle 50"
+                                                VerticalOptions="Fill"
+                                                HorizontalOptions="Fill">
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ShowArchivedCommand}" />
+                                            </Border.GestureRecognizers>
+
+                                            <Label Text="Polubione wydarzenia"
+                                                   TextColor="{Binding IsArchivedSelected, Converter={StaticResource BoolToTextColorConverter}}"
+                                                   FontAttributes="Bold"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center" />
+                                        </Border>
+
+                                    </Grid>
+                                </Border>
+                            </Border>
+
+                            <!-- Lista zapisanych wydarzeń -->
+                            <CollectionView ItemsSource="{Binding Events}"
+                                            IsVisible="{Binding IsCreatedSelected}"
+                                            SelectionMode="Single"
+                                            SelectionChanged="OnEventSelected"
+                                            x:Name="SavedEventsCollection">
+
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="0,4">
+
+                                            <Border Background="#4A4350"
+                                                    Stroke="#3A3341"
+                                                    StrokeThickness="1"
+                                                    Padding="14"
+                                                    Margin="12,6"
+                                                    Shadow="10,10,15,#00000040"
+                                                    StrokeShape="RoundRectangle 20">
+
+                                                <Grid ColumnDefinitions="110,*,Auto">
+
+                                                    <!-- Miniatura -->
+                                                    <Border Grid.Column="0"
+                                                            HeightRequest="80"
+                                                            WidthRequest="150"
+                                                            BackgroundColor="#00000030"
+                                                            StrokeThickness="0"
+                                                            StrokeShape="RoundRectangle 16">
+                                                        <Image Source="{Binding Image}"
+                                                               Aspect="AspectFill"
+                                                               HeightRequest="80"
+                                                               WidthRequest="100" />
+                                                    </Border>
+
+                                                    <!-- Informacje -->
+                                                    <VerticalStackLayout Grid.Column="1"
+                                                                         Margin="5,0,0,0"
+                                                                         VerticalOptions="Center"
+                                                                         Spacing="4">
+                                                        <Label Text="{Binding Name}"
+                                                               FontSize="18"
+                                                               TextColor="White"
+                                                               FontAttributes="Bold" />
+
+                                                        <Label Text="{Binding Location}"
+                                                               FontSize="14"
+                                                               TextColor="#CFCFCF" />
+
+                                                        <Label Text="{Binding StartDate, StringFormat='{0:dd.MM.yyyy}'}"
+                                                               FontSize="14"
+                                                               TextColor="#CFCFCF" />
+                                                    </VerticalStackLayout>
+
+                                                    <!-- Usuń -->
+                                                    <VerticalStackLayout Grid.Column="2"
+                                                                         VerticalOptions="Center"
+                                                                         HorizontalOptions="End">
+                                                        <Button Text="Usuń"
+                                                                Command="{Binding BindingContext.RemoveEventCommand, Source={x:Reference SavedEventsRoot}}"
+                                                                CommandParameter="{Binding}"
+                                                                BackgroundColor="#7A3D87"
+                                                                TextColor="White"
+                                                                Padding="20,8"
+                                                                CornerRadius="12"
+                                                                HeightRequest="38"
+                                                                WidthRequest="90"
+                                                                FontSize="14"
+                                                                Shadow="5,5,10,#00000040" />
+                                                    </VerticalStackLayout>
+
+                                                </Grid>
+                                            </Border>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                            <!-- Archiwum -->
+                            <StackLayout IsVisible="{Binding IsArchivedSelected}"
+                                         Margin="0,20,0,0">
+                                <Label Text="🗄 Archiwum wydarzeń..."
+                                       FontSize="18"
+                                       TextColor="Black" />
+                            </StackLayout>
+
+                            <!-- Brak wydarzeń -->
+                            <StackLayout IsVisible="{Binding NoEventsVisible}"
+                                         HorizontalOptions="Center"
+                                         Margin="0,40">
+                                <Image Source="empty.png"
+                                       WidthRequest="150"
+                                       HeightRequest="150"
+                                       Opacity="0.6" />
+
+                                <Label Text="Nie masz żadnych wydarzeń."
+                                       FontSize="18"
+                                       TextColor="Black"
+                                       HorizontalOptions="Center" />
+                            </StackLayout>
+
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Dolny pasek -->
+        <components:CustomBottomNavBar VerticalOptions="End" />
+    </Grid>
+</ContentPage>
