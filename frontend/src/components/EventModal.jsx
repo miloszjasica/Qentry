@@ -4,6 +4,8 @@ export default function EventModal({ event, onClose }) {
     const [isJoined, setIsJoined] = useState(false);
     const token = localStorage.getItem("access")
     const [showQR, setShowQR] = useState(false);
+    const [qrImage, setQrImage] = useState(null)
+    const [qrId, setQrId] = useState(null);
 
     useEffect(() => {  
       if (!event || !token) return;
@@ -16,9 +18,39 @@ export default function EventModal({ event, onClose }) {
               headers: { Authorization: `Bearer ${token}` },
             }
           );
+
           if (!response.ok) throw new Error("Błąd pobierania statusu");
+
           const data = await response.json();
           setIsJoined(data.is_joined);
+
+          if (data.is_joined) {
+            fetchQrIdForEvent();
+          }
+
+        } catch (err) {
+          console.error(err);
+        }
+      };
+
+      const fetchQrIdForEvent = async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:8000/api/tokens/events/my/`,
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+
+          if (!response.ok) throw new Error("Błąd pobierania listy wydarzeń użytkownika");
+
+          const events = await response.json();
+
+          // Znajdujemy event użytkownika i wyciągamy id_qr
+          const joinedEvent = events.find(e => e.id_event === event.id_event);
+
+          if (joinedEvent) {
+            setQrId(joinedEvent.id_qr);
+          }
+
         } catch (err) {
           console.error(err);
         }
@@ -27,49 +59,79 @@ export default function EventModal({ event, onClose }) {
       fetchStatus();
     }, [event, token]);
 
+
+    async function fetchQR() {
+      try {
+        const token = localStorage.getItem("access");
+        if (!token) return alert("Musisz być zalogowany");
+        if (!qrId) return alert("Brak przypisanego kodu QR");
+
+        const response = await fetch(
+          `http://localhost:8000/api/tokens/qr/${qrId}/image/`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        if (!response.ok) throw new Error("Błąd pobierania QR");
+
+        const blob = await response.blob();
+        const imageUrl = URL.createObjectURL(blob);
+
+        setQrImage(imageUrl);
+        setShowQR(true);
+
+      } catch (error) {
+        console.error(error);
+        alert("Nie udało się pobrać QR");
+      }
+    }
+
+
     if (!event) return null; 
   
     const imageUrl = event.image ? event.image : "/ImageWithFallback.png";
     const category = event.category || "Inne";
 
     async function handleJoin() {
-    const token = localStorage.getItem("access");
+      const token = localStorage.getItem("access");
       if (!token) {
-          alert("Musisz być zalogowany, aby zmienić udział w wydarzeniu.");
-          return;
+        alert("Musisz być zalogowany");
+        return;
       }
 
       const endpoint = isJoined
-          ? `http://localhost:8000/api/tokens/events/${event.id_event}/leave/`
-          : `http://localhost:8000/api/tokens/events/${event.id_event}/join/`;
+        ? `http://localhost:8000/api/tokens/events/${event.id_event}/leave/`
+        : `http://localhost:8000/api/tokens/events/${event.id_event}/join/`;
 
       const method = isJoined ? "DELETE" : "POST";
 
-     try {
-      const response = await fetch(endpoint, {
-        method: method,
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      try {
+        const response = await fetch(endpoint, {
+          method,
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
 
-      if (!response.ok) {
-        throw new Error(`Błąd HTTP: ${response.status}`);
+        if (!response.ok) {
+          throw new Error(`Błąd: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (!isJoined) {
+          setQrId(data.id_qr);
+        } else {
+          setQrId(null);
+        }
+
+        setIsJoined(!isJoined);
+
+      } catch (error) {
+        console.error("Błąd:", error);
+        alert("Wystąpił błąd");
       }
-
-      setIsJoined(!isJoined);
-
-      alert(isJoined
-        ? "Wypisałeś się z wydarzenia"
-        : "Pomyślnie dołączyłeś do wydarzenia!"
-      );
-    } catch (error) {
-      console.error("Błąd podczas zmiany statusu uczestnictwa:", error);
-      alert("Wystąpił błąd. Spróbuj ponownie później.");
     }
-  }
-
 
   return (
     <div style={styles.overlay} onClick={onClose}>
@@ -177,8 +239,8 @@ export default function EventModal({ event, onClose }) {
 
             {isJoined && (
             <button
-                onClick={() => alert("Tutaj wygenerujesz QR")}
-                style={{
+              onClick={fetchQR}
+              style={{
                 width: "52px",
                 height: "52px",
                 borderRadius: "10px",
@@ -188,10 +250,11 @@ export default function EventModal({ event, onClose }) {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center"
-                }}
+              }}
             >
-                <img src="/QRIcon.svg" alt="QR" style={{ width: "16px", height: "16px" }} />
+              <img src="/QRIcon.svg" alt="QR" style={{ width: "16px", height: "16px" }} />
             </button>
+
             )}
             <button
                 onClick={() => alert("Tutaj dodasz do polubionych")}
@@ -210,9 +273,46 @@ export default function EventModal({ event, onClose }) {
                 <img src="/heart.svg" alt="heart" style={{ width: "16px", height: "16px" }} />
             </button>
         </div>
-
+            {showQR && (
+            <div style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100vw",
+              height: "100vh",
+              background: "rgba(0,0,0,0.6)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 10000
+            }}>
+              <div style={{
+                background: "white",
+                padding: "20px",
+                borderRadius: "12px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center"
+              }}>
+                <img src={qrImage} alt="QR Code" style={{ width: "250px", height: "250px" }} />
+                <button 
+                  onClick={() => setShowQR(false)}
+                  style={{
+                    marginTop: "20px",
+                    padding: "10px 16px",
+                    background: "#544E61",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "8px",
+                    cursor: "pointer"
+                  }}
+                >
+                  Zamknij
+                </button>
+              </div>
+            </div>
+          )}
         </div>
-
       </div>
     </div>
   );
