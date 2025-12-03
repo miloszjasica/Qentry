@@ -1,0 +1,64 @@
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Qentry.Views.HorizontalCalendarView">
+
+    <CollectionView x:Name="CalendarView"
+                    ItemsSource="{Binding Days}"
+                    SelectionMode="Single"
+                    Loaded="CalendarView_Loaded"
+                    HorizontalScrollBarVisibility="Never"
+                    VerticalScrollBarVisibility="Never">
+
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+        </CollectionView.ItemsLayout>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Border WidthRequest="60"
+                        HeightRequest="60"
+                        Stroke="Transparent"
+                        StrokeThickness="1"
+                        Background="{StaticResource Color2}"
+                        StrokeShape="RoundRectangle 20">
+
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="CommonStates">
+
+                            <VisualState x:Name="Normal" />
+
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="Background" Value="{StaticResource Primary}"/>
+                                    <Setter Property="BackgroundColor" Value="Transparent"/>
+                                </VisualState.Setters>
+                            </VisualState>
+
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding IsToday}"
+                                     Value="True">
+                            <Setter Property="Background" Value="{StaticResource Tertiary}"/>
+                        </DataTrigger>
+                    </Border.Triggers>
+
+                    <VerticalStackLayout VerticalOptions="Center"
+                                         HorizontalOptions="Center">
+                        <Label Text="{Binding Date, StringFormat='{0:dd}'}"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"/>
+                        <Label Text="{Binding Date, StringFormat='{0:ddd}'}"
+                               FontSize="12"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+
+                </Border>
+            </DataTemplate>
+
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentView>

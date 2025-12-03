@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Qentry.Views.Controls.CustomBottomNavBar"
+             HeightRequest="90"
+             BackgroundColor="Transparent">
+
+    <Grid VerticalOptions="End" 
+          Margin="0, 0, 0, 20">
+        <Border StrokeThickness="1"
+                BackgroundColor="{StaticResource BgColor}"
+                StrokeShape="RoundRectangle 50"
+                Stroke="{StaticResource Tertiary}"
+                HeightRequest="52"
+                Margin="20,0"
+                VerticalOptions="End">
+           
+            <Grid ColumnDefinitions="*,*,*,*"
+                  HorizontalOptions="Fill"
+                  VerticalOptions="Center">
+
+                <ImageButton x:Name="HomeButton"
+                             Source="home.png"
+                             WidthRequest="26"
+                             HeightRequest="26"
+                             BackgroundColor="Transparent"
+                             Clicked="OnHomeClicked" />
+
+                <ImageButton x:Name="MyEventsButton"
+                             Source="edit.png"
+                             Grid.Column="1"
+                             WidthRequest="26"
+                             HeightRequest="26"
+                             BackgroundColor="Transparent"
+                             Clicked="OnMyEventsClicked"
+                             Margin="0,0,40,0"/>
+
+                <ImageButton x:Name="SavedEventsButton"
+                             Source="calendar.png"
+                             Grid.Column="2"
+                             WidthRequest="26"
+                             HeightRequest="26"
+                             BackgroundColor="Transparent"
+                             Clicked="OnSavedEventsClicked"
+                             Margin="40,0,0,0"/>
+
+                <ImageButton x:Name="ProfileButton"
+                             Source="profile.png"
+                             Grid.Column="3"
+                             WidthRequest="26"
+                             HeightRequest="26"
+                             BackgroundColor="Transparent"
+                             Clicked="OnProfileClicked" />
+            </Grid>
+        </Border>
+
+        <Border WidthRequest="67"
+                HeightRequest="67"
+                BackgroundColor="#EEE"
+                StrokeThickness="1"
+                StrokeShape="Ellipse"
+                Stroke="{StaticResource Tertiary}"
+                HorizontalOptions="Center"
+                VerticalOptions="End"
+                Margin="0, 0, 0, -5">
+            <ImageButton Source="plus.png"
+                 WidthRequest="40"
+                 HeightRequest="40"
+                 BackgroundColor="{StaticResource BgColor}"
+                 Clicked="OnAddClicked"/>
+        </Border>
+    </Grid>
+</ContentView>

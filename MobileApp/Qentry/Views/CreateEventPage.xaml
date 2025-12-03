@@ -1,0 +1,51 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:Qentry.Views.Controls"
+             x:Class="Qentry.Views.CreateEventPage">
+	<Grid>
+		<ScrollView>
+			<VerticalStackLayout Padding="20" Spacing="15">
+
+				<Entry Placeholder="Nazwa"
+					   Text="{Binding Name}" />
+
+				<Editor Placeholder="Opis"
+						HeightRequest="100"
+						Text="{Binding Description}" />
+
+				<Entry Placeholder="Lokalizacja"
+					   Text="{Binding Location}" />
+
+				<Button Text="Pobierz lokalizację"
+						Command="{Binding GetLocationCommand}"
+						BackgroundColor="#2196F3"
+						TextColor="White" />
+				
+				<Entry Placeholder="Latitude"
+					   Text="{Binding Latitude}" />
+
+				<Entry Placeholder="Longitude"
+					   Text="{Binding Longitude}" />
+
+				<DatePicker Date="{Binding StartDate}" />
+				<DatePicker Date="{Binding EndDate}" />
+
+				<Entry Placeholder="Uczestnicy"
+					   Keyboard="Numeric"
+					   Text="{Binding Participants}" />
+
+				<Entry Placeholder="URL zdjęcia"
+					   Text="{Binding Image}" />
+
+				<Entry Placeholder="Kategoria"
+					   Text="{Binding Category}" />
+
+				<Button Text="Utwórz wydarzenie"
+						Command="{Binding CreateEventCommand}"
+						BackgroundColor="#4CAF50"
+						TextColor="White" />
+			</VerticalStackLayout>
+		</ScrollView>
+		<components:CustomBottomNavBar VerticalOptions="End" />
+	</Grid>
+</ContentPage>
