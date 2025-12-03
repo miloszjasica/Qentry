@@ -2,6 +2,8 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Profile from "./pages/Profile";
+import CreateEvent from "./pages/CreateEvent";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import NearbyEvents from "./pages/NearbyEvents";
@@ -56,6 +58,9 @@ useEffect(() => {
             <Route path="/register" element={<Register />} /> */}
             <Route path="/biore-udzial" element={<TakePartEvents search={search} />} />
             <Route path="/w-poblizu" element={<NearbyEvents search={search} />} />
+            <Route path="/profil" element={<Profile />} />
+            <Route path="/createevent" element={<CreateEvent />} />
+
           </Routes>
         </div>
     </Router>

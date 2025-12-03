@@ -35,8 +35,8 @@ class ListTransactionsSerializer(serializers.Serializer):
 class QRSerializer(serializers.ModelSerializer):
     name = serializers.CharField(source="id_event.name", read_only=True)
     location = serializers.CharField(source="id_event.location", read_only=True)
-    start_date = serializers.DateField(source="id_event.start_date", read_only=True)
-    event_end_date = serializers.DateField(source="id_event.end_date", read_only=True)
+    start_date = serializers.DateTimeField(source="id_event.start_date", read_only=True)
+    event_end_date = serializers.DateTimeField(source="id_event.end_date", read_only=True)
     image = serializers.ImageField(source="id_event.image", read_only=True)
     participants = serializers.IntegerField(source="id_event.participants", read_only=True)
     description = serializers.CharField(source="id_event.description", read_only = True)
