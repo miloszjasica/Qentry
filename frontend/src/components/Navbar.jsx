@@ -101,27 +101,6 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
             </>
           )}
         </NavLink>
-
-        <NavLink to="/polubione" style={({ isActive }) => ({
-          padding: '12px 16px',
-          display: 'flex',
-          alignItems: 'center',
-          height: '44px', // np. stała wysokość w px
-          textDecoration: 'none',
-          borderRadius: '10px',
-          background: isActive ? '#9893DA' : 'transparent',
-          color: isActive ? 'black' : 'white',
-          marginBottom: "8px",
-          minHeight: "48px"
-        })}>
-          {({ isActive }) => (
-            <>
-              <img src="/heart.png" alt="Favorites" style={{ width: '20px', height: '20px', minWidth: '20px', minHeight: '20px', marginRight: "12px", filter: isActive ? "invert(1)" : "brightness(100%)" }} />
-              {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>Polubione</div>}
-            </>
-          )}
-        </NavLink>
-
         <NavLink to="/biore-udzial" style={({ isActive }) => ({
           padding: '12px 16px',
           display: "flex",
@@ -179,7 +158,7 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
         </NavLink>
 
         {user?.role === "organizer" && (
-          <NavLink to="/stwórz-wydarzenie" style={{
+          <NavLink to="/createevent" style={{
             padding: '12px 16px',
             display: "flex",
             alignItems: 'center',

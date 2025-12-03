@@ -6,6 +6,17 @@ export default function EventModal({ event, onClose }) {
     const [showQR, setShowQR] = useState(false);
     const [qrImage, setQrImage] = useState(null)
     const [qrId, setQrId] = useState(null);
+    const dateObj = event ? new Date(event.start_date) : null;
+    const date = new Intl.DateTimeFormat("pl-PL", { 
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    }).format(dateObj);
+
+    const time = new Intl.DateTimeFormat("pl-PL", { 
+        hour: "2-digit",
+        minute: "2-digit"
+    }).format(dateObj);
 
     useEffect(() => {  
       if (!event || !token) return;
@@ -196,7 +207,7 @@ export default function EventModal({ event, onClose }) {
 
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
             <img src="/calendarPurple.svg" alt="dateIcon" style={{ width: "20px", height: "20px" }} />
-            {new Intl.DateTimeFormat("pl-PL", { day: "numeric", month: "long", year: "numeric" }).format(new Date(event.start_date))}
+            {date + " · " + time}
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
@@ -256,22 +267,7 @@ export default function EventModal({ event, onClose }) {
             </button>
 
             )}
-            <button
-                onClick={() => alert("Tutaj dodasz do polubionych")}
-                style={{
-                width: "52px",
-                height: "52px",
-                borderRadius: "10px",
-                background: "white",
-                border: "1px solid #D1D5DC",
-                cursor: "pointer",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-                }}
-            >
-                <img src="/heart.svg" alt="heart" style={{ width: "16px", height: "16px" }} />
-            </button>
+
         </div>
             {showQR && (
             <div style={{
