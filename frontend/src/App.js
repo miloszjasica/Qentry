@@ -15,15 +15,15 @@ function App() {
   const [search, setSearch] = useState("");
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
-  const token = localStorage.getItem("token");
+  const accessToken = localStorage.getItem("access");
 
 
 useEffect(() => {
-  const token = localStorage.getItem("token");
-  if (!token) return;
+  const accessToken = localStorage.getItem("access");
+  if (!accessToken) return;
 
   fetch("/api/users/me/", {
-    headers: { "Authorization": `Bearer ${token}` },
+    headers: { "Authorization": `Bearer ${accessToken}` },
   })
     .then(res => res.json())
     .then(data => {
@@ -40,18 +40,15 @@ useEffect(() => {
 
         <div style={{ flex: 1, marginLeft: isSidebarExpanded ? 256 : 80, transition: "margin-left 0.3s",  marginTop: "72px" }}>
           <Routes>
-
             {/* <Route path="/" element={<Home search={search} />} /> */}
-
             <Route path="/login" element={<Login />} />
-
             <Route path="/register" element={<Register />} />
           </Routes>
         </div>
       </div>
         <Navbar isExpanded={isSidebarExpanded} setIsExpanded={setIsSidebarExpanded}/>
         <Header search={search} setSearch={setSearch} isExpanded={isSidebarExpanded} user={currentUser}/>
-        <div style={{ flex: 1, marginLeft: isSidebarExpanded ? 256 : 80, transition: "margin-left 0.3s", marginTop: "0px", overflow: "visible" }}>
+        <div style={{ flex: 1, marginLeft: isSidebarExpanded ? 256 : 80, transition: "margin-left 0.3s", marginTop: "0px", overflow: "visible"}}>
           <Routes>
             <Route path="/" element={<Home search={search} />} />
             {/* <Route path="/login" element={<Login />} />
