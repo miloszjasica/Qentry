@@ -1,0 +1,114 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Qentry.ViewModels"
+             x:Class="Qentry.Views.StaffEventDetailsPage"
+			 xmlns:components="clr-namespace:Qentry.Views.Controls"
+             BackgroundColor="{StaticResource Primary}">
+	
+	<Grid>
+	    <ScrollView>
+		    <VerticalStackLayout Padding="20" Spacing="20">
+
+			    <!-- GŁÓWNY BORDER -->
+			    <Border Stroke="{StaticResource Color3}"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 12"
+                        BackgroundColor="{StaticResource BgColor}">
+
+				    <VerticalStackLayout Padding="20" Spacing="25">
+
+					    <!-- Nazwa wydarzenia -->
+					    <VerticalStackLayout>
+						    <Label Text="Wydarzenie"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+						    <Label Text="{Binding Event.Name}"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+					    </VerticalStackLayout>
+
+
+					    <!-- Rola użytkownika -->
+					    <Border Stroke="{StaticResource Color3}"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 10"
+                                BackgroundColor="White"
+                                Padding="12">
+
+						    <Label Text="{Binding Event.UserRole, StringFormat='Twoja rola: {0}'}"
+                                   FontSize="18"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+					    </Border>
+
+
+					    <!-- QR SCAN -->
+					    <VerticalStackLayout Spacing="8">
+
+						    <Label Text="Skanowanie QR"
+                                   FontAttributes="Bold"
+                                   FontSize="16"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+
+						    <Button Text="Skanuj kod QR"
+                                    Command="{Binding ScanQrCommand}"
+                                    BackgroundColor="{StaticResource Secondary}"
+                                    HeightRequest="45"
+                                    CornerRadius="10"
+                                    TextColor="White" />
+					    </VerticalStackLayout>
+
+
+					    <!-- ADD TOKENS -->
+					    <VerticalStackLayout Spacing="10" IsVisible="{Binding CanAddTokens}">
+
+						    <Label Text="Dodawanie tokenów"
+                                   FontAttributes="Bold"
+                                   FontSize="16"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+
+						    <Entry Placeholder="Ilość tokenów"
+                                   Text="{Binding AddTokensAmount}"
+                                   Keyboard="Numeric"
+                                   BackgroundColor="White"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+
+						    <Button Text="Dodaj tokeny"
+                                    Command="{Binding AddTokensCommand}"
+                                    BackgroundColor="{StaticResource Tertiary}"
+                                    HeightRequest="45"
+                                    CornerRadius="10"
+                                    TextColor="White" />
+					    </VerticalStackLayout>
+
+
+					    <!-- REMOVE TOKENS -->
+					    <VerticalStackLayout Spacing="10" IsVisible="{Binding CanTakeTokens}">
+						    <Label Text="Odbieranie tokenów"
+                                   FontAttributes="Bold"
+                                   FontSize="16"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+
+						    <Entry Placeholder="ID atrakcji"
+                                   Text="{Binding AttractionId}"
+                                   Keyboard="Numeric"
+                                   BackgroundColor="White"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+
+						    <Button Text="Odbierz tokeny"
+                                    Command="{Binding TakeTokensCommand}"
+                                    BackgroundColor="{StaticResource Quaternary}"
+                                    HeightRequest="45"
+                                    CornerRadius="10"
+                                    TextColor="White" />
+					    </VerticalStackLayout>
+
+				    </VerticalStackLayout>
+			    </Border>
+
+		    </VerticalStackLayout>
+	    </ScrollView>
+	    <components:CustomBottomNavBar VerticalOptions="End" />
+	</Grid>
+</ContentPage>

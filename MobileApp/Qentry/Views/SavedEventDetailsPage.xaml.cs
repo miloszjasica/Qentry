@@ -19,5 +19,10 @@ namespace Qentry.Views
         {
             (BindingContext as SavedEventDetailsViewModel)?.ApplyQueryAttributes(query);
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
     }
 }

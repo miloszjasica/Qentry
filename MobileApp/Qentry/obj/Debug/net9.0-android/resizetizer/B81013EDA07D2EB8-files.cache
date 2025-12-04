@@ -1,4 +1,6 @@
-﻿obj\Debug\net9.0-android\resizetizer\r\drawable-hdpi\calendar.png
+﻿obj\Debug\net9.0-android\resizetizer\r\drawable\brakwydarzenia.png
+obj\Debug\net9.0-android\resizetizer\r\drawable\olowek.png
+obj\Debug\net9.0-android\resizetizer\r\drawable-hdpi\calendar.png
 obj\Debug\net9.0-android\resizetizer\r\drawable-hdpi\dotnet_bot.png
 obj\Debug\net9.0-android\resizetizer\r\drawable-hdpi\edit.png
 obj\Debug\net9.0-android\resizetizer\r\drawable-hdpi\filter.png

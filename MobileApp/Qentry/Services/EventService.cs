@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -167,6 +168,72 @@ namespace Qentry.Services
             var response = await _httpClient.DeleteAsync($"{_baseUrl}/{eventId}/delete/");
 
             return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> UpdateEventAsync(int eventId, EventUpdateModel updated)
+        {
+            await AddAuthAsync();
+
+            var json = JsonSerializer.Serialize(updated);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PatchAsync($"{_baseUrl}/{eventId}/update/", content);
+
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> AddAttractionAsync(int eventId, AttractionCreateModel attraction)
+        {
+            await AddAuthAsync();
+
+            var json = JsonSerializer.Serialize(attraction);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync($"{_baseUrl}/{eventId}/attractions/add/", content);
+
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> UpdateAttractionAsync(int attractionId, AttractionCreateModel updated)
+        {
+            await AddAuthAsync();
+
+            var json = JsonSerializer.Serialize(updated);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PatchAsync($"http://192.168.201.1:8000/attractions/{attractionId}/update/", content);
+
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<AttractionModel> GetAttractionByIdAsync(int attractionId)
+        {
+            await AddAuthAsync();
+
+            var url = $"http://192.168.201.1:8000/attractions/{attractionId}/";
+
+            var response = await _httpClient.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Nie udało się pobrać danych atrakcji");
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<AttractionModel>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        }
+
+        public async Task<List<EventModel>> GetEventsWhereIHaveRolesAsync()
+        {
+            await AddAuthAsync();
+
+            var response = await _httpClient.GetAsync($"{_baseUrl}/user/roles/");
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Nie udało się pobrać eventów użytkownika");
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<List<EventModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
         }
     }
 }

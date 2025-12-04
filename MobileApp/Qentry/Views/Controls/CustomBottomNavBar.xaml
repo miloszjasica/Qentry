@@ -21,16 +21,16 @@
 
                 <ImageButton x:Name="HomeButton"
                              Source="home.png"
-                             WidthRequest="26"
-                             HeightRequest="26"
+                             WidthRequest="40"
+                             HeightRequest="40"
                              BackgroundColor="Transparent"
                              Clicked="OnHomeClicked" />
 
                 <ImageButton x:Name="MyEventsButton"
                              Source="edit.png"
                              Grid.Column="1"
-                             WidthRequest="26"
-                             HeightRequest="26"
+                             WidthRequest="40"
+                             HeightRequest="40"
                              BackgroundColor="Transparent"
                              Clicked="OnMyEventsClicked"
                              Margin="0,0,40,0"/>
@@ -38,8 +38,9 @@
                 <ImageButton x:Name="SavedEventsButton"
                              Source="calendar.png"
                              Grid.Column="2"
-                             WidthRequest="26"
-                             HeightRequest="26"
+                             WidthRequest="40"
+                             HeightRequest="40"
+                             Aspect="AspectFit"
                              BackgroundColor="Transparent"
                              Clicked="OnSavedEventsClicked"
                              Margin="40,0,0,0"/>
@@ -47,8 +48,9 @@
                 <ImageButton x:Name="ProfileButton"
                              Source="profile.png"
                              Grid.Column="3"
-                             WidthRequest="26"
-                             HeightRequest="26"
+                             WidthRequest="40"
+                             HeightRequest="40"
+                             Aspect="AspectFit"
                              BackgroundColor="Transparent"
                              Clicked="OnProfileClicked" />
             </Grid>

@@ -2,35 +2,151 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Qentry.ViewModels"
              xmlns:components="clr-namespace:Qentry.Views.Controls"
-             x:Class="Qentry.Views.SavedEventDetailsPage">
-    <Grid>
-        <ScrollView>
+             xmlns:converters="clr-namespace:Qentry.Converters"
+             x:Class="Qentry.Views.SavedEventDetailsPage"
+             BackgroundColor="{StaticResource Primary}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolToStatusConverter x:Key="BoolToStatusConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*, Auto">
+
+        <ScrollView Grid.Row="0"
+                    x:Name="MainScroll">
             <VerticalStackLayout Padding="20" Spacing="20">
 
-                <Label Text="{Binding EventData.Name}" FontSize="26" FontAttributes="Bold"/>
+                <!-- GŁÓWNY BORDER -->
+                <Border Stroke="{StaticResource Color3}"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 12"
+                        BackgroundColor="{StaticResource BgColor}">
 
-                <Image Source="{Binding QrImage}" HeightRequest="200"/>
+                    <VerticalStackLayout Padding="20" Spacing="25">
 
-                <Label Text="Twój balans:" FontSize="18" />
-                <Label Text="{Binding EventBalance}" FontSize="22" FontAttributes="Bold"/>
+                        <!-- Nazwa wydarzenia -->
+                        <VerticalStackLayout>
+                            <Label Text="Wydarzenie"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+                            <Label Text="{Binding EventData.Name}"
+                                   FontSize="26"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+                        </VerticalStackLayout>
 
-                <Label Text="Opis:" FontAttributes="Bold" />
-                <Label Text="{Binding EventData.Description}"/>
+                        <!-- QR kod -->
+                        <VerticalStackLayout>
+                            <Label Text="Twój kod wejściowy"
+                                   FontAttributes="Bold"
+                                   FontSize="16"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+                            <Border Stroke="{StaticResource Primary}"
+                                    StrokeThickness="2"
+                                    StrokeShape="RoundRectangle 16"
+                                    BackgroundColor="White"
+                                    Padding="10"
+                                    HeightRequest="220">
 
-                <Label Text="Atrakcje:" FontAttributes="Bold"/>
+                                <Image Source="{Binding QrImage}"
+                                       Aspect="AspectFit"/>
+                            </Border>
+                        </VerticalStackLayout>
 
-                <CollectionView ItemsSource="{Binding Attractions}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame BorderColor="#ddd" Padding="10">
-                                <Label Text="{Binding Name}" />
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                        <!-- Balans -->
+                        <VerticalStackLayout>
+                            <Label Text="Twój balans"
+                                   FontAttributes="Bold"
+                                   FontSize="16"
+                                   TextColor="{StaticResource PrimaryDarkText}"/>
 
+                            <Border Stroke="{StaticResource PrimaryDark}"
+                                    StrokeThickness="2"
+                                    StrokeShape="RoundRectangle 12"
+                                    BackgroundColor="White"
+                                    Padding="15">
+
+                                <Label Text="{Binding EventBalance}"
+                                       FontSize="26"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"
+                                       TextColor="{StaticResource Secondary}" />
+                            </Border>
+                        </VerticalStackLayout>
+
+
+                        <!-- Opis wydarzenia -->
+                        <VerticalStackLayout>
+                            <Label Text="Opis wydarzenia"
+                                   FontAttributes="Bold"
+                                   FontSize="16"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+
+                            <Border BackgroundColor="{StaticResource Tertiary}"
+                                    StrokeThickness="0"
+                                    Padding="17"
+                                    StrokeShape="RoundRectangle 12">
+
+                                <Label Text="{Binding EventData.Description}"
+                                       TextColor="White"
+                                       FontSize="15"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+
+                        <!-- ATRAKCJE -->
+                        <Label Text="Dostępne atrakcje"
+                               FontAttributes="Bold"
+                               FontSize="18"
+                               TextColor="{StaticResource PrimaryDarkText}"
+                               Margin="0,10,0,0"/>
+
+                        <CollectionView ItemsSource="{Binding Attractions}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+
+                                    <Border Stroke="{StaticResource Color3}"
+                                            StrokeThickness="1.5"
+                                            StrokeShape="RoundRectangle 12"
+                                            BackgroundColor="White"
+                                            Padding="15"
+                                            Margin="0,8">
+
+                                        <VerticalStackLayout Spacing="6">
+
+                                            <Label Text="{Binding Name}"
+                                                   FontAttributes="Bold"
+                                                   FontSize="17"
+                                                   TextColor="{StaticResource PrimaryDarkText}" />
+
+                                            <Label Text="{Binding Description}"
+                                                   FontSize="14"
+                                                   TextColor="{StaticResource Quaternary}"/>
+
+                                            <Label Text="{Binding Price, StringFormat='Cena: {0} zł'}"
+                                                   FontSize="14"
+                                                   TextColor="{StaticResource Secondary}" />
+
+                                        </VerticalStackLayout>
+
+                                    </Border>
+
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                    </VerticalStackLayout>
+                </Border>
+                <BoxView HeightRequest="120" Color="Transparent"/>
             </VerticalStackLayout>
         </ScrollView>
-        <components:CustomBottomNavBar VerticalOptions="End" />
+
+        <!-- NAVBAR -->
+        <components:CustomBottomNavBar VerticalOptions="End"
+                                       BackgroundColor="Transparent"/>
+
     </Grid>
 </ContentPage>

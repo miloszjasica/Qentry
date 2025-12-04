@@ -9,12 +9,21 @@ namespace Qentry
         public AppShell(AuthService authService)
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
-            Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
-            Routing.RegisterRoute(nameof(MyEventsPage), typeof(MyEventsPage));
-            _authService = authService;
 
+            Routing.RegisterRoute(nameof(MyEventDetailsPage), typeof(MyEventDetailsPage));
+            Routing.RegisterRoute(nameof(SavedEventDetailsPage), typeof(SavedEventDetailsPage));
+            Routing.RegisterRoute(nameof(AddAttractionPage), typeof(AddAttractionPage));
+            Routing.RegisterRoute(nameof(EditAttractionPage), typeof(EditAttractionPage));
+            Routing.RegisterRoute(nameof(EditEventPage), typeof(EditEventPage));
+            Routing.RegisterRoute(nameof(ManageRolesPage), typeof(ManageRolesPage));
+            Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+            Routing.RegisterRoute(nameof(EditProfilePage), typeof(EditProfilePage));
+
+
+            _authService = authService;
             Loaded += AppShellLoaded;
+
         }
 
         private async void AppShellLoaded(object? sender, EventArgs e)
@@ -24,14 +33,13 @@ namespace Qentry
 
         private async Task CheckLoginStateAsync()
         {
-            TokenStorage.ClearTokensIfNotRemembered();
-
             bool remember = Preferences.Get("RememberMe", false);
             var access = await TokenStorage.GetAccessTokenAsync();
             var refresh = await TokenStorage.GetRefreshTokenAsync();
 
             if (!remember)
             {
+                TokenStorage.ClearTokensIfNotRemembered();
                 await GoToAsync("//LoginPage");
                 return;
             }
