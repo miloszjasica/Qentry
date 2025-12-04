@@ -1,0 +1,78 @@
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Qentry.Views.EditAttractionPage"
+    BackgroundColor="{StaticResource Primary}"
+    Title="Edytuj atrakcję">
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="20">
+
+                <Border Stroke="{StaticResource Color3}"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 12"
+                        BackgroundColor="{StaticResource BgColor}">
+
+                    <VerticalStackLayout Padding="20" Spacing="18">
+
+                        <VerticalStackLayout>
+                            <Label Text="Nazwa atrakcji *"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+                            <Entry Placeholder="Nazwa atrakcji"
+                                   Text="{Binding Name}"
+                                   BackgroundColor="White"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout>
+                            <Label Text="Opis *"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+                            <Editor Placeholder="Opisz atrakcję..."
+                                    HeightRequest="120"
+                                    BackgroundColor="White"
+                                    TextColor="{StaticResource PrimaryDarkText}"
+                                    PlaceholderColor="#9d9d9d"
+                                    Text="{Binding Description}" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout>
+                            <Label Text="Cena"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+                            <Entry Placeholder="Np. 50"
+                                   Keyboard="Numeric"
+                                   BackgroundColor="White"
+                                   TextColor="{StaticResource PrimaryDarkText}"
+                                   Text="{Binding Price}" />
+                        </VerticalStackLayout>
+
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Aktywna?"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource PrimaryDarkText}"
+                                   VerticalOptions="Center"/>
+                            <Switch IsToggled="{Binding IsActive}" />
+                        </HorizontalStackLayout>
+
+                        <Button Text="Zapisz zmiany"
+                                Command="{Binding SaveCommand}"
+                                BackgroundColor="{StaticResource Secondary}"
+                                CornerRadius="10"
+                                HeightRequest="50"
+                                TextColor="White"/>
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

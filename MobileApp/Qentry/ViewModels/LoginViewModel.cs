@@ -22,13 +22,17 @@ namespace Qentry.ViewModels
         private readonly AuthService _authService;
 
         public ICommand LoginCommand { get; }
+        public ICommand GoToRegisterCommand { get; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public LoginViewModel(AuthService authService)
         {
             _authService = authService;
+
             LoginCommand = new Command(async () => await LoginAsync(), () => !IsBusy);
+
+            GoToRegisterCommand = new Command(async () => await Shell.Current.GoToAsync(nameof(RegisterPage)));
         }
 
         public string Email

@@ -1,0 +1,107 @@
+<ContentPage x:Class="Qentry.Views.ManageRolesPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="RolesRoot"
+             BackgroundColor="{StaticResource Primary}"
+             Title="Zarządzanie rolami">
+
+    <Grid>
+
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="20">
+
+                <Border Stroke="{StaticResource Color3}"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 12"
+                        BackgroundColor="{StaticResource BgColor}">
+
+                    <VerticalStackLayout Padding="20" Spacing="18">
+
+                        <Label Text="Przypisz rolę użytkownikowi"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource PrimaryDarkText}" />
+
+                        <!-- Email -->
+                        <VerticalStackLayout>
+                            <Label Text="E-mail użytkownika *"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource PrimaryDarkText}"/>
+                            <Entry Placeholder="Np. user@example.com"
+                                   Text="{Binding Email}"
+                                   BackgroundColor="White"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+                        </VerticalStackLayout>
+
+                        <!-- Rola -->
+                        <VerticalStackLayout>
+                            <Label Text="Rola *"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource PrimaryDarkText}"/>
+                            <Picker ItemsSource="{Binding AvailableRoles}"
+                                    SelectedItem="{Binding SelectedRole}"
+                                    BackgroundColor="White"
+                                    TextColor="{StaticResource PrimaryDarkText}" />
+                        </VerticalStackLayout>
+
+                        <Button Text="Przypisz rolę"
+                                BackgroundColor="{StaticResource Secondary}"
+                                CornerRadius="10"
+                                HeightRequest="50"
+                                TextColor="White"
+                                Command="{Binding AssignRoleCommand}"/>
+
+                        <Label Text="Użytkownicy z rolami:"
+                               FontAttributes="Bold"
+                               FontSize="18"
+                               Margin="0,20,0,0"
+                               TextColor="{StaticResource PrimaryDarkText}"/>
+
+                        <CollectionView ItemsSource="{Binding Users}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+
+                                    <Border Stroke="{StaticResource Color3}"
+                                            StrokeThickness="1.2"
+                                            StrokeShape="RoundRectangle 12"
+                                            Padding="12"
+                                            Margin="0,6"
+                                            BackgroundColor="White">
+
+                                        <Grid ColumnDefinitions="*,Auto">
+
+                                            <VerticalStackLayout>
+                                                <Label Text="{Binding Email}"
+                                                       FontAttributes="Bold"
+                                                       TextColor="{StaticResource PrimaryDarkText}" />
+
+                                                <Label Text="{Binding Role}"
+                                                       TextColor="{StaticResource Quaternary}" />
+                                            </VerticalStackLayout>
+
+                                            <Button Text="Edytuj"
+                                                    Grid.Column="1"
+                                                    BackgroundColor="{StaticResource Primary}"
+                                                    CornerRadius="8"
+                                                    TextColor="White"
+                                                    Command="{Binding BindingContext.EditRoleCommand, Source={x:Reference RolesRoot}}"
+                                                    CommandParameter="{Binding}"/>
+                                        </Grid>
+
+                                    </Border>
+
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                    </VerticalStackLayout>
+
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>

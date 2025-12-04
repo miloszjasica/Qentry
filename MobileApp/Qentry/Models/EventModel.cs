@@ -37,5 +37,6 @@ namespace Qentry.Models
         public string Image { get; set; }
         [JsonPropertyName("category")]
         public string Category { get; set; }
+        public string UserRole { get; set; }
     }
 }

@@ -867,6 +867,141 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Browser.targets": {}
         }
       },
+      "Xamarin.AndroidX.Camera.Camera2/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Tracing.Tracing": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Core/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Concurrent.Futures.Ktx": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.AndroidX.Lifecycle.LiveData": "2.8.7.2",
+          "Xamarin.AndroidX.Tracing.Tracing": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2",
+          "Xamarin.KotlinX.Coroutines.Android": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Lifecycle/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Concurrent.Futures.Ktx": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.AndroidX.Tracing.Tracing.Ktx": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26",
+          "Xamarin.KotlinX.Coroutines.Android": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Video/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.View/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.AndroidX.AppCompat": "1.7.0.5",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Camera.Lifecycle": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Camera.Video": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.View.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.View.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.View.targets": {}
+        }
+      },
       "Xamarin.AndroidX.CardView/1.0.0.34": {
         "type": "package",
         "dependencies": {
@@ -964,6 +1099,27 @@
         },
         "build": {
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Concurrent.Futures.Ktx/1.2.0.5": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Concurrent.Futures": "[1.2.0.5, 1.2.1)",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2",
+          "Xamarin.KotlinX.Coroutines.Core": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.targets": {}
         }
       },
       "Xamarin.AndroidX.ConstraintLayout/2.2.1.1": {
@@ -1993,6 +2149,26 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.targets": {}
         }
       },
+      "Xamarin.AndroidX.Tracing.Tracing.Ktx/1.2.0.9": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Tracing.Tracing": "[1.2.0.9, 1.2.1)",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.targets": {}
+        }
+      },
       "Xamarin.AndroidX.Transition/1.5.1.5": {
         "type": "package",
         "dependencies": {
@@ -2204,6 +2380,19 @@
         },
         "build": {
           "buildTransitive/net8.0-android34.0/Xamarin.Google.Android.Material.targets": {}
+        }
+      },
+      "Xamarin.Google.AutoValue.Annotations/1.11.0.5": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.Google.AutoValue.Annotations.dll": {
+            "related": ".aar;.pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.Google.AutoValue.Annotations.dll": {
+            "related": ".aar;.pdb;.xml"
+          }
         }
       },
       "Xamarin.Google.Code.FindBugs.JSR305/3.0.2.19": {
@@ -2433,6 +2622,57 @@
         "runtime": {
           "lib/net8.0-android34.0/Xamarin.KotlinX.Serialization.Core.Jvm.dll": {
             "related": ".aar;.pdb;.xml"
+          }
+        }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "Xamarin.AndroidX.Camera.Camera2": "1.4.1.1",
+          "Xamarin.AndroidX.Camera.Lifecycle": "1.4.1.1",
+          "Xamarin.AndroidX.Camera.View": "1.4.1.1",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.Controls.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.Controls.dll": {
+            "related": ".xml"
           }
         }
       }
@@ -3303,6 +3543,141 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Browser.targets": {}
         }
       },
+      "Xamarin.AndroidX.Camera.Camera2/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Tracing.Tracing": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Core/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Concurrent.Futures.Ktx": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.AndroidX.Lifecycle.LiveData": "2.8.7.2",
+          "Xamarin.AndroidX.Tracing.Tracing": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2",
+          "Xamarin.KotlinX.Coroutines.Android": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Lifecycle/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Concurrent.Futures.Ktx": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.AndroidX.Tracing.Tracing.Ktx": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26",
+          "Xamarin.KotlinX.Coroutines.Android": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Video/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.View/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.AndroidX.AppCompat": "1.7.0.5",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Camera.Lifecycle": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Camera.Video": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.View.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.View.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.View.targets": {}
+        }
+      },
       "Xamarin.AndroidX.CardView/1.0.0.34": {
         "type": "package",
         "dependencies": {
@@ -3400,6 +3775,27 @@
         },
         "build": {
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Concurrent.Futures.Ktx/1.2.0.5": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Concurrent.Futures": "[1.2.0.5, 1.2.1)",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2",
+          "Xamarin.KotlinX.Coroutines.Core": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.targets": {}
         }
       },
       "Xamarin.AndroidX.ConstraintLayout/2.2.1.1": {
@@ -4429,6 +4825,26 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.targets": {}
         }
       },
+      "Xamarin.AndroidX.Tracing.Tracing.Ktx/1.2.0.9": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Tracing.Tracing": "[1.2.0.9, 1.2.1)",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.targets": {}
+        }
+      },
       "Xamarin.AndroidX.Transition/1.5.1.5": {
         "type": "package",
         "dependencies": {
@@ -4640,6 +5056,19 @@
         },
         "build": {
           "buildTransitive/net8.0-android34.0/Xamarin.Google.Android.Material.targets": {}
+        }
+      },
+      "Xamarin.Google.AutoValue.Annotations/1.11.0.5": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.Google.AutoValue.Annotations.dll": {
+            "related": ".aar;.pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.Google.AutoValue.Annotations.dll": {
+            "related": ".aar;.pdb;.xml"
+          }
         }
       },
       "Xamarin.Google.Code.FindBugs.JSR305/3.0.2.19": {
@@ -4869,6 +5298,57 @@
         "runtime": {
           "lib/net8.0-android34.0/Xamarin.KotlinX.Serialization.Core.Jvm.dll": {
             "related": ".aar;.pdb;.xml"
+          }
+        }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "Xamarin.AndroidX.Camera.Camera2": "1.4.1.1",
+          "Xamarin.AndroidX.Camera.Lifecycle": "1.4.1.1",
+          "Xamarin.AndroidX.Camera.View": "1.4.1.1",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.Controls.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.Controls.dll": {
+            "related": ".xml"
           }
         }
       }
@@ -5739,6 +6219,141 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Browser.targets": {}
         }
       },
+      "Xamarin.AndroidX.Camera.Camera2/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Tracing.Tracing": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Core/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Concurrent.Futures.Ktx": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.AndroidX.Lifecycle.LiveData": "2.8.7.2",
+          "Xamarin.AndroidX.Tracing.Tracing": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2",
+          "Xamarin.KotlinX.Coroutines.Android": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Lifecycle/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Concurrent.Futures.Ktx": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.AndroidX.Tracing.Tracing.Ktx": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26",
+          "Xamarin.KotlinX.Coroutines.Android": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Video/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.View/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.AndroidX.AppCompat": "1.7.0.5",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Camera.Lifecycle": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Camera.Video": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.View.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.View.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.View.targets": {}
+        }
+      },
       "Xamarin.AndroidX.CardView/1.0.0.34": {
         "type": "package",
         "dependencies": {
@@ -5836,6 +6451,27 @@
         },
         "build": {
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Concurrent.Futures.Ktx/1.2.0.5": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Concurrent.Futures": "[1.2.0.5, 1.2.1)",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2",
+          "Xamarin.KotlinX.Coroutines.Core": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.targets": {}
         }
       },
       "Xamarin.AndroidX.ConstraintLayout/2.2.1.1": {
@@ -6865,6 +7501,26 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.targets": {}
         }
       },
+      "Xamarin.AndroidX.Tracing.Tracing.Ktx/1.2.0.9": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Tracing.Tracing": "[1.2.0.9, 1.2.1)",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.targets": {}
+        }
+      },
       "Xamarin.AndroidX.Transition/1.5.1.5": {
         "type": "package",
         "dependencies": {
@@ -7076,6 +7732,19 @@
         },
         "build": {
           "buildTransitive/net8.0-android34.0/Xamarin.Google.Android.Material.targets": {}
+        }
+      },
+      "Xamarin.Google.AutoValue.Annotations/1.11.0.5": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.Google.AutoValue.Annotations.dll": {
+            "related": ".aar;.pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.Google.AutoValue.Annotations.dll": {
+            "related": ".aar;.pdb;.xml"
+          }
         }
       },
       "Xamarin.Google.Code.FindBugs.JSR305/3.0.2.19": {
@@ -7305,6 +7974,57 @@
         "runtime": {
           "lib/net8.0-android34.0/Xamarin.KotlinX.Serialization.Core.Jvm.dll": {
             "related": ".aar;.pdb;.xml"
+          }
+        }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "Xamarin.AndroidX.Camera.Camera2": "1.4.1.1",
+          "Xamarin.AndroidX.Camera.Lifecycle": "1.4.1.1",
+          "Xamarin.AndroidX.Camera.View": "1.4.1.1",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.Controls.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.Controls.dll": {
+            "related": ".xml"
           }
         }
       }
@@ -8175,6 +8895,141 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Browser.targets": {}
         }
       },
+      "Xamarin.AndroidX.Camera.Camera2/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Tracing.Tracing": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Core/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Concurrent.Futures.Ktx": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.AndroidX.Lifecycle.LiveData": "2.8.7.2",
+          "Xamarin.AndroidX.Tracing.Tracing": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2",
+          "Xamarin.KotlinX.Coroutines.Android": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Lifecycle/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Concurrent.Futures.Ktx": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.AndroidX.Tracing.Tracing.Ktx": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26",
+          "Xamarin.KotlinX.Coroutines.Android": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Video/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.View/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.AndroidX.AppCompat": "1.7.0.5",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Camera.Lifecycle": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Camera.Video": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.View.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.View.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.View.targets": {}
+        }
+      },
       "Xamarin.AndroidX.CardView/1.0.0.34": {
         "type": "package",
         "dependencies": {
@@ -8272,6 +9127,27 @@
         },
         "build": {
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Concurrent.Futures.Ktx/1.2.0.5": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Concurrent.Futures": "[1.2.0.5, 1.2.1)",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2",
+          "Xamarin.KotlinX.Coroutines.Core": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.targets": {}
         }
       },
       "Xamarin.AndroidX.ConstraintLayout/2.2.1.1": {
@@ -9301,6 +10177,26 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.targets": {}
         }
       },
+      "Xamarin.AndroidX.Tracing.Tracing.Ktx/1.2.0.9": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Tracing.Tracing": "[1.2.0.9, 1.2.1)",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.targets": {}
+        }
+      },
       "Xamarin.AndroidX.Transition/1.5.1.5": {
         "type": "package",
         "dependencies": {
@@ -9512,6 +10408,19 @@
         },
         "build": {
           "buildTransitive/net8.0-android34.0/Xamarin.Google.Android.Material.targets": {}
+        }
+      },
+      "Xamarin.Google.AutoValue.Annotations/1.11.0.5": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.Google.AutoValue.Annotations.dll": {
+            "related": ".aar;.pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.Google.AutoValue.Annotations.dll": {
+            "related": ".aar;.pdb;.xml"
+          }
         }
       },
       "Xamarin.Google.Code.FindBugs.JSR305/3.0.2.19": {
@@ -9741,6 +10650,57 @@
         "runtime": {
           "lib/net8.0-android34.0/Xamarin.KotlinX.Serialization.Core.Jvm.dll": {
             "related": ".aar;.pdb;.xml"
+          }
+        }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "Xamarin.AndroidX.Camera.Camera2": "1.4.1.1",
+          "Xamarin.AndroidX.Camera.Lifecycle": "1.4.1.1",
+          "Xamarin.AndroidX.Camera.View": "1.4.1.1",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.Controls.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.Controls.dll": {
+            "related": ".xml"
           }
         }
       }
@@ -10611,6 +11571,141 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Browser.targets": {}
         }
       },
+      "Xamarin.AndroidX.Camera.Camera2/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Tracing.Tracing": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Core/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Concurrent.Futures.Ktx": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.AndroidX.Lifecycle.LiveData": "2.8.7.2",
+          "Xamarin.AndroidX.Tracing.Tracing": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2",
+          "Xamarin.KotlinX.Coroutines.Android": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Lifecycle/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Concurrent.Futures.Ktx": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.AndroidX.Tracing.Tracing.Ktx": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26",
+          "Xamarin.KotlinX.Coroutines.Android": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Video/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.View/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.AndroidX.AppCompat": "1.7.0.5",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Camera.Lifecycle": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Camera.Video": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.View.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.View.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.View.targets": {}
+        }
+      },
       "Xamarin.AndroidX.CardView/1.0.0.34": {
         "type": "package",
         "dependencies": {
@@ -10708,6 +11803,27 @@
         },
         "build": {
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Concurrent.Futures.Ktx/1.2.0.5": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Concurrent.Futures": "[1.2.0.5, 1.2.1)",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2",
+          "Xamarin.KotlinX.Coroutines.Core": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.targets": {}
         }
       },
       "Xamarin.AndroidX.ConstraintLayout/2.2.1.1": {
@@ -11737,6 +12853,26 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.targets": {}
         }
       },
+      "Xamarin.AndroidX.Tracing.Tracing.Ktx/1.2.0.9": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Tracing.Tracing": "[1.2.0.9, 1.2.1)",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.targets": {}
+        }
+      },
       "Xamarin.AndroidX.Transition/1.5.1.5": {
         "type": "package",
         "dependencies": {
@@ -11948,6 +13084,19 @@
         },
         "build": {
           "buildTransitive/net8.0-android34.0/Xamarin.Google.Android.Material.targets": {}
+        }
+      },
+      "Xamarin.Google.AutoValue.Annotations/1.11.0.5": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.Google.AutoValue.Annotations.dll": {
+            "related": ".aar;.pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.Google.AutoValue.Annotations.dll": {
+            "related": ".aar;.pdb;.xml"
+          }
         }
       },
       "Xamarin.Google.Code.FindBugs.JSR305/3.0.2.19": {
@@ -12177,6 +13326,57 @@
         "runtime": {
           "lib/net8.0-android34.0/Xamarin.KotlinX.Serialization.Core.Jvm.dll": {
             "related": ".aar;.pdb;.xml"
+          }
+        }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "Xamarin.AndroidX.Camera.Camera2": "1.4.1.1",
+          "Xamarin.AndroidX.Camera.Lifecycle": "1.4.1.1",
+          "Xamarin.AndroidX.Camera.View": "1.4.1.1",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.Controls.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.Controls.dll": {
+            "related": ".xml"
           }
         }
       }
@@ -13047,6 +14247,141 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Browser.targets": {}
         }
       },
+      "Xamarin.AndroidX.Camera.Camera2/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Tracing.Tracing": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Core/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Concurrent.Futures.Ktx": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.AndroidX.Lifecycle.LiveData": "2.8.7.2",
+          "Xamarin.AndroidX.Tracing.Tracing": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2",
+          "Xamarin.KotlinX.Coroutines.Android": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Lifecycle/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Concurrent.Futures.Ktx": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.AndroidX.Tracing.Tracing.Ktx": "1.2.0.9",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26",
+          "Xamarin.KotlinX.Coroutines.Android": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.Video/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Camera.View/1.4.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.AndroidX.AppCompat": "1.7.0.5",
+          "Xamarin.AndroidX.Camera.Core": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Camera.Lifecycle": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Camera.Video": "[1.4.1.1, 1.4.2)",
+          "Xamarin.AndroidX.Concurrent.Futures": "1.2.0.5",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Lifecycle.Common": "2.8.7.2",
+          "Xamarin.Google.AutoValue.Annotations": "1.11.0.5",
+          "Xamarin.Google.Guava.ListenableFuture": "1.0.0.26"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.View.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.View.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.View.targets": {}
+        }
+      },
       "Xamarin.AndroidX.CardView/1.0.0.34": {
         "type": "package",
         "dependencies": {
@@ -13144,6 +14479,27 @@
         },
         "build": {
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.targets": {}
+        }
+      },
+      "Xamarin.AndroidX.Concurrent.Futures.Ktx/1.2.0.5": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Concurrent.Futures": "[1.2.0.5, 1.2.1)",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2",
+          "Xamarin.KotlinX.Coroutines.Core": "1.9.0.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.targets": {}
         }
       },
       "Xamarin.AndroidX.ConstraintLayout/2.2.1.1": {
@@ -14173,6 +15529,26 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.targets": {}
         }
       },
+      "Xamarin.AndroidX.Tracing.Tracing.Ktx/1.2.0.9": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Tracing.Tracing": "[1.2.0.9, 1.2.1)",
+          "Xamarin.Kotlin.StdLib": "2.0.21.2"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.targets": {}
+        }
+      },
       "Xamarin.AndroidX.Transition/1.5.1.5": {
         "type": "package",
         "dependencies": {
@@ -14384,6 +15760,19 @@
         },
         "build": {
           "buildTransitive/net8.0-android34.0/Xamarin.Google.Android.Material.targets": {}
+        }
+      },
+      "Xamarin.Google.AutoValue.Annotations/1.11.0.5": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-android34.0/Xamarin.Google.AutoValue.Annotations.dll": {
+            "related": ".aar;.pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/Xamarin.Google.AutoValue.Annotations.dll": {
+            "related": ".aar;.pdb;.xml"
+          }
         }
       },
       "Xamarin.Google.Code.FindBugs.JSR305/3.0.2.19": {
@@ -14613,6 +16002,57 @@
         "runtime": {
           "lib/net8.0-android34.0/Xamarin.KotlinX.Serialization.Core.Jvm.dll": {
             "related": ".aar;.pdb;.xml"
+          }
+        }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "Xamarin.AndroidX.Camera.Camera2": "1.4.1.1",
+          "Xamarin.AndroidX.Camera.Lifecycle": "1.4.1.1",
+          "Xamarin.AndroidX.Camera.View": "1.4.1.1",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.Controls.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android35.0/ZXing.Net.MAUI.Controls.dll": {
+            "related": ".xml"
           }
         }
       }
@@ -15159,6 +16599,46 @@
         "build": {
           "buildTransitive/net8.0/_._": {}
         }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.Controls.dll": {}
+        }
       }
     },
     "net9.0-ios26.0/android-arm64": {
@@ -15702,6 +17182,46 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.Controls.dll": {}
         }
       }
     },
@@ -16247,6 +17767,46 @@
         "build": {
           "buildTransitive/net8.0/_._": {}
         }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.Controls.dll": {}
+        }
       }
     },
     "net9.0-ios26.0/iossimulator-x64": {
@@ -16790,6 +18350,46 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.Controls.dll": {}
         }
       }
     },
@@ -17335,6 +18935,46 @@
         "build": {
           "buildTransitive/net8.0/_._": {}
         }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.Controls.dll": {}
+        }
       }
     },
     "net9.0-ios26.0/win10-x64": {
@@ -17878,6 +19518,46 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-ios18.0/ZXing.Net.MAUI.Controls.dll": {}
         }
       }
     },
@@ -18423,6 +20103,46 @@
         "build": {
           "buildTransitive/net8.0/_._": {}
         }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.Controls.dll": {}
+        }
       }
     },
     "net9.0-maccatalyst26.0/android-arm64": {
@@ -18966,6 +20686,46 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.Controls.dll": {}
         }
       }
     },
@@ -19511,6 +21271,46 @@
         "build": {
           "buildTransitive/net8.0/_._": {}
         }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.Controls.dll": {}
+        }
       }
     },
     "net9.0-maccatalyst26.0/iossimulator-x64": {
@@ -20054,6 +21854,46 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.Controls.dll": {}
         }
       }
     },
@@ -20599,6 +22439,46 @@
         "build": {
           "buildTransitive/net8.0/_._": {}
         }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.Controls.dll": {}
+        }
       }
     },
     "net9.0-maccatalyst26.0/win10-x64": {
@@ -21142,6 +23022,46 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.Controls.dll": {}
         }
       }
     },
@@ -21937,6 +23857,46 @@
         "build": {
           "buildTransitive/net8.0/_._": {}
         }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.Controls.dll": {}
+        }
       }
     },
     "net9.0-windows10.0.19041/android-arm64": {
@@ -22668,6 +24628,46 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.Controls.dll": {}
         }
       }
     },
@@ -23401,6 +25401,46 @@
         "build": {
           "buildTransitive/net8.0/_._": {}
         }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.Controls.dll": {}
+        }
       }
     },
     "net9.0-windows10.0.19041/iossimulator-x64": {
@@ -24133,6 +26173,46 @@
         "build": {
           "buildTransitive/net8.0/_._": {}
         }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.Controls.dll": {}
+        }
       }
     },
     "net9.0-windows10.0.19041/maccatalyst-x64": {
@@ -24864,6 +26944,46 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.Controls.dll": {}
         }
       }
     },
@@ -25606,6 +27726,46 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "ZXing.Net/0.16.10": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10"
+        },
+        "compile": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.dll": {}
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.40",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "compile": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.Controls.dll": {}
         }
       }
     }
@@ -28183,6 +30343,123 @@
         "xamarin.androidx.browser.nuspec"
       ]
     },
+    "Xamarin.AndroidX.Camera.Camera2/1.4.1.1": {
+      "sha512": "XlgOXhksQ4DA6lGfeomwcEW3bhqwWpT9tPAhHrkSiHJRw8rqUFo53b1znaxnXTYMKICIg0pNQjv7daexqk0mJw==",
+      "type": "package",
+      "path": "xamarin.androidx.camera.camera2/1.4.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "THIRD-PARTY-NOTICES.txt",
+        "_manifest/spdx_2.2/manifest.spdx.json",
+        "_manifest/spdx_2.2/manifest.spdx.json.sha256",
+        "aar/androidx.camera.camera-camera2.aar",
+        "build/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.targets",
+        "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.targets",
+        "icon.png",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.dll",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.pdb",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Camera2.xml",
+        "proguard/proguard.txt",
+        "readme.md",
+        "xamarin.androidx.camera.camera2.1.4.1.1.nupkg.sha512",
+        "xamarin.androidx.camera.camera2.nuspec"
+      ]
+    },
+    "Xamarin.AndroidX.Camera.Core/1.4.1.1": {
+      "sha512": "jItBqY/ymj8df+IBRkSwOxSN8FfVWMTA4JshAsASHReesBSnVHzVU0A8e6fJmUlZUsBLc3WgMxE5rHiFajIdGg==",
+      "type": "package",
+      "path": "xamarin.androidx.camera.core/1.4.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "THIRD-PARTY-NOTICES.txt",
+        "_manifest/spdx_2.2/manifest.spdx.json",
+        "_manifest/spdx_2.2/manifest.spdx.json.sha256",
+        "aar/androidx.camera.camera-core.aar",
+        "build/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.targets",
+        "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.targets",
+        "icon.png",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.dll",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.pdb",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Core.xml",
+        "proguard/proguard.txt",
+        "readme.md",
+        "xamarin.androidx.camera.core.1.4.1.1.nupkg.sha512",
+        "xamarin.androidx.camera.core.nuspec"
+      ]
+    },
+    "Xamarin.AndroidX.Camera.Lifecycle/1.4.1.1": {
+      "sha512": "qxPx5IHJMjcrYQ6xW4KAOAd5oWYwsYFKy7E+o2sCp4FssU3iY4QB8rJElRxm6ghgC4hjBNj8P34t4aGRNskhoA==",
+      "type": "package",
+      "path": "xamarin.androidx.camera.lifecycle/1.4.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "THIRD-PARTY-NOTICES.txt",
+        "_manifest/spdx_2.2/manifest.spdx.json",
+        "_manifest/spdx_2.2/manifest.spdx.json.sha256",
+        "aar/androidx.camera.camera-lifecycle.aar",
+        "build/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.targets",
+        "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.targets",
+        "icon.png",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.dll",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.pdb",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Lifecycle.xml",
+        "readme.md",
+        "xamarin.androidx.camera.lifecycle.1.4.1.1.nupkg.sha512",
+        "xamarin.androidx.camera.lifecycle.nuspec"
+      ]
+    },
+    "Xamarin.AndroidX.Camera.Video/1.4.1.1": {
+      "sha512": "dnQ+ZTilMEUmOSjgu/hM6qop2xjtO3WKmMM/ygQJKOyqnIRpzMV+9RSoAKlPqRHjBXjB9jZCTLUaCsnqW5NxNA==",
+      "type": "package",
+      "path": "xamarin.androidx.camera.video/1.4.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "THIRD-PARTY-NOTICES.txt",
+        "_manifest/spdx_2.2/manifest.spdx.json",
+        "_manifest/spdx_2.2/manifest.spdx.json.sha256",
+        "aar/androidx.camera.camera-video.aar",
+        "build/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.targets",
+        "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.targets",
+        "icon.png",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.dll",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.pdb",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.Video.xml",
+        "readme.md",
+        "xamarin.androidx.camera.video.1.4.1.1.nupkg.sha512",
+        "xamarin.androidx.camera.video.nuspec"
+      ]
+    },
+    "Xamarin.AndroidX.Camera.View/1.4.1.1": {
+      "sha512": "XxN1uOCcjZfuoHhcBZjfezs6IF5IvGVBSeNZzEIp/RqlbKMeR8z9+D00yIlp/jF3MxmX9uTLWrJ5G/Oh/kjXnw==",
+      "type": "package",
+      "path": "xamarin.androidx.camera.view/1.4.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "THIRD-PARTY-NOTICES.txt",
+        "_manifest/spdx_2.2/manifest.spdx.json",
+        "_manifest/spdx_2.2/manifest.spdx.json.sha256",
+        "aar/androidx.camera.camera-view.aar",
+        "build/net8.0-android34.0/Xamarin.AndroidX.Camera.View.targets",
+        "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Camera.View.targets",
+        "icon.png",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.View.dll",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.View.pdb",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Camera.View.xml",
+        "readme.md",
+        "xamarin.androidx.camera.view.1.4.1.1.nupkg.sha512",
+        "xamarin.androidx.camera.view.nuspec"
+      ]
+    },
     "Xamarin.AndroidX.CardView/1.0.0.34": {
       "sha512": "xlq+9cyWFxEcdUf1cVu7sxxMFkP8Sn9unKLFgDD1wHdJcs+EF7y0hbGODdJK3DCmumaKIn1a6756ZKLZtvFzrg==",
       "type": "package",
@@ -28286,6 +30563,29 @@
         "readme.md",
         "xamarin.androidx.concurrent.futures.1.2.0.6.nupkg.sha512",
         "xamarin.androidx.concurrent.futures.nuspec"
+      ]
+    },
+    "Xamarin.AndroidX.Concurrent.Futures.Ktx/1.2.0.5": {
+      "sha512": "4ySDOkB0vpLeasTTx+ZA1js0TVdkCPg1uuG6k3+wBJCzuIV692Ju7Wa7r/PDL2jo4ox3U9TvR5Glga1AUBAtfQ==",
+      "type": "package",
+      "path": "xamarin.androidx.concurrent.futures.ktx/1.2.0.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "THIRD-PARTY-NOTICES.txt",
+        "_manifest/spdx_2.2/manifest.spdx.json",
+        "_manifest/spdx_2.2/manifest.spdx.json.sha256",
+        "build/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.targets",
+        "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.targets",
+        "icon.png",
+        "jar/androidx.concurrent.concurrent-futures-ktx.jar",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.dll",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.pdb",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Concurrent.Futures.Ktx.xml",
+        "readme.md",
+        "xamarin.androidx.concurrent.futures.ktx.1.2.0.5.nupkg.sha512",
+        "xamarin.androidx.concurrent.futures.ktx.nuspec"
       ]
     },
     "Xamarin.AndroidX.ConstraintLayout/2.2.1.1": {
@@ -29271,6 +31571,29 @@
         "xamarin.androidx.tracing.tracing.nuspec"
       ]
     },
+    "Xamarin.AndroidX.Tracing.Tracing.Ktx/1.2.0.9": {
+      "sha512": "k86lTK18KTgzTunEOCWTobWDqN2ySW+FLkg7clh9b7ZHCI+2/DnXuxZXlw/gZ9vhWhAMn8/GvYjwfJGYDOKgqw==",
+      "type": "package",
+      "path": "xamarin.androidx.tracing.tracing.ktx/1.2.0.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "THIRD-PARTY-NOTICES.txt",
+        "_manifest/spdx_2.2/manifest.spdx.json",
+        "_manifest/spdx_2.2/manifest.spdx.json.sha256",
+        "aar/androidx.tracing.tracing-ktx.aar",
+        "build/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.targets",
+        "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.targets",
+        "icon.png",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.dll",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.pdb",
+        "lib/net8.0-android34.0/Xamarin.AndroidX.Tracing.Tracing.Ktx.xml",
+        "readme.md",
+        "xamarin.androidx.tracing.tracing.ktx.1.2.0.9.nupkg.sha512",
+        "xamarin.androidx.tracing.tracing.ktx.nuspec"
+      ]
+    },
     "Xamarin.AndroidX.Transition/1.5.1.5": {
       "sha512": "LIOtol92q34LxKiXZcXCtorF/Erg7xOLAS8z94U7uwJ4kw0MxP5OHg9zjjkIuV6wunQhhzFTMfQGOgN1XJhYow==",
       "type": "package",
@@ -29464,6 +31787,27 @@
         "readme.md",
         "xamarin.google.android.material.1.12.0.3.nupkg.sha512",
         "xamarin.google.android.material.nuspec"
+      ]
+    },
+    "Xamarin.Google.AutoValue.Annotations/1.11.0.5": {
+      "sha512": "mcJb0pz5tWQh5MMGOcCP2lLWXPs1pkPDuFLYchR/zz8IXOjqnWRJHufLEHcKIEmvvr23woCbxOpdQjXy6Y1zeQ==",
+      "type": "package",
+      "path": "xamarin.google.autovalue.annotations/1.11.0.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "THIRD-PARTY-NOTICES.txt",
+        "_manifest/spdx_2.2/manifest.spdx.json",
+        "_manifest/spdx_2.2/manifest.spdx.json.sha256",
+        "icon.png",
+        "lib/net8.0-android34.0/Xamarin.Google.AutoValue.Annotations.aar",
+        "lib/net8.0-android34.0/Xamarin.Google.AutoValue.Annotations.dll",
+        "lib/net8.0-android34.0/Xamarin.Google.AutoValue.Annotations.pdb",
+        "lib/net8.0-android34.0/Xamarin.Google.AutoValue.Annotations.xml",
+        "readme.md",
+        "xamarin.google.autovalue.annotations.1.11.0.5.nupkg.sha512",
+        "xamarin.google.autovalue.annotations.nuspec"
       ]
     },
     "Xamarin.Google.Code.FindBugs.JSR305/3.0.2.19": {
@@ -29750,6 +32094,129 @@
         "xamarin.kotlinx.serialization.core.jvm.1.7.3.4.nupkg.sha512",
         "xamarin.kotlinx.serialization.core.jvm.nuspec"
       ]
+    },
+    "ZXing.Net/0.16.10": {
+      "sha512": "9avtcn21T7Ndcl8PQ1LHR7/wEoCruX1QKKHvO6zBPTsDW9IdvR5vKOmd618AY+DtDWZz8NaFDTkpbZdgaF4l4w==",
+      "type": "package",
+      "path": "zxing.net/0.16.10",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/native/zxing.XML",
+        "lib/native/zxing.pri",
+        "lib/native/zxing.winmd",
+        "lib/net20-cf/zxing.ce2.0.dll",
+        "lib/net20-cf/zxing.ce2.0.xml",
+        "lib/net20/zxing.XML",
+        "lib/net20/zxing.dll",
+        "lib/net35-cf/zxing.ce3.5.dll",
+        "lib/net35-cf/zxing.ce3.5.xml",
+        "lib/net35/zxing.XML",
+        "lib/net35/zxing.dll",
+        "lib/net40/zxing.XML",
+        "lib/net40/zxing.dll",
+        "lib/net40/zxing.presentation.XML",
+        "lib/net40/zxing.presentation.dll",
+        "lib/net45/zxing.XML",
+        "lib/net45/zxing.dll",
+        "lib/net45/zxing.presentation.XML",
+        "lib/net45/zxing.presentation.dll",
+        "lib/net461/zxing.XML",
+        "lib/net461/zxing.dll",
+        "lib/net461/zxing.presentation.XML",
+        "lib/net461/zxing.presentation.dll",
+        "lib/net47/zxing.XML",
+        "lib/net47/zxing.dll",
+        "lib/net47/zxing.presentation.XML",
+        "lib/net47/zxing.presentation.dll",
+        "lib/net48/zxing.XML",
+        "lib/net48/zxing.dll",
+        "lib/net48/zxing.presentation.XML",
+        "lib/net48/zxing.presentation.dll",
+        "lib/net5.0/zxing.XML",
+        "lib/net5.0/zxing.dll",
+        "lib/net6.0/zxing.XML",
+        "lib/net6.0/zxing.dll",
+        "lib/net7.0/zxing.XML",
+        "lib/net7.0/zxing.dll",
+        "lib/net8.0/zxing.XML",
+        "lib/net8.0/zxing.dll",
+        "lib/net9.0/zxing.XML",
+        "lib/net9.0/zxing.dll",
+        "lib/netcoreapp3.0/zxing.dll",
+        "lib/netcoreapp3.0/zxing.xml",
+        "lib/netcoreapp3.1/zxing.dll",
+        "lib/netcoreapp3.1/zxing.xml",
+        "lib/netstandard1.0/zxing.dll",
+        "lib/netstandard1.0/zxing.xml",
+        "lib/netstandard1.1/zxing.dll",
+        "lib/netstandard1.1/zxing.xml",
+        "lib/netstandard1.3/zxing.dll",
+        "lib/netstandard1.3/zxing.xml",
+        "lib/netstandard2.0/zxing.dll",
+        "lib/netstandard2.0/zxing.xml",
+        "lib/netstandard2.1/zxing.dll",
+        "lib/netstandard2.1/zxing.xml",
+        "lib/portable-win+net40+sl4+sl5+wp7+wp71+wp8/zxing.portable.XML",
+        "lib/portable-win+net40+sl4+sl5+wp7+wp71+wp8/zxing.portable.dll",
+        "lib/sl3-wp/zxing.wp7.0.XML",
+        "lib/sl3-wp/zxing.wp7.0.dll",
+        "lib/sl4-wp71/zxing.wp7.1.XML",
+        "lib/sl4-wp71/zxing.wp7.1.dll",
+        "lib/sl4/zxing.sl4.XML",
+        "lib/sl4/zxing.sl4.dll",
+        "lib/sl5/zxing.sl5.XML",
+        "lib/sl5/zxing.sl5.dll",
+        "lib/uap10/zxing.dll",
+        "lib/uap10/zxing.pri",
+        "lib/uap10/zxing.xml",
+        "lib/windows8-managed/zxing.winrt.XML",
+        "lib/windows8-managed/zxing.winrt.dll",
+        "lib/windows8/zxing.XML",
+        "lib/windows8/zxing.pri",
+        "lib/windows8/zxing.winmd",
+        "lib/wp8/zxing.wp8.0.XML",
+        "lib/wp8/zxing.wp8.0.dll",
+        "logo.jpg",
+        "zxing.net.0.16.10.nupkg.sha512",
+        "zxing.net.nuspec"
+      ]
+    },
+    "ZXing.Net.Maui/0.6.0": {
+      "sha512": "WMiLNG0PYtB/3jXDI3n1QZcU9tXgxCJlXIFleeVlqk+SGKdPdV+1T5RM9S+bdzpu730f+ziHxnlkTzbAmLCndA==",
+      "type": "package",
+      "path": "zxing.net.maui/0.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net9.0-android35.0/ZXing.Net.MAUI.dll",
+        "lib/net9.0-android35.0/ZXing.Net.MAUI.xml",
+        "lib/net9.0-ios18.0/ZXing.Net.MAUI.dll",
+        "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.dll",
+        "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.dll",
+        "lib/net9.0/ZXing.Net.MAUI.dll",
+        "zxing.net.maui.0.6.0.nupkg.sha512",
+        "zxing.net.maui.nuspec"
+      ]
+    },
+    "ZXing.Net.Maui.Controls/0.6.0": {
+      "sha512": "eXA0gAQ1jr1ZDmwZc4Tn+/62PfCOG4JJjQB1XDhcDoicD45vi+aEV2okgA89zXwmN7Y3KF2WmWcGmkWnNyVknQ==",
+      "type": "package",
+      "path": "zxing.net.maui.controls/0.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net9.0-android35.0/ZXing.Net.MAUI.Controls.dll",
+        "lib/net9.0-android35.0/ZXing.Net.MAUI.Controls.xml",
+        "lib/net9.0-ios18.0/ZXing.Net.MAUI.Controls.dll",
+        "lib/net9.0-maccatalyst18.0/ZXing.Net.MAUI.Controls.dll",
+        "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.Controls.dll",
+        "lib/net9.0/ZXing.Net.MAUI.Controls.dll",
+        "zxing.net.maui.controls.0.6.0.nupkg.sha512",
+        "zxing.net.maui.controls.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -29758,27 +32225,31 @@
       "Microsoft.Extensions.Http >= 10.0.0",
       "Microsoft.Extensions.Logging.Debug >= 9.0.8",
       "Microsoft.Maui.Controls >= 9.0.111",
-      "Microsoft.NET.ILLink.Tasks >= 9.0.11"
+      "Microsoft.NET.ILLink.Tasks >= 9.0.11",
+      "ZXing.Net.Maui.Controls >= 0.6.0"
     ],
     "net9.0-ios26.0": [
       "CommunityToolkit.Mvvm >= 8.4.0",
       "Microsoft.Extensions.Http >= 10.0.0",
       "Microsoft.Extensions.Logging.Debug >= 9.0.8",
       "Microsoft.Maui.Controls >= 9.0.111",
-      "Microsoft.NET.ILLink.Tasks >= 9.0.11"
+      "Microsoft.NET.ILLink.Tasks >= 9.0.11",
+      "ZXing.Net.Maui.Controls >= 0.6.0"
     ],
     "net9.0-maccatalyst26.0": [
       "CommunityToolkit.Mvvm >= 8.4.0",
       "Microsoft.Extensions.Http >= 10.0.0",
       "Microsoft.Extensions.Logging.Debug >= 9.0.8",
       "Microsoft.Maui.Controls >= 9.0.111",
-      "Microsoft.NET.ILLink.Tasks >= 9.0.11"
+      "Microsoft.NET.ILLink.Tasks >= 9.0.11",
+      "ZXing.Net.Maui.Controls >= 0.6.0"
     ],
     "net9.0-windows10.0.19041": [
       "CommunityToolkit.Mvvm >= 8.4.0",
       "Microsoft.Extensions.Http >= 10.0.0",
       "Microsoft.Extensions.Logging.Debug >= 9.0.8",
-      "Microsoft.Maui.Controls >= 9.0.111"
+      "Microsoft.Maui.Controls >= 9.0.111",
+      "ZXing.Net.Maui.Controls >= 0.6.0"
     ]
   },
   "packageFolders": {
@@ -29869,6 +32340,10 @@
             "target": "Package",
             "version": "[9.0.11, )",
             "autoReferenced": true
+          },
+          "ZXing.Net.Maui.Controls": {
+            "target": "Package",
+            "version": "[0.6.0, )"
           }
         },
         "imports": [
@@ -29916,6 +32391,10 @@
             "target": "Package",
             "version": "[9.0.11, )",
             "autoReferenced": true
+          },
+          "ZXing.Net.Maui.Controls": {
+            "target": "Package",
+            "version": "[0.6.0, )"
           }
         },
         "imports": [
@@ -29963,6 +32442,10 @@
             "target": "Package",
             "version": "[9.0.11, )",
             "autoReferenced": true
+          },
+          "ZXing.Net.Maui.Controls": {
+            "target": "Package",
+            "version": "[0.6.0, )"
           }
         },
         "imports": [
@@ -30005,6 +32488,10 @@
           "Microsoft.Maui.Controls": {
             "target": "Package",
             "version": "[9.0.111, )"
+          },
+          "ZXing.Net.Maui.Controls": {
+            "target": "Package",
+            "version": "[0.6.0, )"
           }
         },
         "imports": [

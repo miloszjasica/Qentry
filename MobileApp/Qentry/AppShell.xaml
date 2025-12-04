@@ -3,39 +3,37 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:Qentry.Views"
-    FlyoutBehavior="Disabled"
-    Title="Qentry">
+    FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Route="LoginPage"
-        ContentTemplate="{DataTemplate views:LoginPage}" />
+    <ShellContent Route="LoginPage"
+                  ContentTemplate="{DataTemplate views:LoginPage}" />
 
-    <ShellContent
-        Route="MainPage"
-        ContentTemplate="{DataTemplate views:MainPage}"/>
+    <ShellContent Route="RegisterPage" 
+                  ContentTemplate="{DataTemplate views:RegisterPage}" />
+    
+    <ShellContent Route="MainPage"
+                  ContentTemplate="{DataTemplate views:MainPage}" />
 
-    <ShellContent 
-        Route="ProfilePage"
-        ContentTemplate="{DataTemplate views:ProfilePage}" />
+    <ShellContent Route="ProfilePage"
+                  ContentTemplate="{DataTemplate views:ProfilePage}" />
 
-    <ShellContent 
-        Route="MyEventsPage"
-        ContentTemplate="{DataTemplate views:MyEventsPage}" />
+    <ShellContent Route="MyEventsPage"
+                  ContentTemplate="{DataTemplate views:MyEventsPage}" />
 
-    <ShellContent 
-        Route="SavedEventsPage"
-        ContentTemplate="{DataTemplate views:SavedEventsPage}" />
+    <ShellContent Route="SavedEventsPage"
+                  ContentTemplate="{DataTemplate views:SavedEventsPage}" />
 
-    <ShellContent 
-        Route="CreateEventPage"
-        ContentTemplate="{DataTemplate views:CreateEventPage}" />
+    <ShellContent Route="CreateEventPage"
+                  ContentTemplate="{DataTemplate views:CreateEventPage}" />
 
-    <ShellContent 
-        Route="EventDetailsPage"
-        ContentTemplate="{DataTemplate views:EventDetailsPage}" />
+    <ShellContent Route="EventDetailsPage"
+                  ContentTemplate="{DataTemplate views:EventDetailsPage}" />
 
-    <ShellContent 
-        Route="SavedEventDetailsPage"
-        ContentTemplate="{DataTemplate views:SavedEventDetailsPage}" />
+    <ShellContent Route="SavedEventDetailsPage"
+                  ContentTemplate="{DataTemplate views:SavedEventDetailsPage}" />
+
+    <ShellContent Route="StaffEventDetailsPage"
+                  ContentTemplate="{DataTemplate views:StaffEventDetailsPage}" />
+
 
 </Shell>
