@@ -98,13 +98,25 @@ def add_tokens(request, qr_string, id_event):
             if amount <= 0:
                 return Response({'error': 'Amount must be greater than zero'}, status=400)
 
+            old_balance = qr.balance
             qr.balance += amount
             qr.save()
+
+            Transaction.objects.create(
+                id_user=qr.id_user,
+                id_attraction=None,
+                amount=amount,
+                type ='topup'
+            )
+
+            data = {
+                'old_balance': old_balance,
+                'added_amount': amount,
+                'message': 'Tokeny zostały pomyślnie zakupione',
+                'type': type
+            }
             
-            return Response(AddTokensSerializer({
-                'new_balance': qr.balance,
-                'message': 'Tokeny zakupione pomyślnie'
-            }).data)
+            return Response(AddTokensSerializer(data).data)
         else:
             return Response({'error': 'Nie możesz sprzedawać tokenów jako gość lub kasjer'}, status=403)
     
