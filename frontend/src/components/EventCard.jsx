@@ -3,6 +3,17 @@ export default function EventCard({ event, onOpen, onCategoryClick }) {
     ? event.image 
     : "/ImageWithFallback.png";
     const category = event.category || "Inne";
+    const dateObj = event ? new Date(event.start_date) : null;
+    const date = new Intl.DateTimeFormat("pl-PL", { 
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    }).format(dateObj);
+
+    const time = new Intl.DateTimeFormat("pl-PL", { 
+        hour: "2-digit",
+        minute: "2-digit"
+    }).format(dateObj);
 
   return (
     <div onClick={() => onOpen(event)} style={{ cursor: "pointer" }}>
@@ -42,28 +53,7 @@ export default function EventCard({ event, onOpen, onCategoryClick }) {
                     {category}
                 </div>
             </div>
-            <div style={{
-                    position: 'absolute',
-                    top: '12px',
-                    right: '12px',
-                    width: '32px',
-                    height: '32px',
-                    background: 'white',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    boxShadow: '0px 2px 4px rgba(0,0,0,0.1)'
-                }}>
-                    <img 
-                        src="/HeartIcon.png" 
-                        alt="Add to favorites" 
-                        style={{ 
-                            width: '16px', 
-                            height: '16px' 
-                        }} 
-                    />
-            </div>
+
         </div>
         <div style={{
             display: "flex",
@@ -92,7 +82,8 @@ export default function EventCard({ event, onOpen, onCategoryClick }) {
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                     <img src="/time.png" alt="date" style={{ width: "16px", height: "16px" }} />
-                    {new Intl.DateTimeFormat("pl-PL", { day: "numeric", month: "long", year: "numeric" }).format(new Date(event.start_date))}
+                    {date + " · " + time}
+
                 </div>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>

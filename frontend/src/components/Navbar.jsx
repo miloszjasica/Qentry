@@ -3,9 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Navbar({ isExpanded, setIsExpanded }) {
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
 
-  // funkcja do pobrania aktualnego użytkownika
   const fetchUser = async () => {
     const token = localStorage.getItem("access");
     if (!token) return setUser(null);
@@ -26,28 +24,6 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
   useEffect(() => {
     fetchUser();
   }, []);
-
-  const handleLogout = async () => {
-    if (user) {
-      try {
-        await fetch("http://localhost:8000/api/users/logout/", {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${localStorage.getItem("access")}`,
-            "Content-Type": "application/json",
-          },
-        });
-      } catch (err) {
-        console.error(err);
-      }
-      localStorage.removeItem("access");
-      localStorage.removeItem("refresh");
-      setUser(null);
-      navigate("/");
-    } else {
-      navigate("/login");
-    }
-  };
 
   return (
     <nav style={{
@@ -115,34 +91,16 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
           borderRadius: '10px',
           background: isActive ? '#9893DA' : 'transparent',
           color: isActive ? 'black' : 'white',
-          marginBottom: "8px"
+          marginBottom: "8px",
+          minHeight: "48px"
         })}>
           {({ isActive }) => (
             <>
-              <img src="/Home.png" alt="Home Page" style={{ width: '20px', height: '20px', marginRight: "12px", filter: isActive ? "none" : "invert(1)" }} />
+              <img src="/Home.png" alt="Home Page" style={{ width: '20px', height: '20px', minWidth: '20px', minHeight: '20px', marginRight: isExpanded ? "12px" : "0",  filter: isActive ? "none" : "invert(1)" }} />
               {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>Strona Główna</div>}
             </>
           )}
         </NavLink>
-
-        <NavLink to="/polubione" style={({ isActive }) => ({
-          padding: '12px 16px',
-          display: "flex",
-          alignItems: 'center',
-          textDecoration: 'none',
-          borderRadius: '10px',
-          background: isActive ? '#9893DA' : 'transparent',
-          color: isActive ? 'black' : 'white',
-          marginBottom: "8px"
-        })}>
-          {({ isActive }) => (
-            <>
-              <img src="/heart.png" alt="Favorites" style={{ width: '20px', height: '20px', marginRight: "12px", filter: isActive ? "invert(1)" : "brightness(100%)" }} />
-              {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>Polubione</div>}
-            </>
-          )}
-        </NavLink>
-
         <NavLink to="/biore-udzial" style={({ isActive }) => ({
           padding: '12px 16px',
           display: "flex",
@@ -151,11 +109,12 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
           borderRadius: '10px',
           background: isActive ? '#9893DA' : 'transparent',
           color: isActive ? 'black' : 'white',
-          marginBottom: "8px"
+          marginBottom: "8px",
+          minHeight: "48px"
         })}>
           {({ isActive }) => (
             <>
-              <img src="/Saved.png" alt="Saved" style={{ width: '20px', height: '20px', marginRight: "12px", filter: isActive ? "invert(1)" : "brightness(100%)" }} />
+              <img src="/Saved.png" alt="Saved" style={{ width: '20px', height: '20px', minWidth: '20px', minHeight: '20px', marginRight: "12px", filter: isActive ? "invert(1)" : "brightness(100%)" }} />
               {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>Biorę udział</div>}
             </>
           )}
@@ -169,11 +128,12 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
           borderRadius: '10px',
           background: isActive ? '#9893DA' : 'transparent',
           color: isActive ? 'black' : 'white',
-          marginBottom: "8px"
+          marginBottom: "8px",
+          minHeight: "48px"
         })}>
           {({ isActive }) => (
             <>
-              <img src="/Localization.png" alt="Nearby" style={{ width: '20px', height: '20px', marginRight: "12px", filter: isActive ? "invert(1)" : "brightness(100%)" }} />
+              <img src="/Localization.png" alt="Nearby" style={{ width: '20px', height: '20px', minWidth: '20px', minHeight: '20px', marginRight: "12px", filter: isActive ? "invert(1)" : "brightness(100%)" }} />
               {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>W pobliżu</div>}
             </>
           )}
@@ -187,17 +147,18 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
           borderRadius: '10px',
           background: isActive ? '#9893DA' : 'transparent',
           color: isActive ? 'black' : 'white',
+          minHeight: "48px"
         })}>
           {({ isActive }) => (
             <>
-              <img src="/Profile.png" alt="Profile" style={{ width: '20px', height: '20px', marginRight: "12px", filter: isActive ? "invert(1)" : "brightness(100%)" }} />
+              <img src="/Profile.png" alt="Profile" style={{ width: '20px', height: '20px', minWidth: '20px', minHeight: '20px', marginRight: "12px", filter: isActive ? "invert(1)" : "brightness(100%)" }} />
               {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>Profil</div>}
             </>
           )}
         </NavLink>
 
         {user?.role === "organizer" && (
-          <NavLink to="/stwórz-wydarzenie" style={{
+          <NavLink to="/createevent" style={{
             padding: '12px 16px',
             display: "flex",
             alignItems: 'center',
@@ -205,9 +166,10 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
             borderRadius: '10px',
             background: '#157145',
             color: 'white',
-            marginTop: "24px"
+            marginTop: "24px",
+            minHeight: "48px"
           }}>
-            <img src="/plus.png" alt="Dodaj wydarzenie" style={{ width: '20px', height: '20px', marginRight: "12px", filter: "brightness(100%)" }} />
+            <img src="/plus.png" alt="Dodaj wydarzenie" style={{ width: '20px', height: '20px', minWidth: '20px', minHeight: '20px', marginRight: "12px", filter: "brightness(100%)" }} />
             {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>Dodaj wydarzenie</div>}
           </NavLink>
         )}
@@ -256,13 +218,14 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
                   width: '100%',
                   padding: '12px 16px',
                   alignItems: 'center',
-                  display: 'flex'
+                  display: 'flex',
+                  minHeight: "48px"
                 }}
               >
                 <img 
                   src={user ? "/logout.svg" : "/logout.svg"}
                   alt={user ? "Wyloguj" : "Zaloguj"} 
-                  style={{ width: '20px', height: '20px', marginRight: '12px' }} 
+                  style={{ width: '20px', height: '20px', minWidth: '20px', minHeight: '20px', marginRight: '12px' }} 
                 />
                 {isExpanded && (user ? "Wyloguj" : "Zaloguj")}
 

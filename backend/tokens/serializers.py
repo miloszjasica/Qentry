@@ -35,8 +35,8 @@ class ListTransactionsSerializer(serializers.Serializer):
 class QRSerializer(serializers.ModelSerializer):
     name = serializers.CharField(source="id_event.name", read_only=True)
     location = serializers.CharField(source="id_event.location", read_only=True)
-    start_date = serializers.DateField(source="id_event.start_date", read_only=True)
-    event_end_date = serializers.DateField(source="id_event.end_date", read_only=True)
+    start_date = serializers.DateTimeField(source="id_event.start_date", read_only=True)
+    event_end_date = serializers.DateTimeField(source="id_event.end_date", read_only=True)
     image = serializers.ImageField(source="id_event.image", read_only=True)
     participants = serializers.IntegerField(source="id_event.participants", read_only=True)
     description = serializers.CharField(source="id_event.description", read_only = True)
@@ -45,4 +45,18 @@ class QRSerializer(serializers.ModelSerializer):
     class Meta:
         model = QR
         fields = '__all__'
-        read_only_fields = ['id_qr', 'generated_at', 'qr_string', 'id_user', "location", "start_date", "end_date", "image", "name"]
+        read_only_fields = ['id_qr', 'generated_at', 'qr_string', 'id_user']
+
+class AssignRoleSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    role = serializers.ChoiceField(choices=[
+        'guest', 'staff', 'token_taker', 'token_seller'
+    ])
+
+class EventUserRoleSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(source="id_user.email")
+    role = serializers.CharField(source="user_role")
+
+    class Meta:
+        model = QR
+        fields = ["email", "role"]

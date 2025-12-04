@@ -25,6 +25,7 @@ export default function CategoryBar({ selected, onSelect }) {
       marginBottom: "20px",
       overflowX: "auto",
       paddingBottom: "10px",
+      paddingTop: "5px",
       position: "relative",
       flexWrap: "wrap"
     }}>
@@ -49,6 +50,8 @@ export default function CategoryBar({ selected, onSelect }) {
               whiteSpace: "nowrap",
               outline: "1.11px solid #E5E7EB",
               outlifetOffset: "-1.11px",
+              boxShadow: "0 1px 4px rgba(0,0,0,0.10)"
+
             }}
           >
             <Icon size={16} /> {cat.label}
