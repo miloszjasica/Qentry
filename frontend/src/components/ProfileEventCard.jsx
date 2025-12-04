@@ -1,6 +1,6 @@
 import { Calendar, Clock, MapPin, Award, Users, Settings } from 'lucide-react';
 
-export function ProfileEventCard({ event, onClick, statusLabel = "Zapisano", showManageBtn = false }) {
+export function ProfileEventCard({ event, onClick, onManageClick, statusLabel = "Zapisano", showManageBtn = false }) {
 
   const dateObj = new Date(event.start_date);
 
@@ -83,6 +83,7 @@ export function ProfileEventCard({ event, onClick, statusLabel = "Zapisano", sho
             <button
                 onClick={(e) => {
                     e.stopPropagation();
+                    onManageClick(event);
                 }}
                 className="flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 bg-[#9893da] hover:bg-[#8681c4] text-white rounded-lg text-xs md:text-sm transition-colors shadow-sm"
             >

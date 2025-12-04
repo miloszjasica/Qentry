@@ -84,9 +84,10 @@ class AssignRoleSerializer(serializers.Serializer):
     ])
 
 class EventUserRoleSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(source='id_user.id')
     email = serializers.EmailField(source="id_user.email")
     role = serializers.CharField(source="user_role")
 
     class Meta:
         model = QR
-        fields = ["email", "role"]
+        fields = ["id", "email", "role"]
