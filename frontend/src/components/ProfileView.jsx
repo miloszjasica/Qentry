@@ -3,7 +3,8 @@ import { Calendar, Clock, Users, PlusCircle } from 'lucide-react';
 import { ProfileHeader } from './ProfileHeader';
 import { ProfileEventCard } from './ProfileEventCard';
 
-export function ProfileView({ user, participatingEvents, createdEvents, onEventClick,onCreateClick }) {
+// Dodałem onEditClick do destrukturyzacji propsów
+export function ProfileView({ user, participatingEvents, createdEvents, onEventClick, onCreateClick, onEditClick }) {
   const [activeTab, setActiveTab] = useState('upcoming');
   const isOrganizer = user.wants_to_be_organizer === true;
   const currentDate = new Date();
@@ -20,7 +21,8 @@ export function ProfileView({ user, participatingEvents, createdEvents, onEventC
             finished: pastEvents.length,
             created: createdEvents.length
         }}
-        isOrganizer={isOrganizer}
+        isOrganizer={isOrganizer} // Przekazujemy wyliczoną wyżej wartość
+        onEditClick={onEditClick} // Przekazujemy funkcję do nagłówka
       />
 
       <div className="bg-white rounded-2xl shadow-sm p-4 md:p-6 lg:p-8">
@@ -97,7 +99,7 @@ export function ProfileView({ user, participatingEvents, createdEvents, onEventC
             )
           )}
 
-          {/* Stworzone (Prosto z backendu!) */}
+          {/* Stworzone */}
           {activeTab === 'created' && isOrganizer && (
              createdEvents.length > 0 ? (
                 createdEvents.map(event => (
