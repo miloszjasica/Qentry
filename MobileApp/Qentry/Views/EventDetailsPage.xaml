@@ -1,66 +1,140 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 x:Class="Qentry.Views.EventDetailsPage">
-	
-	<ScrollView>
-		<VerticalStackLayout Padding="20" Spacing="15">
+             x:Class="Qentry.Views.EventDetailsPage"
+             xmlns:converters="clr-namespace:Qentry.Converters"
+             BackgroundColor="{StaticResource BgColor}">
 
-			<!-- Tytuł -->
-			<Label Text="{Binding Event.Name}"
-                   FontSize="26"
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolToStatusConverter x:Key="BoolToStatusConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Zdjęcie wydarzenia -->
+            <Border StrokeThickness="0"
+                    BackgroundColor="{StaticResource Tertiary}"
+                    HeightRequest="200"
+                    StrokeShape="RoundRectangle 15">
+                <Image Source="{Binding Event.Image}"
+                       Aspect="AspectFill"/>
+            </Border>
+
+            <!-- Tytuł -->
+            <Label Text="{Binding Event.Name}"
+                   FontSize="28"
                    FontAttributes="Bold"
-                   TextColor="White"/>
+                   TextColor="{StaticResource PrimaryDarkText}"/>
 
-			<!-- Lokalizacja -->
-			<Label Text="{Binding Event.Location}"
-                   TextColor="#DDDDDD"/>
+            <!-- Lokalizacja + daty -->
+            <Border Stroke="{StaticResource Primary}"
+                    StrokeThickness="2"
+                    Padding="15"
+                    StrokeShape="RoundRectangle 12"
+                    BackgroundColor="White">
+                <VerticalStackLayout Spacing="5">
 
-			<!-- Daty -->
-			<Label Text="{Binding Event.StartDate, StringFormat='Start: {0:dd MMM yyyy}'}"
-                   TextColor="#FF6666"/>
-			<Label Text="{Binding Event.EndDate, StringFormat='Koniec: {0:dd MMM yyyy}'}"
-                   TextColor="#FF6666"/>
+                    <Label Text="{Binding Event.Location}"
+                           FontSize="16"
+                           TextColor="{StaticResource PrimaryDarkText}"/>
 
-			<!-- Opis -->
-			<Label Text="Opis:"
+                    <Label Text="{Binding Event.StartDate, StringFormat='Start: {0:dd MMM yyyy HH:mm}'}"
+                           TextColor="{StaticResource SecondaryDarkText}"/>
+
+                    <Label Text="{Binding Event.EndDate, StringFormat='Koniec: {0:dd MMM yyyy HH:mm}'}"
+                           TextColor="{StaticResource SecondaryDarkText}"/>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Opis -->
+            <Label Text="Opis"
                    FontAttributes="Bold"
-                   FontSize="18"
-                   TextColor="White"/>
-			<Label Text="{Binding Event.Description}"
-                   TextColor="#CCCCCC"/>
+                   FontSize="20"
+                   TextColor="{StaticResource PrimaryDarkText}"/>
 
-			<!-- ATRAKCJE -->
-			<Label Text="Atrakcje:"
+            <Border StrokeThickness="0"
+                    BackgroundColor="{StaticResource Quaternary}"
+                    Padding="15"
+                    StrokeShape="RoundRectangle 12">
+                <Label Text="{Binding Event.Description}"
+                       TextColor="White"
+                       FontSize="15"/>
+            </Border>
+
+
+            <!-- Dodatkowe informacje -->
+            <Label Text="Informacje o wydarzeniu"
+                   FontAttributes="Bold"
+                   FontSize="20"
+                   TextColor="{StaticResource PrimaryDarkText}"/>
+
+            <Border Stroke="{StaticResource PrimaryDark}"
+                    StrokeThickness="1.5"
+                    Padding="15"
+                    StrokeShape="RoundRectangle 12"
+                    BackgroundColor="White">
+
+                <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto" RowSpacing="8">
+
+                    <Label Grid.Row="0" Grid.Column="0" Text="Kategoria:"
+                           TextColor="{StaticResource Tertiary}"/>
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Event.Category}"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource PrimaryDarkText}"/>
+
+                    <Label Grid.Row="1" Grid.Column="0" Text="Uczestnicy:"
+                           TextColor="{StaticResource Tertiary}"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding Event.Participants}"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource PrimaryDarkText}"/>
+
+                    <Label Grid.Row="2" Grid.Column="0" Text="Status:"
+                           TextColor="{StaticResource Tertiary}"/>
+                    <Label Grid.Row="2" Grid.Column="1"
+                           Text="{Binding Event.IsActive, Converter={StaticResource BoolToStatusConverter}}"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Secondary}"/>
+
+                </Grid>
+            </Border>
+
+            <!-- ATRAKCJE -->
+            <Label Text="Atrakcje"
                    FontSize="22"
                    FontAttributes="Bold"
-                   TextColor="White"
-                   Margin="0,10,0,0"/>
+                   Margin="0,15,0,10"
+                   TextColor="{StaticResource PrimaryDarkText}"/>
 
-			<CollectionView ItemsSource="{Binding Attractions}">
-				<CollectionView.ItemTemplate>
-					<DataTemplate>
-						<Frame BackgroundColor="#333"
-                               Padding="10"
-                               CornerRadius="10"
-                               Margin="0,5">
-
-							<VerticalStackLayout>
-								<Label Text="{Binding Name}"
+            <CollectionView ItemsSource="{Binding Attractions}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="{StaticResource Color3}"
+                                    Padding="15"
+                                    Margin="0,16"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 12">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Name}"
                                        FontAttributes="Bold"
                                        FontSize="18"
                                        TextColor="White"/>
-								<Label Text="{Binding Description}"
-                                       TextColor="#CCCCCC"/>
-								<Label Text="{Binding Price, StringFormat='Cena: {0} zł'}"
-                                       TextColor="#FFDD55"/>
-							</VerticalStackLayout>
 
-						</Frame>
-					</DataTemplate>
-				</CollectionView.ItemTemplate>
-			</CollectionView>
+                                <Label Text="{Binding Description}"
+                                       TextColor="#E0E0E0"/>
 
-		</VerticalStackLayout>
-	</ScrollView>
-	
+                                <Label Text="{Binding Price, StringFormat='Cena: {0} zł'}"
+                                       TextColor="{StaticResource Color2}"/>
+                            </VerticalStackLayout>
+
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>

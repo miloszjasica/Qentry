@@ -9,7 +9,7 @@
 
     <Grid>
         <ScrollView>
-            <VerticalStackLayout Spacing="0">
+            <VerticalStackLayout Spacing="0" Margin="0" Padding="0">
 
                 <!-- Kalendarz -->
                 <Grid Margin="0,50,0,0">
@@ -109,11 +109,13 @@
                         Stroke="{StaticResource Primary}"
                         StrokeThickness="2"
                         MinimumHeightRequest="{Binding ScreenHeight}"
-                        StrokeShape="RoundRectangle 50,50,0,0">
+                        StrokeShape="RoundRectangle 50,50,0,0"
+                        VerticalOptions="End"
+                        Margin="0, 0, 0, -1"
+                        Padding="0">
 
                     <Grid>
-                        <VerticalStackLayout>
-
+                        <VerticalStackLayout Margin="0, 20, 0, 0">
                             <!-- Przełącznik: zapisane/archiwum -->
                             <Border HeightRequest="60"
                                     Stroke="Transparent"
@@ -247,18 +249,15 @@
                             <!-- Archiwum -->
                             <StackLayout IsVisible="{Binding IsArchivedSelected}"
                                          Margin="0,20,0,0">
-                                <Label Text="🗄 Archiwum wydarzeń..."
-                                       FontSize="18"
-                                       TextColor="Black" />
                             </StackLayout>
 
                             <!-- Brak wydarzeń -->
                             <StackLayout IsVisible="{Binding NoEventsVisible}"
                                          HorizontalOptions="Center"
                                          Margin="0,40">
-                                <Image Source="empty.png"
-                                       WidthRequest="150"
-                                       HeightRequest="150"
+                                <Image Source="brakwydarzenia.png"
+                                       WidthRequest="450"
+                                       HeightRequest="450"
                                        Opacity="0.6" />
 
                                 <Label Text="Nie masz żadnych wydarzeń."
@@ -270,10 +269,10 @@
                         </VerticalStackLayout>
                     </Grid>
                 </Border>
-
+                <Grid BackgroundColor="{StaticResource Primary}" HeightRequest="100" Margin="0" Padding="0"/>
             </VerticalStackLayout>
         </ScrollView>
-
+        
         <!-- Dolny pasek -->
         <components:CustomBottomNavBar VerticalOptions="End" />
     </Grid>

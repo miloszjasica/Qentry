@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Qentry.Views.EditProfilePage"
+             Title="Edytuj profil"
+             BackgroundColor="{StaticResource Primary}">
+
+	<ScrollView>
+		<VerticalStackLayout Padding="30" Spacing="25" VerticalOptions="Center">
+
+			<Border Stroke="{StaticResource Color3}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 14"
+                    BackgroundColor="{StaticResource BgColor}"
+                    Padding="25">
+
+				<VerticalStackLayout Spacing="22">
+
+					<Label Text="Edytuj profil"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           TextColor="{StaticResource PrimaryDarkText}" />
+
+					<VerticalStackLayout>
+						<Label Text="Imię"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource PrimaryDarkText}" />
+
+						<Border Stroke="{StaticResource Color3}"
+                                StrokeThickness="1.5"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="8"
+                                BackgroundColor="White">
+
+							<Entry Placeholder="Podaj imię"
+                                   Text="{Binding User.Name}"
+                                   ClearButtonVisibility="WhileEditing"
+                                   TextColor="Black" />
+						</Border>
+					</VerticalStackLayout>
+
+					<VerticalStackLayout>
+						<Label Text="Nazwisko"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource PrimaryDarkText}" />
+
+						<Border Stroke="{StaticResource Color3}"
+                                StrokeThickness="1.5"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="8"
+                                BackgroundColor="White">
+
+							<Entry Placeholder="Podaj nazwisko"
+                                   Text="{Binding User.Surname}"
+                                   ClearButtonVisibility="WhileEditing"
+                                   TextColor="Black" />
+						</Border>
+					</VerticalStackLayout>
+
+					<VerticalStackLayout>
+						<Label Text="Email"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource PrimaryDarkText}" />
+
+						<Border Stroke="{StaticResource Color3}"
+                                StrokeThickness="1.5"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="8"
+                                BackgroundColor="White">
+
+							<Entry Placeholder="Podaj email"
+                                   Text="{Binding User.Email}"
+                                   Keyboard="Email"
+                                   ClearButtonVisibility="WhileEditing"
+                                   TextColor="Black" />
+						</Border>
+					</VerticalStackLayout>
+
+					<Button Text="Zapisz"
+                            Command="{Binding SaveCommand}"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="White"
+                            CornerRadius="10"
+                            HeightRequest="48"/>
+
+				</VerticalStackLayout>
+			</Border>
+
+		</VerticalStackLayout>
+	</ScrollView>
+
+</ContentPage>
