@@ -30,9 +30,17 @@ class QR(models.Model):
 class Transaction(models.Model):
     id_transaction = models.AutoField(primary_key=True)
     id_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='transactions')
-    id_attraction = models.ForeignKey(Attraction, on_delete=models.CASCADE, related_name='transactions')
-
+    id_attraction = models.ForeignKey(Attraction, on_delete=models.CASCADE, related_name='transactions', null=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
+    type = models.CharField(
+        max_length=20,
+        choices=[
+            ('attraction', 'Attraction'),
+            ('topup', 'TopUp'),
+        ],
+        default='attraction'
+    )
 
     def __str__(self):
         return f"Transaction {self.id_transaction} - {self.id_user.name}"
