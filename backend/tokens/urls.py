@@ -12,6 +12,7 @@ urlpatterns = [
     path('attractions/<int:id_attraction>/transactions/', views.attraction_transactions, name='history-attraction-transactions'),
     path('events/<int:event_id>/join/', views.join_event, name='join-event'),
     path('events/my/', views.my_events, name='my-events'),
+    path('events/my/upcoming/', views.my_events_upcoming, name='my_events_upcoming'),
     path('events/<int:event_id>/leave/', views.leave_event, name='leave-event'),
     path('qr/<int:qr_id>/image/', views.get_qr_image, name='qr-image'),
     path("events/<int:event_id>/assign-role/", views.assign_role, name="assign_role"),

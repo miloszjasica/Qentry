@@ -10,6 +10,7 @@ from tokens.models import QR
 from .serializers import EventSerializer, EventWithDistanceSerializer
 from utils.geo import get_locations, distance, get_client_ip
 from .permissions import IsOwnerOrAdmin
+from datetime import datetime
 
 
 @extend_schema(
@@ -62,10 +63,10 @@ from .permissions import IsOwnerOrAdmin
 )
 @api_view(['GET'])
 def get_events(request):
-    #today = timezone.now().date()
-    #queryset = Event.objects.filter(end_date__gte=today)
+    today = timezone.now().date()
+    queryset = Event.objects.filter(end_date__gte=today)
 
-    queryset = Event.objects.all()
+    #queryset = Event.objects.all()
 
     name = request.query_params.get('name')
     location = request.query_params.get('location')
@@ -372,6 +373,12 @@ def close_event(request, id):
                 "tech", "wellness", "gaming", "film", "fashion", "books", "other"
             ]
         ),
+        OpenApiParameter(
+            name='end_date',
+            description='Filtr po dacie (eventy aktywne w danym dniu, format YYYY-MM-DD)',
+            required=False,
+            type=str,
+        ),
     ],
     responses={200: OpenApiResponse(response=EventSerializer, description='Lista pobliskich eventów')}
 )
@@ -388,8 +395,27 @@ def get_nearby_events(request):
         return Response({'error': 'Nieprawidłowy format parametru radius'}, status=status.HTTP_400_BAD_REQUEST)
     
     category = request.query_params.get('category', '')
-    
     name_filter = request.query_params.get('name', '')
+    end_date = request.query_params.get('end_date', '')
+    
+    if end_date:
+        try:
+            filter_date = datetime.strptime(end_date, "%Y-%m-%d").date()
+        except ValueError:
+            return Response({'error': 'Nieprawidłowy format end_date (YYYY-MM-DD)'}, status=400)
+
+        events_qs = Event.objects.filter(
+            is_active=True,
+            end_date__gte=filter_date,      # event jeszcze trwa lub zaczyna się później
+            start_date__lte=filter_date     # event już zaczął się lub zacznie najpóźniej tego dnia
+        )
+    else:
+        # Domyślnie: eventy, które jeszcze trwają dzisiaj
+        today = datetime.today().date()
+        events_qs = Event.objects.filter(
+            is_active=True,
+            end_date__gte=today
+        )
 
     ip_address = get_client_ip(request)
 
@@ -409,7 +435,7 @@ def get_nearby_events(request):
         return Response({'error': 'Nie udało się ustalić lokalizacji użytkownika'}, status=status.HTTP_400_BAD_REQUEST)
 
     nearby_events = []
-    for event in Event.objects.filter(is_active=True).exclude(latitude__isnull=True, longitude__isnull=True):
+    for event in events_qs.exclude(latitude__isnull=True, longitude__isnull=True):
         if name_filter and name_filter.lower() not in event.name.lower():
             continue
         if category and event.category != category:

@@ -16,6 +16,7 @@ from django.http import FileResponse, Http404, HttpResponse
 import uuid
 import qrcode
 from io import BytesIO
+from django.utils import timezone
 
 @extend_schema(
     tags=['Tokens'],
@@ -399,6 +400,18 @@ def join_event(request, event_id):
                 "tech", "wellness", "gaming", "film", "fashion", "books", "other"
             ]
         ),
+        OpenApiParameter(
+            name='date_from',
+            description='Filtr od daty (YYYY-MM-DD)',
+            required=False,
+            type=str
+        ),
+        OpenApiParameter(
+            name='date_to',
+            description='Filtr do daty (YYYY-MM-DD)',
+            required=False,
+            type=str
+        )
     ],
     responses={
         200: OpenApiResponse(response=QRSerializer, description='Lista zapisów użytkownika')
@@ -408,7 +421,62 @@ def join_event(request, event_id):
 @permission_classes([IsAuthenticated])
 def my_events(request):
     user = request.user
-    qrs = QR.objects.select_related('id_event').filter(id_user=user)
+    qrs = QR.objects.filter(id_user=user)
+    category = request.query_params.get('category', '')
+    name_filter = request.query_params.get('name', '')
+    
+    if name_filter:
+        qrs = qrs.filter(id_event__name__icontains=name_filter)
+
+    if category:
+        qrs = qrs.filter(id_event__category=category)
+    
+    return Response(QRSerializer(qrs, many=True).data)
+
+@extend_schema(
+    tags=['Events'],
+    summary='Lista eventów na które zapisany jest zalogowany użytkownik',
+    parameters=[
+        OpenApiParameter(
+            name='name',
+            description='Filtr po nazwie wydarzenia',
+            required=False,
+            type=str
+        ),
+        OpenApiParameter(
+            name='category',
+            description='Filtr po kategorii wydarzenia',
+            required=False,
+            type=str,
+            enum=[
+                "music", "art", "food", "sport", "business", "theatre",
+                "tech", "wellness", "gaming", "film", "fashion", "books", "other"
+            ]
+        ),
+        OpenApiParameter(
+            name='date_from',
+            description='Filtr od daty (YYYY-MM-DD)',
+            required=False,
+            type=str
+        ),
+        OpenApiParameter(
+            name='date_to',
+            description='Filtr do daty (YYYY-MM-DD)',
+            required=False,
+            type=str
+        )
+    ],
+    responses={
+        200: OpenApiResponse(response=QRSerializer, description='Lista zapisów użytkownika')
+    }
+)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def my_events_upcoming(request):
+    today = timezone.now().date()
+    user = request.user
+    qrs = QR.objects.filter(id_user=user)
+    qrs = qrs.filter(id_event__end_date__gte=today)
     category = request.query_params.get('category', '')
     name_filter = request.query_params.get('name', '')
     
