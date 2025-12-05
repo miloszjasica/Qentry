@@ -13,6 +13,7 @@
           "Microsoft.Extensions.Http": "10.0.0",
           "Microsoft.Extensions.Logging.Debug": "9.0.8",
           "Microsoft.Maui.Controls": "9.0.111",
+          "ZXing.Net.Maui.Controls": "0.6.0",
           "Microsoft.Web.WebView2.Core.Projection": "1.0.3179.45",
           "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.19041.57"
         },
@@ -569,6 +570,39 @@
           }
         }
       },
+      "ZXing.Net/0.16.10": {
+        "runtime": {
+          "lib/net9.0/zxing.dll": {
+            "assemblyVersion": "0.16.10.0",
+            "fileVersion": "0.16.10.0"
+          }
+        }
+      },
+      "ZXing.Net.Maui/0.6.0": {
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.111",
+          "ZXing.Net": "0.16.10"
+        },
+        "runtime": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ZXing.Net.Maui.Controls/0.6.0": {
+        "dependencies": {
+          "Microsoft.Maui.Controls": "9.0.111",
+          "ZXing.Net": "0.16.10",
+          "ZXing.Net.Maui": "0.6.0"
+        },
+        "runtime": {
+          "lib/net9.0-windows10.0.19041/ZXing.Net.MAUI.Controls.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Microsoft.Web.WebView2.Core.Projection/1.0.3179.45": {
         "runtime": {
           "Microsoft.Web.WebView2.Core.Projection.dll": {
@@ -799,6 +833,27 @@
       "sha512": "sha512-0KdBK+h7G13PuOSC2R/DalAoFMvdYMznvGRuICtkdcUMXgl/gYXsG6z4yUvTxHSMACorWgHCU1Faq0KUHU6yAQ==",
       "path": "system.diagnostics.diagnosticsource/10.0.0",
       "hashPath": "system.diagnostics.diagnosticsource.10.0.0.nupkg.sha512"
+    },
+    "ZXing.Net/0.16.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9avtcn21T7Ndcl8PQ1LHR7/wEoCruX1QKKHvO6zBPTsDW9IdvR5vKOmd618AY+DtDWZz8NaFDTkpbZdgaF4l4w==",
+      "path": "zxing.net/0.16.10",
+      "hashPath": "zxing.net.0.16.10.nupkg.sha512"
+    },
+    "ZXing.Net.Maui/0.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WMiLNG0PYtB/3jXDI3n1QZcU9tXgxCJlXIFleeVlqk+SGKdPdV+1T5RM9S+bdzpu730f+ziHxnlkTzbAmLCndA==",
+      "path": "zxing.net.maui/0.6.0",
+      "hashPath": "zxing.net.maui.0.6.0.nupkg.sha512"
+    },
+    "ZXing.Net.Maui.Controls/0.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-eXA0gAQ1jr1ZDmwZc4Tn+/62PfCOG4JJjQB1XDhcDoicD45vi+aEV2okgA89zXwmN7Y3KF2WmWcGmkWnNyVknQ==",
+      "path": "zxing.net.maui.controls/0.6.0",
+      "hashPath": "zxing.net.maui.controls.0.6.0.nupkg.sha512"
     },
     "Microsoft.Web.WebView2.Core.Projection/1.0.3179.45": {
       "type": "reference",

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Qentry.Views.RegisterPage"
+             BackgroundColor="{StaticResource Primary}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="25" VerticalOptions="Center">
+
+            <Border Stroke="{StaticResource Color3}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 14"
+                    BackgroundColor="{StaticResource BgColor}"
+                    Padding="25">
+
+                <VerticalStackLayout Spacing="22">
+
+                    <Label Text="Rejestracja"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           TextColor="{StaticResource PrimaryDarkText}" />
+
+                    <VerticalStackLayout>
+                        <Label Text="Email"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource PrimaryDarkText}" />
+
+                        <Border Stroke="{StaticResource Color3}"
+                                StrokeThickness="1.5"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="8"
+                                BackgroundColor="White">
+
+                            <Entry Placeholder="Podaj email"
+                                   Text="{Binding Email}"
+                                   Keyboard="Email"
+                                   ClearButtonVisibility="WhileEditing"
+                                   TextColor="Black" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout>
+                        <Label Text="Imię"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource PrimaryDarkText}" />
+
+                        <Border Stroke="{StaticResource Color3}"
+                                StrokeThickness="1.5"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="8"
+                                BackgroundColor="White">
+
+                            <Entry Placeholder="Podaj imię"
+                                   Text="{Binding Name}"
+                                   TextColor="Black" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout>
+                        <Label Text="Nazwisko"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource PrimaryDarkText}" />
+
+                        <Border Stroke="{StaticResource Color3}"
+                                StrokeThickness="1.5"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="8"
+                                BackgroundColor="White">
+
+                            <Entry Placeholder="Podaj nazwisko"
+                                   Text="{Binding Surname}"
+                                   TextColor="Black" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout>
+                        <Label Text="Hasło"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource PrimaryDarkText}" />
+
+                        <Border Stroke="{StaticResource Color3}"
+                                StrokeThickness="1.5"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="8"
+                                BackgroundColor="White">
+
+                            <Entry Placeholder="Podaj hasło"
+                                   Text="{Binding Password}"
+                                   IsPassword="True"
+                                   ClearButtonVisibility="WhileEditing"
+                                   TextColor="Black" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                        <CheckBox IsChecked="{Binding WantsToBeOrganizer}" />
+                        <Label Text="Chcę być organizatorem"
+                               VerticalTextAlignment="Center"
+                               TextColor="{StaticResource PrimaryDarkText}" />
+                    </HorizontalStackLayout>
+
+                    <Button Text="Zarejestruj"
+                            Command="{Binding RegisterCommand}"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="White"
+                            CornerRadius="10"
+                            HeightRequest="48" />
+
+                    <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                       IsVisible="{Binding IsBusy}"
+                                       Color="{StaticResource Primary}" />
+
+                    <Label Text="{Binding Message}"
+                           TextColor="#E53935"
+                           HorizontalOptions="Center"
+                           FontSize="Medium" />
+
+
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                        <Label Text="Masz już konto?"
+                               TextColor="{StaticResource PrimaryDarkText}" />
+
+                        <Label Text="Zaloguj się"
+                               TextColor="{StaticResource Primary}"
+                               FontAttributes="Bold">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToLoginCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </HorizontalStackLayout>
+
+
+                </VerticalStackLayout>
+
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

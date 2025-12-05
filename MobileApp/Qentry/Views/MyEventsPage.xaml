@@ -4,9 +4,10 @@
              xmlns:viewmodels="clr-namespace:Qentry.ViewModels"
              xmlns:views="clr-namespace:Qentry.Views"
              x:Class="Qentry.Views.MyEventsPage"
-             BackgroundColor="{StaticResource BgColor}">
+             BackgroundColor="{StaticResource BgColor}"
+             x:Name="MyEventsPageInstance">
 
-    <Grid>
+    <Grid RowDefinitions="*, Auto">
 		<ScrollView>
             <VerticalStackLayout>
                 <Grid Margin="0, 50, 0, 0">
@@ -44,38 +45,11 @@
                                      HeightRequest="24"/>
                     </Grid>
                 </Border>
-                
+
                 <StackLayout IsVisible="{Binding IsFilterPanelVisible}"
                              Padding="20"
                              Spacing="10">
 
-                    <Label Text="Filtruj według kategorii:"
-                           FontAttributes="Bold"
-                           TextColor="Black"/>
-
-                    <CollectionView 
-                        ItemsSource="{Binding Categories}"
-                        SelectionMode="Single"
-                        SelectedItem="{Binding SelectedCategory}">
-
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Horizontal"/>
-                        </CollectionView.ItemsLayout>
-
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Frame Padding="8"
-                                       Margin="5"
-                                       CornerRadius="10"
-                                       BackgroundColor="{StaticResource BgColor}"
-                                       BorderColor="{StaticResource Primary}">
-                                    <Label Text="{Binding}" TextColor="Black"/>
-                                </Frame>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-
-                    </CollectionView>
-                    
                     <Label Text="Filtruj według lokalizacji:"
                            FontAttributes="Bold"
                            TextColor="Black"/>
@@ -106,16 +80,17 @@
                         Stroke="{StaticResource Primary}"
                         StrokeThickness="2"
                         MinimumHeightRequest="{Binding ScreenHeight}"
-                        StrokeShape="RoundRectangle 50, 50, 0, 0">
+                        StrokeShape="RoundRectangle 50, 50, 0, 0"
+                        Margin="0, 0, 0, -1">
 
                     <Grid>
                         <VerticalStackLayout Margin="0, 20, 0, 0">
-                            
+
                             <!-- Pole przyciskow -->
                             <Border HeightRequest="60"
                                     Stroke="Transparent"
                                     StrokeShape="RoundRectangle 50">
-                                
+
                                 <Border BackgroundColor="{StaticResource Quaternary}"
                                         WidthRequest="355"
                                         StrokeShape="RoundRectangle 50"
@@ -123,7 +98,7 @@
                                         StrokeThickness="0"
                                         HorizontalOptions="Center"
                                         Padding="3">
-                                    
+
                                     <Grid ColumnDefinitions="*,*">
                                         <Border BackgroundColor="{Binding IsCreatedSelected, Converter={StaticResource BoolToColorConverter}, ConverterParameter='Selected'}"
                                                 StrokeShape="RoundRectangle 50"
@@ -156,11 +131,15 @@
                                                    FontAttributes="Bold"/>
                                         </Border>
                                     </Grid>
-                                    
+
                                 </Border>
                             </Border>
                             <CollectionView ItemsSource="{Binding Events}"
-                                            IsVisible="{Binding IsCreatedSelected}">
+                                            IsVisible="{Binding IsCreatedSelected}"
+                                            SelectionMode="Single"
+                                            SelectionChanged="OnEventSelected"
+                                            VerticalOptions="Start">
+
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Padding="0,4">
@@ -220,8 +199,9 @@
                                                                 WidthRequest="90"
                                                                 FontSize="14"
                                                                 Shadow="5,5,10,#00000040"
-                                                                Command="{Binding BindingContext.DeleteEventCommand, Source={x:Reference Name=Calendar}}"
-                                                                CommandParameter="{Binding Id_Event}"/>
+                                                                Command="{Binding Source={x:Reference MyEventsPageInstance}, Path=BindingContext.DeleteEventCommand}"
+                                                                CommandParameter="{Binding Id_Event}"
+                                                                IsVisible="{Binding Source={x:Reference Calendar}, Path=BindingContext.IsOrganizer}"/>
                                                     </VerticalStackLayout>
 
                                                 </Grid>
@@ -234,17 +214,16 @@
 
 
                             <StackLayout IsVisible="{Binding IsArchivedSelected}" Margin="0,20,0,0">
-                                <Label Text="🗄 Archiwum wydarzeń..." FontSize="18"/>
 
                             </StackLayout>
-                            
+
                             <StackLayout IsVisible="{Binding NoEventsVisible}"
                                          HorizontalOptions="Center"
                                          Margin="0,40">
 
-                                <Image Source="empty.png"
-                                       WidthRequest="150"
-                                       HeightRequest="150"
+                                <Image Source="olowek.png"
+                                       WidthRequest="450"
+                                       HeightRequest="450"
                                        Opacity="0.6" />
 
                                 <Label Text="Nie masz żadnych wydarzeń."
@@ -253,10 +232,9 @@
                                        HorizontalOptions="Center"/>
                             </StackLayout>
                         </VerticalStackLayout>
-                        
                     </Grid>
                 </Border>
- 
+                <Grid BackgroundColor="{StaticResource Primary}" HeightRequest="100"/>
             </VerticalStackLayout>
 		</ScrollView>
         

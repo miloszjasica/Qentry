@@ -34,5 +34,8 @@
 
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Potrzebujemy lokalizacji, aby działać prawidłowo.</string>
+
+	<key>NSCameraUsageDescription</key>
+	<string>Ta aplikacja potrzebuje dostępu do kamery aby skanować kody QR.</string>
 </dict>
 </plist>

@@ -1,10 +1,13 @@
-﻿using Qentry.Services;
+﻿using Qentry.Helpers;
+using Qentry.Models;
+using Qentry.Services;
 using Qentry.ViewModels;
 
 namespace Qentry.Views
 {
     public partial class MyEventsPage : ContentPage
     {
+        private MyEventsViewModel _vm;
 
         public MyEventsPage(MyEventsViewModel vm)
         {
@@ -27,6 +30,28 @@ namespace Qentry.Views
                 return;
             }
         }
-    }
 
+        private void OnEventsUpdated()
+        {
+            _vm.LoadEventsCommand.Execute(null);
+        }
+
+        private void OnEventSelected(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedEvent = e.CurrentSelection.FirstOrDefault() as EventModel;
+            if (selectedEvent == null) return;
+
+            var vm = BindingContext as MyEventsViewModel;
+            vm?.OpenEventDetailsCommand?.Execute(selectedEvent);
+
+            ((CollectionView)sender).SelectedItem = null;
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            EventBus.EventsUpdated -= OnEventsUpdated;
+        }
+
+    }
 }
