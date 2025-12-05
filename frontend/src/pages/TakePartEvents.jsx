@@ -22,7 +22,7 @@ export default function TakePartEvents({ search, radius = 30 }) {
           params.append("name", search.trim());
         }
 
-        let url = "http://localhost:8000/api/tokens/events/my/";
+        let url = "http://localhost:8000/api/tokens/events/my/upcoming/";
         if (params.toString()) {
           url += `?${params.toString()}`;
         }
