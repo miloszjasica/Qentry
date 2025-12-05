@@ -1,5 +1,49 @@
-export default function Header({ user, search, setSearch, isExpanded }) {
-      console.log("User prop:", user);
+import { useState, useEffect } from "react";
+
+export default function Header({ search, setSearch, isExpanded }) {
+  const [user, setUser] = useState(null);
+
+  const fetchUser = async () => {
+    const token = localStorage.getItem("access");
+    if (!token) {
+      setUser(null);
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:8000/api/users/me/", {
+        headers: { "Authorization": `Bearer ${token}` },
+      });
+      
+      if (res.ok) {
+        const data = await res.json();
+        setUser(data);
+      } else {
+        setUser(null);
+      }
+    } catch (err) {
+      console.error(err);
+      setUser(null);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+
+    const handleAuthChange = () => {
+      fetchUser();
+    };
+
+    window.addEventListener("auth-change", handleAuthChange);
+
+    return () => {
+      window.removeEventListener("auth-change", handleAuthChange);
+    };
+  }, []);
+
+  // Logowanie dla sprawdzenia
+  console.log("Header user data:", user);
+
   return (
     <div
       style={{
@@ -20,8 +64,9 @@ export default function Header({ user, search, setSearch, isExpanded }) {
       }}
     >
       <div style={{ fontSize: 24, fontFamily: "Arimo" }}>
-        Witaj{user?.name ? `, ${user.name}!` : '!'}
+        Witaj{user && user.name ? `, ${user.name}!` : '!'}
       </div>
+      
       <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
         <div
           style={{
@@ -61,7 +106,7 @@ export default function Header({ user, search, setSearch, isExpanded }) {
             cursor: "pointer",
             padding: 0
           }}
-          onClick={() => alert("Tu trzeba zmienic logike")} //trzeba zmienic tu logike
+          onClick={() => alert("Tu trzeba zmienic logike powiadomień")}
         >
           <img
             src="/Notifications.svg"

@@ -23,6 +23,16 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
 
   useEffect(() => {
     fetchUser();
+
+    const handleAuthChange = () => {
+      fetchUser();
+    };
+
+    window.addEventListener("auth-change", handleAuthChange);
+
+    return () => {
+      window.removeEventListener("auth-change", handleAuthChange);
+    };
   }, []);
 
   return (
@@ -186,13 +196,16 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
                 onClick={async () => {
                   if (user) {
                     try {
+
+                      const refreshToken = localStorage.getItem("refresh");
+
                       await fetch("http://localhost:8000/api/users/logout/", {
                         method: "POST",
                         headers: {
                           "Accept": "application/json",
                           "Content-Type": "application/json",
                           "Authorization": `Bearer ${localStorage.getItem("access")}`
-                        }
+                        },body: JSON.stringify({refresh: refreshToken})
                       });
                     } catch (error) {
                       console.error("Logout error:", error);
@@ -222,10 +235,10 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
                   minHeight: "48px"
                 }}
               >
-                <img 
+                <img
                   src={user ? "/logout.svg" : "/logout.svg"}
-                  alt={user ? "Wyloguj" : "Zaloguj"} 
-                  style={{ width: '20px', height: '20px', minWidth: '20px', minHeight: '20px', marginRight: '12px' }} 
+                  alt={user ? "Wyloguj" : "Zaloguj"}
+                  style={{ width: '20px', height: '20px', minWidth: '20px', minHeight: '20px', marginRight: '12px' }}
                 />
                 {isExpanded && (user ? "Wyloguj" : "Zaloguj")}
 
