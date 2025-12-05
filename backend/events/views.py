@@ -62,10 +62,10 @@ from .permissions import IsOwnerOrAdmin
 )
 @api_view(['GET'])
 def get_events(request):
-    #today = timezone.now().date()
-    #queryset = Event.objects.filter(end_date__gte=today)
+    today = timezone.now().date()
+    queryset = Event.objects.filter(end_date__gte=today)
 
-    queryset = Event.objects.all()
+    #queryset = Event.objects.all()
 
     name = request.query_params.get('name')
     location = request.query_params.get('location')

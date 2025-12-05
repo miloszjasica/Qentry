@@ -33,7 +33,7 @@ export function EventManager({ eventId, eventTitle, onClose, onUpdateRole, refre
   const [attractions, setAttractions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [attractionsLoading, setAttractionsLoading] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery] = useState("");
   const [isUpdating, setIsUpdating] = useState({});
   const [activeTab, setActiveTab] = useState("participants");
   const [showAddAttractionModal, setShowAddAttractionModal] = useState(false);
