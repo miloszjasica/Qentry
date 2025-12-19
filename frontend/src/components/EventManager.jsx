@@ -509,7 +509,7 @@ export function EventManager({ eventId, eventTitle, onClose, onUpdateRole, refre
                           <div className="grid grid-cols-2 gap-4">
                             <div>
                               <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Cena (zł)
+                                Cena (Tokeny)
                               </label>
                               <input
                                 type="number"
@@ -651,7 +651,7 @@ export function EventManager({ eventId, eventTitle, onClose, onUpdateRole, refre
               
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Cena (zł)
+                  Cena (Tokeny)
                 </label>
                 <input
                   type="number"

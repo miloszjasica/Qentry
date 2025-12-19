@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useIsMobile } from "../hooks/useIsMobile";
 
-export default function Navbar({ isExpanded, setIsExpanded }) {
+export default function Navbar({
+  isExpanded,
+  setIsExpanded,
+  isOpen,
+  setIsOpen,
+}) {
   const [user, setUser] = useState(null);
+  const isMobile = useIsMobile();
 
   const fetchUser = async () => {
     const token = localStorage.getItem("access");
@@ -10,243 +17,174 @@ export default function Navbar({ isExpanded, setIsExpanded }) {
 
     try {
       const res = await fetch("http://localhost:8000/api/users/me/", {
-        headers: { "Authorization": `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
       if (!data.detail) setUser(data);
       else setUser(null);
-    } catch (err) {
-      console.error(err);
+    } catch {
       setUser(null);
     }
   };
 
   useEffect(() => {
     fetchUser();
-
-    const handleAuthChange = () => {
-      fetchUser();
-    };
-
-    window.addEventListener("auth-change", handleAuthChange);
-
-    return () => {
-      window.removeEventListener("auth-change", handleAuthChange);
-    };
+    const handler = () => fetchUser();
+    window.addEventListener("auth-change", handler);
+    return () => window.removeEventListener("auth-change", handler);
   }, []);
 
+  // mobile = zawsze expanded
+  useEffect(() => {
+    if (isMobile) setIsExpanded(true);
+  }, [isMobile, setIsExpanded]);
+
   return (
-    <nav style={{
-      display: "flex",
-      flexDirection: "column",
-      width: isExpanded ? 256 : 80,
-      transition: "width 0.3s",
-      overflow: "visible",
-      height: "100vh",
-      background: "#544E61",
-      boxShadow: "2px 0 8px rgba(0,0,0,0.1)",
-      position: "fixed",
-      top: 0,
-      left: 0,
-    }}>
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
+    <>
+      {/* OVERLAY */}
+      {isMobile && isOpen && (
+        <div
+          onClick={() => setIsOpen(false)}
           style={{
-            position: "absolute",
-            top: "75px",
-            right: "-12px",
-            background: "#9893DA",
-            border: "none",
-            color: "white",
-            cursor: "pointer",
-            fontSize: "24px",
-            borderRadius: "50%",
-            width: "24px",
-            height: "24px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 1000
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.4)",
+            zIndex: 998,
           }}
-        >
-          <img
-            src={isExpanded ? "/arrowLeft.svg" : "/arrowRight.svg"}
-            alt={isExpanded ? "Collapse" : "Expand"}
-            style={{ width: "16px", height: "16px" }}
-          />
-        </button>
+        />
+      )}
 
-      <div style={{
-        width: '100%',
-        height: '72px',
-        borderBottom: '1px #6D5F7A solid',
-        display: 'inline-flex',
-        alignItems: "center",
-        justifyContent: 'space-between'
-      }}>
-        <div style={{width: 64, height: 24, display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
-          <div style={{color: 'white', fontSize: 16, fontFamily: 'Arimo', fontWeight: '400', paddingLeft: 24, paddingRight: 24}}>
-            {isExpanded && <div>QentRy</div>}
-          </div>
-        </div>
-      </div>
-
-      <div style={{ width: "100%", padding: "16px", boxSizing: "border-box", flex: 1 }}>
-
-        <NavLink to="/" style={({ isActive }) => ({
-          padding: '12px 16px',
+      <nav
+        style={{
+          position: "fixed",
+          top: 0,
+          left: isMobile ? (isOpen ? 0 : "-100vw") : 0,
+          width: isMobile ? "100vw" : isExpanded ? 256 : 80,
+          height: "100vh",
+          background: "#544E61",
           display: "flex",
-          alignItems: 'center',
-          textDecoration: 'none',
-          borderRadius: '10px',
-          background: isActive ? '#9893DA' : 'transparent',
-          color: isActive ? 'black' : 'white',
-          marginBottom: "8px",
-          minHeight: "48px"
-        })}>
-          {({ isActive }) => (
-            <>
-              <img src="/Home.png" alt="Home Page" style={{ width: '20px', height: '20px', minWidth: '20px', minHeight: '20px', marginRight: isExpanded ? "12px" : "0",  filter: isActive ? "none" : "invert(1)" }} />
-              {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>Strona Główna</div>}
-            </>
-          )}
-        </NavLink>
-        <NavLink to="/biore-udzial" style={({ isActive }) => ({
-          padding: '12px 16px',
-          display: "flex",
-          alignItems: 'center',
-          textDecoration: 'none',
-          borderRadius: '10px',
-          background: isActive ? '#9893DA' : 'transparent',
-          color: isActive ? 'black' : 'white',
-          marginBottom: "8px",
-          minHeight: "48px"
-        })}>
-          {({ isActive }) => (
-            <>
-              <img src="/Saved.png" alt="Saved" style={{ width: '20px', height: '20px', minWidth: '20px', minHeight: '20px', marginRight: "12px", filter: isActive ? "invert(1)" : "brightness(100%)" }} />
-              {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>Biorę udział</div>}
-            </>
-          )}
-        </NavLink>
-
-        <NavLink to="/w-poblizu" style={({ isActive }) => ({
-          padding: '12px 16px',
-          display: "flex",
-          alignItems: 'center',
-          textDecoration: 'none',
-          borderRadius: '10px',
-          background: isActive ? '#9893DA' : 'transparent',
-          color: isActive ? 'black' : 'white',
-          marginBottom: "8px",
-          minHeight: "48px"
-        })}>
-          {({ isActive }) => (
-            <>
-              <img src="/Localization.png" alt="Nearby" style={{ width: '20px', height: '20px', minWidth: '20px', minHeight: '20px', marginRight: "12px", filter: isActive ? "invert(1)" : "brightness(100%)" }} />
-              {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>W pobliżu</div>}
-            </>
-          )}
-        </NavLink>
-
-        <NavLink to="/profil" style={({ isActive }) => ({
-          padding: '12px 16px',
-          display: "flex",
-          alignItems: 'center',
-          textDecoration: 'none',
-          borderRadius: '10px',
-          background: isActive ? '#9893DA' : 'transparent',
-          color: isActive ? 'black' : 'white',
-          minHeight: "48px"
-        })}>
-          {({ isActive }) => (
-            <>
-              <img src="/Profile.png" alt="Profile" style={{ width: '20px', height: '20px', minWidth: '20px', minHeight: '20px', marginRight: "12px", filter: isActive ? "invert(1)" : "brightness(100%)" }} />
-              {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: isActive ? 'black' : 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>Profil</div>}
-            </>
-          )}
-        </NavLink>
-
-        {user?.role === "organizer" && (
-          <NavLink to="/createevent" style={{
-            padding: '12px 16px',
-            display: "flex",
-            alignItems: 'center',
-            textDecoration: 'none',
-            borderRadius: '10px',
-            background: '#157145',
-            color: 'white',
-            marginTop: "24px",
-            minHeight: "48px"
-          }}>
-            <img src="/plus.png" alt="Dodaj wydarzenie" style={{ width: '20px', height: '20px', minWidth: '20px', minHeight: '20px', marginRight: "12px", filter: "brightness(100%)" }} />
-            {isExpanded && <div style={{ fontFamily: 'Arimo', fontSize: '16px', color: 'white', whiteSpace: 'nowrap', overflow: 'hidden' }}>Dodaj wydarzenie</div>}
-          </NavLink>
+          flexDirection: "column",
+          transition: "all 0.3s",
+          zIndex: 999,
+          boxShadow: "2px 0 8px rgba(0,0,0,0.1)",
+        }}
+      >
+        {/* CLOSE (MOBILE) */}
+        {isMobile && (
+          <button
+            onClick={() => setIsOpen(false)}
+            style={{
+              position: "absolute",
+              top: 16,
+              right: 16,
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            <img src="/close.svg" width={32} />
+          </button>
         )}
 
-      </div>
-      <div style={{ padding: '16px', borderTop: '1px #6D5F7A solid', }}>
-        <div style={{
-          width: '100%',
-          display: 'inline-flex',
-          alignItems: "center",
-        }}>
-          <div style={{display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', width: '100%'}}>
-              <button
-                onClick={async () => {
-                  if (user) {
-                    try {
+        {/* COLLAPSE (DESKTOP) */}
+        {!isMobile && (
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            style={{
+              position: "absolute",
+              top: 75,
+              right: -12,
+              background: "#9893DA",
+              border: "none",
+              borderRadius: "50%",
+              width: 24,
+              height: 24,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+            }}
+          >
+            <img
+              src={isExpanded ? "/arrowLeft.svg" : "/arrowRight.svg"}
+              width={16}
+            />
+          </button>
+        )}
 
-                      const refreshToken = localStorage.getItem("refresh");
-
-                      await fetch("http://localhost:8000/api/users/logout/", {
-                        method: "POST",
-                        headers: {
-                          "Accept": "application/json",
-                          "Content-Type": "application/json",
-                          "Authorization": `Bearer ${localStorage.getItem("access")}`
-                        },body: JSON.stringify({refresh: refreshToken})
-                      });
-                    } catch (error) {
-                      console.error("Logout error:", error);
-                    }
-                    localStorage.removeItem("access");
-                    localStorage.removeItem("refresh");
-                    setUser(null);
-                    window.location.href = "/";
-                  } else {
-                    window.location.href = "/login";
-                  }
-                }}
-                style={{
-                  background: 'transparent',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '8px',
-                  fontFamily: 'Arimo',
-                  fontSize: '16px',
-                  fontWeight: '400',
-                  cursor: 'pointer',
-                  textAlign: 'left',
-                  width: '100%',
-                  padding: '12px 16px',
-                  alignItems: 'center',
-                  display: 'flex',
-                  minHeight: "48px"
-                }}
-              >
-                <img
-                  src={user ? "/logout.svg" : "/logout.svg"}
-                  alt={user ? "Wyloguj" : "Zaloguj"}
-                  style={{ width: '20px', height: '20px', minWidth: '20px', minHeight: '20px', marginRight: '12px' }}
-                />
-                {isExpanded && (user ? "Wyloguj" : "Zaloguj")}
-
-              </button>
-          </div>
+        {/* LOGO */}
+        <div
+          style={{
+            height: 72,
+            borderBottom: "1px solid #6D5F7A",
+            display: "flex",
+            alignItems: "center",
+            paddingLeft: 24,
+            color: "white",
+            fontFamily: "Arimo",
+          }}
+        >
+          {isExpanded && "QentRy"}
         </div>
-      </div>
 
-    </nav>
+        {/* LINKS */}
+        <div style={{ padding: 16, flex: 1 }}>
+          {[
+            ["/", "Home.png", "Strona Główna"],
+            ["/biore-udzial", "Saved.png", "Biorę udział"],
+            ["/w-poblizu", "Localization.png", "W pobliżu"],
+            ["/profil", "Profile.png", "Profil"],
+          ].map(([to, icon, label]) => (
+            <NavLink
+              key={to}
+              to={to}
+              style={({ isActive }) => ({
+                display: "flex",
+                alignItems: "center",
+                padding: "12px 16px",
+                marginBottom: 8,
+                borderRadius: 10,
+                textDecoration: "none",
+                background: isActive ? "#9893DA" : "transparent",
+                color: isActive ? "black" : "white",
+              })}
+            >
+              <img src={`/${icon}`} width={20} />
+              {isExpanded && (
+                <span style={{ marginLeft: 12, whiteSpace: "nowrap" }}>
+                  {label}
+                </span>
+              )}
+            </NavLink>
+          ))}
+        </div>
+
+        {/* LOGOUT */}
+        <div style={{ padding: 16, borderTop: "1px solid #6D5F7A" }}>
+          <button
+            onClick={() => {
+              localStorage.clear();
+              window.location.href = user ? "/" : "/login";
+            }}
+            style={{
+              background: "transparent",
+              border: "none",
+              color: "white",
+              display: "flex",
+              alignItems: "center",
+              cursor: "pointer",
+              width: "100%",
+            }}
+          >
+            <img src="/logout.svg" width={20} />
+            {isExpanded && (
+              <span style={{ marginLeft: 12 }}>
+                {user ? "Wyloguj" : "Zaloguj"}
+              </span>
+            )}
+          </button>
+        </div>
+      </nav>
+    </>
   );
 }

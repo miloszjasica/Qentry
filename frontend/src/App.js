@@ -16,6 +16,9 @@ function App() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
   const accessToken = localStorage.getItem("access");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isMobile = window.innerWidth <= 768;
+  const[isOpen, setIsOpen] = useState(false);
 
 
 useEffect(() => {
@@ -46,9 +49,24 @@ useEffect(() => {
           </Routes>
         </div>
       </div>
-        <Navbar isExpanded={isSidebarExpanded} setIsExpanded={setIsSidebarExpanded}/>
-        <Header search={search} setSearch={setSearch} isExpanded={isSidebarExpanded} user={currentUser}/>
-        <div style={{ flex: 1, marginLeft: isSidebarExpanded ? 256 : 80, transition: "margin-left 0.3s", marginTop: "0px", overflow: "visible"}}>
+        <Navbar
+          isExpanded={isSidebarExpanded}
+          setIsExpanded={setIsSidebarExpanded}
+          isOpen={isMobileMenuOpen}
+          setIsOpen={setIsMobileMenuOpen}
+          isMobile={isMobile}
+        />
+
+        <Header
+          search={search}
+          setSearch={setSearch}
+          isExpanded={isSidebarExpanded}
+          isMobile={isMobile}
+          isOpen={isMobileMenuOpen}
+          setIsOpen={setIsMobileMenuOpen}
+          user={currentUser}
+        />
+        <div style={{ flex: 1, marginLeft: isMobile ? 0 : (isSidebarExpanded ? 256 : 80), transition: "margin-left 0.3s", marginTop: "0px", overflow: "visible"}}>
           <Routes>
             <Route path="/" element={<Home search={search} />} />
             {/* <Route path="/login" element={<Login />} />
