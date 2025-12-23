@@ -7,6 +7,13 @@ export default function TakePartEvents({ search, radius = 30 }) {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [category, setCategory] = useState("all");
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -47,14 +54,26 @@ export default function TakePartEvents({ search, radius = 30 }) {
 
     return () => clearTimeout(delay);
   }, [search, category, radius]);
+  
+  const getGridColumns = () => {
+    if (windowWidth >= 1536) return 5;
+    if (windowWidth >= 1280) return 4;
+    if (windowWidth >= 768) return 2;
+    return 1;
+  };
 
   return (
     <div style={{ padding: "20px" }}>
       <CategoryBar selected={category} onSelect={setCategory} />
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", marginTop: "20px" }}>
-        {events.length === 0 && <div>Brak wyników</div>}
-
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${getGridColumns()}, 1fr)`,
+          gap: "20px",
+          marginTop: "20px",
+        }}
+      >
         {events.map(ev => (
           <EventCard key={ev.id_event} event={ev} onOpen={setSelectedEvent} />
         ))}
