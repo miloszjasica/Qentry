@@ -17,6 +17,7 @@ import uuid
 import qrcode
 from io import BytesIO
 from django.utils import timezone
+from decimal import Decimal, ROUND_HALF_UP
 
 @extend_schema(
     tags=['Tokens'],
@@ -35,7 +36,8 @@ def my_balance(request, id_event):
         event = Event.objects.get(pk=id_event)
         qr = QR.objects.get(id_user=request.user, id_event=event)
 
-
+        if not qr.is_active:
+            return Response({'error': 'Twój kod QR jest nieaktywny'}, status=400)
         
         return Response(BalanceSerializer({"balance": qr.balance}).data)
            
@@ -94,10 +96,14 @@ def add_tokens(request, qr_string, id_event):
         
         if operator_qr.user_role == 'token_seller' or operator_qr.user_role == 'staff':
 
-            amount = request.query_params.get('amount')
-            amount = Decimal(str(amount)).quantize(Decimal('0.01'), rounding=decimal)
-            if amount <= 0:
-                return Response({'error': 'Amount must be greater than zero'}, status=400)
+            amount = request.data.get('amount')
+            if amount is None:
+                return Response({'error': 'Kwota musi być wprowadzona'}, status=400)
+            
+            try:
+                amount = Decimal(str(amount)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            except:
+                return Response({'error': 'Niepoprawna kwota'}, status=400)
 
             old_balance = qr.balance
             qr.balance += amount
