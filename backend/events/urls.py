@@ -10,7 +10,7 @@ urlpatterns = [
     path('<int:id>/clone/', views.clone_event),
     path('<int:id>/open/', views.open_event),
     path('<int:id>/close/', views.close_event),
-    path('nearby-events/', views.get_nearby_events),
+    path('nearby-events/', views.get_nearby_events, name='get-nearby-events'),
     path('organizer-events/', views.get_organizer_events),
     path('events/<int:event_id>/status/', views.event_status,),
     path('user/roles/', views.get_user_events_with_role, name='user-events-with-role')
