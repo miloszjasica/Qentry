@@ -68,7 +68,10 @@ class QRSerializer(serializers.ModelSerializer):
     start_date = serializers.DateTimeField(source="id_event.start_date", read_only=True)
     event_end_date = serializers.DateTimeField(source="id_event.end_date", read_only=True)
     image = serializers.SerializerMethodField()
-    participants = serializers.IntegerField(source="id_event.participants", read_only=True)
+    participants = serializers.IntegerField(
+            source='id_event.participants_count',
+            read_only=True
+        )    
     description = serializers.CharField(source="id_event.description", read_only = True)
     category = serializers.CharField(source="id_event.category", read_only=True)
 

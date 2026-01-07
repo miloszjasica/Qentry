@@ -372,6 +372,14 @@ def join_event(request, event_id):
             {"error": "Już jesteś zapisany na ten event"},
             status=status.HTTP_400_BAD_REQUEST
         )
+    
+    if event.participants.count() >= event.max_participants:
+        return Response(
+            {"error": "Brak wolnych miejsc"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    event.participants.add(user)
 
     qr_code = str(uuid.uuid4())
 
@@ -517,6 +525,8 @@ def leave_event(request, event_id):
 
     try:
         qr = QR.objects.get(id_user=user, id_event_id=event_id)
+        event = qr.id_event
+        event.participants.remove(user)
         qr.delete()
         return Response({"message": "Wypisano z eventu"}, status=200)
 

@@ -33,15 +33,26 @@ class Event(models.Model):
     longitude = models.FloatField(null=True, blank=True)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
-    participants = models.IntegerField(default=0)
+    max_participants = models.IntegerField(default=0)
     image = models.URLField(max_length=500, null=True, blank=True)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default="other")
+    
+    participants = models.ManyToManyField(
+    User,
+    related_name='events_participated',
+    blank=True
+)
+
+    @property
+    def participants_count(self):
+        return self.participants.count()
+
 
     def __str__(self):
         return self.name
 
     def save(self, *args, **kwargs):
-        """Automatycznie uzupełnia latitude i longitude na podstawie location."""
+        """Set latitude and longitude by location using geopy before saving"""
         if self.location and (self.latitude is None or self.longitude is None):
             try:
                 geolocator = Nominatim(user_agent="events_app")

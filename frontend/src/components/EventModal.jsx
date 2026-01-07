@@ -401,7 +401,7 @@ export default function EventModal({ event, onClose }) {
               }}>
                 {balance !== null && (
                   <div style={{ marginTop: "16px", fontSize: "16px", color: "#101828" }}>
-                    <strong>{balance} tokenów</strong>
+                    <strong>{balance} tokenów</strong> 
                   </div>
                 )}
                 <img src={qrImage} alt="QR Code" style={{ width: "250px", height: "250px" }} />
