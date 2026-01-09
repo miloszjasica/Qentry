@@ -103,13 +103,24 @@ export function CreateEventView({ onBack, onSubmit, isLoading }) {
               <textarea
                 id="description"
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // limit do 200 znaków
+                  if (value.length <= 1000) {
+                    setDescription(value);
+                    setErrors(prev => ({ ...prev, description: "" })); // usuń błąd jeśli jest ok
+                  } else {
+                    setErrors(prev => ({ ...prev, description: "Opis nie może mieć więcej niż 1000 znaków" }));
+                  }
+                }}
                 rows={4}
                 className={`block w-full px-4 py-3 border ${errors.description ? "border-red-500" : "border-gray-300"} rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9893da] resize-none`}
                 placeholder="Opisz swoje wydarzenie..."
               />
               {errors.description && <p className="mt-1 text-sm text-red-500">{errors.description}</p>}
+              <p className="mt-1 text-sm text-gray-500 text-right">{description.length}/1000</p>
             </div>
+
 
             {/* Location */}
             <div>

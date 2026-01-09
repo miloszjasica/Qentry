@@ -25,7 +25,7 @@ class Event(models.Model):
     id_event = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(max_length=2000)
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     location = models.CharField(max_length=255)

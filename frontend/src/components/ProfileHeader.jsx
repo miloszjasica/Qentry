@@ -1,4 +1,6 @@
 import { User, Edit, Mail, MapPin } from 'lucide-react';
+import { CreditCard } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
 
 export function ProfileHeader({ user, stats, onEditClick }) {
 
@@ -12,6 +14,12 @@ export function ProfileHeader({ user, stats, onEditClick }) {
 
   // Bezpieczne pobieranie zdjęcia
   const imageUrl = user.photo_url || user.user_image || user.avatar;
+
+  const navigate = useNavigate();
+
+  function handleTransactionsClick() {
+    navigate("/transactions");
+  }
 
   return (
     <div className="bg-white rounded-2xl shadow-sm p-4 md:p-6 lg:p-8 mb-6">
@@ -49,12 +57,21 @@ export function ProfileHeader({ user, stats, onEditClick }) {
               <p className="text-gray-600 text-sm md:text-base">ID: {user.id}</p>
             </div>
             {/* Główny przycisk Edytuj profil */}
-            <button
-              onClick={onEditClick}
-              className="px-4 md:px-6 py-2 border border-gray-300 rounded-lg hover:border-[#9893da] transition-colors whitespace-nowrap text-sm md:text-base"
-            >
-              Edytuj profil
-            </button>
+            <div className="hidden sm:flex flex-col gap-2">
+              <button
+                onClick={onEditClick}
+                className="px-4 md:px-6 py-2 border border-gray-300 rounded-lg hover:border-[#9893da] transition-colors text-sm md:text-base"
+              >
+                Edytuj profil
+              </button>
+
+              <button
+                onClick={handleTransactionsClick}
+                className="px-4 md:px-6 py-2 border border-gray-300 rounded-lg hover:border-[#9893da] transition-colors text-sm md:text-base"
+              >
+                Historia transakcji
+              </button>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
@@ -66,6 +83,21 @@ export function ProfileHeader({ user, stats, onEditClick }) {
               <MapPin className="w-4 h-4 md:w-5 md:h-5 text-gray-400 flex-shrink-0" />
               <span>Polska (Domyślna)</span>
             </div>
+          </div>
+          <div className="flex flex-col gap-2 mt-4 sm:hidden">
+            <button
+              onClick={onEditClick}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg hover:border-[#9893da] transition-colors text-sm"
+            >
+              Edytuj profil
+            </button>
+
+            <button
+              onClick={handleTransactionsClick}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg hover:border-[#9893da] transition-colors text-sm"
+            >
+              Historia transakcji
+            </button>
           </div>
         </div>
       </div>

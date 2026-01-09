@@ -362,12 +362,13 @@ export function EventManager({ eventId, eventTitle, onClose, onUpdateRole, refre
                       const isUpdatingUser = isUpdating[participant.email];
 
                       return (
-                        <div
-                          key={participant.id || participant.email}
-                          className={`bg-white border border-gray-200 rounded-lg p-4 mb-3 hover:shadow-md transition-shadow flex items-center justify-between ${
-                            isUpdatingUser ? 'opacity-75' : ''
-                          }`}
-                        >
+                      <div
+                        key={participant.id || participant.email}
+                        className={`bg-white border border-gray-200 rounded-lg p-4 mb-3 hover:shadow-md transition-shadow ${
+                          isUpdatingUser ? 'opacity-75' : ''
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-[#9893da] flex items-center justify-center text-white flex-shrink-0">
                               {participant.email?.charAt(0).toUpperCase() || "?"}
@@ -386,33 +387,46 @@ export function EventManager({ eventId, eventTitle, onClose, onUpdateRole, refre
                               </div>
                             </div>
                           </div>
-
-                          <div className="relative">
-                            <select
-                              value={participant.role || "guest"}
-                              onChange={(e) => {
-                                handleRoleUpdate(participant.email, e.target.value, participant.id);
-                              }}
-                              disabled={isUpdatingUser}
-                              className={`appearance-none pl-3 pr-8 py-2 rounded-lg border-0 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#9893da] ${roleInfo.bgColor} ${roleInfo.color} ${
-                                isUpdatingUser ? 'opacity-50 cursor-not-allowed' : ''
-                              }`}
-                            >
-                              <option value="guest">Gość</option>
-                              <option value="staff">Personel</option>
-                              <option value="token_taker">Pobierający tokeny</option>
-                              <option value="token_seller">Kasjer</option>
-                            </select>
-                            <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none">
-                              {isUpdatingUser ? (
-                                <div className="w-4 h-4 border-2 border-[#9893da] border-t-transparent rounded-full animate-spin"></div>
-                              ) : (
-                                <RoleIcon className="w-4 h-4" />
-                              )}
-                            </div>
-                          </div>
+                          <div className="mt-2 hidden lg:block">
+                          <select
+                            value={participant.role || "guest"}
+                            onChange={(e) => {
+                              handleRoleUpdate(participant.email, e.target.value, participant.id);
+                            }}
+                            disabled={isUpdatingUser}
+                            className={`w-full appearance-none pl-3 pr-8 py-2 rounded-lg border-0 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#9893da] ${roleInfo.bgColor} ${roleInfo.color} ${
+                              isUpdatingUser ? 'opacity-50 cursor-not-allowed' : ''
+                            }`}
+                          >
+                            <option value="guest">Gość</option>
+                            <option value="staff">Personel</option>
+                            <option value="token_taker">Pobierający tokeny</option>
+                            <option value="token_seller">Kasjer</option>
+                          </select>
                         </div>
-                      );
+        
+
+
+                        </div>
+                        <div className="mt-4 block sm:hidden">
+                          <select
+                            value={participant.role || "guest"}
+                            onChange={(e) => {
+                              handleRoleUpdate(participant.email, e.target.value, participant.id);
+                            }}
+                            disabled={isUpdatingUser}
+                            className={`w-full appearance-none pl-3 pr-8 py-2 rounded-lg border-0 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#9893da] ${roleInfo.bgColor} ${roleInfo.color} ${
+                              isUpdatingUser ? 'opacity-50 cursor-not-allowed' : ''
+                            }`}
+                          >
+                            <option value="guest">Gość</option>
+                            <option value="staff">Personel</option>
+                            <option value="token_taker">Pobierający tokeny</option>
+                            <option value="token_seller">Kasjer</option>
+                          </select>
+                        </div>
+                      </div>
+                    );
                     })}
                   </div>
                 )}

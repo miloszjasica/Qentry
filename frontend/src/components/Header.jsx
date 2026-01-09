@@ -80,56 +80,57 @@ export default function Header({
             Witaj{user?.name ? `, ${user.name}!` : "!"}
           </div>
         </div>
-
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          {!isMobile && (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                backgroundColor: "white",
-                padding: "6px 12px",
-                borderRadius: 8,
-                border: "1px solid #D1D5DC",
-                width: 384,
-              }}
-            >
-              <img
-                src="/Search.png"
-                alt="search"
-                style={{ width: 20, height: 20, marginRight: 12 }}
-              />
-              <input
-                type="text"
-                placeholder="Wyszukaj wydarzenie..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
+          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            {!isMobile && (
+              <div
                 style={{
-                  border: "none",
-                  background: "transparent",
-                  outline: "none",
-                  fontSize: 16,
-                  width: "100%",
-                  fontFamily: "Arimo",
+                  display: "flex",
+                  alignItems: "center",
+                  backgroundColor: "white",
+                  padding: "6px 12px",
+                  borderRadius: 8,
+                  border: "1px solid #D1D5DC",
+                  width: 384,
                 }}
-              />
-            </div>
-          )}
-
-          {isMobile && !showMobileSearch && (
-            <button
-              onClick={() => setShowMobileSearch(true)}
-              style={{
-                background: "transparent",
-                border: "none",
-                cursor: "pointer",
-              }}
-            >
-              <img src="/blacksearch.svg" alt="Szukaj" width={40} height={40} />
-            </button>
-          )}
+              >
+                <img
+                  src="/Search.png"
+                  alt="search"
+                  style={{ width: 20, height: 20, marginRight: 12 }}
+                />
+                <input
+                  type="text"
+                  placeholder="Wyszukaj wydarzenie..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  style={{
+                    border: "none",
+                    background: "transparent",
+                    outline: "none",
+                    fontSize: 16,
+                    width: "100%",
+                    fontFamily: "Arimo",
+                  }}
+                />
+              </div>
+            )}
+            {isMobile && !showMobileSearch && (
+              <button
+                onClick={() => setShowMobileSearch(true)}
+                style={{
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                <img src="/blacksearch.svg" alt="Szukaj" width={40} height={40} />
+              </button>
+            )}
+          </div>
         </div>
       </div>
+
 
       {isMobile && showMobileSearch && (
         <div

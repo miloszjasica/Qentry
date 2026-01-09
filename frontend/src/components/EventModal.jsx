@@ -1,5 +1,6 @@
 import { useEffect, useState} from "react";
 import { ChevronRight} from "lucide-react";
+import { BanknoteArrowDown, BanknoteArrowUp } from "lucide-react";
 
 export default function EventModal({ event, onClose }) {
     const [isJoined, setIsJoined] = useState(false);
@@ -10,6 +11,7 @@ export default function EventModal({ event, onClose }) {
     const [balance, setBalance] = useState(null);
     const [attractions, setAttractions] = useState([]);
     const [isAttractionsExpanded, setIsAttractionsExpanded] = useState(false);
+    const [userRole, setUserRole] = useState(null);
 
     const dateObj = event ? new Date(event.start_date) : null;
     const date = new Intl.DateTimeFormat("pl-PL", { 
@@ -60,11 +62,11 @@ export default function EventModal({ event, onClose }) {
 
           const events = await response.json();
 
-          // Znajdujemy event użytkownika i wyciągamy id_qr
           const joinedEvent = events.find(e => e.id_event === event.id_event);
 
           if (joinedEvent) {
             setQrId(joinedEvent.id_qr);
+            setUserRole(joinedEvent.user_role);
           }
 
         } catch (err) {
@@ -185,6 +187,10 @@ export default function EventModal({ event, onClose }) {
         console.error("Błąd:", error);
         alert("Wystąpił błąd");
       }
+    }
+
+    function handleTokenActionClick() {
+      alert("Pobierz aplikację mobilną Qentry, aby zarządzać tokenami podczas wydarzenia.");
     }
 
   return (
@@ -359,22 +365,61 @@ export default function EventModal({ event, onClose }) {
             </button>
 
             {isJoined && (
-            <button
-              onClick={fetchQR}
-              style={{
-                width: "52px",
-                height: "52px",
-                borderRadius: "10px",
-                background: "white",
-                border: "1px solid #D1D5DC",
-                cursor: "pointer",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-              }}
-            >
-              <img src="/QRIcon.svg" alt="QR" style={{ width: "16px", height: "16px" }} />
-            </button>
+            <div style={{ display: "flex", gap: "12px" }}>
+              <button
+                onClick={fetchQR}
+                style={{
+                  width: "52px",
+                  height: "52px",
+                  borderRadius: "10px",
+                  background: "white",
+                  border: "1px solid #D1D5DC",
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <img src="/QRIcon.svg" alt="QR" style={{ width: "16px", height: "16px" }} />
+              </button>
+
+              {(userRole === 'token_seller' || userRole === 'staff') && (
+              <button
+                onClick={handleTokenActionClick}
+                style={{
+                  width: "52px",
+                  height: "52px",
+                  borderRadius: "10px",
+                  background: "white",
+                  border: "1px solid #D1D5DC",
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <BanknoteArrowUp size={16} color="black" />
+              </button>
+              )}
+              {(userRole === 'token_taker' || userRole === 'staff') && (
+              <button
+                onClick={handleTokenActionClick}
+                style={{
+                  width: "52px",
+                  height: "52px",
+                  borderRadius: "10px",
+                  background: "white",
+                  border: "1px solid #D1D5DC",
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <BanknoteArrowDown size={16} color="black" />
+              </button>
+              )}
+            </div>
 
             )}
 
