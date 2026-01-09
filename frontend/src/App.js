@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import NearbyEvents from "./pages/NearbyEvents";
 import TakePartEvents from "./pages/TakePartEvents";
 import { useState, useEffect } from "react";
+import Transactions from "./pages/Transactions";
 
 function App() {
 
@@ -75,6 +76,7 @@ useEffect(() => {
             <Route path="/w-poblizu" element={<NearbyEvents search={search} />} />
             <Route path="/profil" element={<Profile />} />
             <Route path="/createevent" element={<CreateEvent />} />
+            <Route path="/transactions" element={<Transactions />} />
 
           </Routes>
         </div>
