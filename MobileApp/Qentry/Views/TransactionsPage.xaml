@@ -1,0 +1,76 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Qentry.Views.TransactionsPage"
+             BackgroundColor="{StaticResource BgColor}"
+             Title="Transakcje">
+
+	<Grid>
+
+		<CollectionView ItemsSource="{Binding Transactions}"
+                        Margin="16"
+                        SelectionMode="None">
+
+			<CollectionView.ItemTemplate>
+				<DataTemplate>
+                    <Grid Padding="10">
+					<Border BackgroundColor="White"
+                            Padding="16"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 16">
+
+						<Grid ColumnDefinitions="Auto,*,Auto"
+                              RowDefinitions="Auto,Auto">
+
+							<Border HeightRequest="32"
+                                    WidthRequest="32"
+                                    BackgroundColor="{StaticResource Primary}"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 16">
+								<Label Text="↓"
+                                       TextColor="White"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+							</Border>
+
+							<VerticalStackLayout Grid.Column="1"
+                                                 Margin="12,0">
+								<Label Text="{Binding AttractionName}"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource PrimaryDarkText}" />
+
+								<Label Text="{Binding EventName}"
+                                       FontSize="12"
+                                       TextColor="{StaticResource Quaternary}" />
+							</VerticalStackLayout>
+
+							<Label Grid.Column="2"
+                                   Text="{Binding Price, StringFormat='-{0} tokenów'}"
+                                   FontAttributes="Bold"
+                                   TextColor="Red" />
+
+							<Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding DateValue, StringFormat='{0:dd.MM.yyyy, HH:mm:ss}'}"
+                                   FontSize="11"
+                                   TextColor="{StaticResource Gray500}" />
+
+							<Label Grid.Row="1"
+                                   Grid.Column="2"
+                                   Text="Wydatek"
+                                   FontSize="11"
+                                   TextColor="{StaticResource Gray500}" />
+						</Grid>
+					</Border>
+                    </Grid>
+                </DataTemplate>
+			</CollectionView.ItemTemplate>
+		</CollectionView>
+
+		<ActivityIndicator IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           Color="{StaticResource Primary}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+
+	</Grid>
+</ContentPage>

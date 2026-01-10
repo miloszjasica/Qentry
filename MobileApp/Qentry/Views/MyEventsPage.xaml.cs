@@ -41,6 +41,12 @@ namespace Qentry.Views
             var selectedEvent = e.CurrentSelection.FirstOrDefault() as EventModel;
             if (selectedEvent == null) return;
 
+            if (selectedEvent.IsExpired)
+            {
+                ((CollectionView)sender).SelectedItem = null;
+                return;
+            }
+
             var vm = BindingContext as MyEventsViewModel;
             vm?.OpenEventDetailsCommand?.Execute(selectedEvent);
 

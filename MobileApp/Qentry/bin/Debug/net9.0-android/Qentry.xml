@@ -46,6 +46,9 @@
         <member name="P:Qentry.ViewModels.CalendarViewModel.SelectedDate">
             <inheritdoc cref="F:Qentry.ViewModels.CalendarViewModel.selectedDate"/>
         </member>
+        <member name="P:Qentry.ViewModels.CalendarViewModel.SelectedCategoryPolish">
+            <inheritdoc cref="F:Qentry.ViewModels.CalendarViewModel.selectedCategoryPolish"/>
+        </member>
         <member name="M:Qentry.ViewModels.CalendarViewModel.OnSelectedCategoryChanged(System.String)">
             <summary>Executes the logic for when <see cref="P:Qentry.ViewModels.CalendarViewModel.SelectedCategory"/> just changed.</summary>
             <param name="value">The new property value that was set.</param>
@@ -194,6 +197,7 @@
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
+            <inheritdoc/>
         </member>
         <member name="P:Qentry.ViewModels.SavedEventsViewModel.SelectedDateString">
             <inheritdoc cref="F:Qentry.ViewModels.SavedEventsViewModel.selectedDateString"/>
@@ -219,6 +223,9 @@
         <member name="P:Qentry.ViewModels.SavedEventsViewModel.IsCreatedSelected">
             <inheritdoc cref="F:Qentry.ViewModels.SavedEventsViewModel.isCreatedSelected"/>
         </member>
+        <member name="P:Qentry.ViewModels.SavedEventsViewModel.SelectedCategoryPolish">
+            <inheritdoc cref="F:Qentry.ViewModels.SavedEventsViewModel.selectedCategoryPolish"/>
+        </member>
         <member name="M:Qentry.ViewModels.SavedEventsViewModel.OnSelectedCategoryChanged(System.String)">
             <summary>Executes the logic for when <see cref="P:Qentry.ViewModels.SavedEventsViewModel.SelectedCategory"/> just changed.</summary>
             <param name="value">The new property value that was set.</param>
@@ -228,6 +235,17 @@
             <summary>Executes the logic for when <see cref="P:Qentry.ViewModels.SavedEventsViewModel.ManualDateFilter"/> just changed.</summary>
             <param name="value">The new property value that was set.</param>
             <remarks>This method is invoked right after the value of <see cref="P:Qentry.ViewModels.SavedEventsViewModel.ManualDateFilter"/> is changed.</remarks>
+        </member>
+        <member name="M:Qentry.ViewModels.SavedEventsViewModel.OnSelectedCategoryPolishChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:Qentry.ViewModels.SavedEventsViewModel.SelectedCategoryPolish"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:Qentry.ViewModels.SavedEventsViewModel.SelectedCategoryPolish"/> is changed.</remarks>
+        </member>
+        <member name="F:Qentry.ViewModels.SavedEventsViewModel.selectCategoryCommand">
+            <summary>The backing field for <see cref="P:Qentry.ViewModels.SavedEventsViewModel.SelectCategoryCommand"/>.</summary>
+        </member>
+        <member name="P:Qentry.ViewModels.SavedEventsViewModel.SelectCategoryCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:Qentry.ViewModels.SavedEventsViewModel.SelectCategory(System.String)"/>.</summary>
         </member>
         <member name="F:Qentry.ViewModels.SavedEventsViewModel.showCreatedCommand">
             <summary>The backing field for <see cref="P:Qentry.ViewModels.SavedEventsViewModel.ShowCreatedCommand"/>.</summary>
@@ -330,6 +348,9 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedDate">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedCategoryPolish">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedCategoryPolish" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Location">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Location" generated properties.</summary>
@@ -435,6 +456,9 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedDate">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedCategoryPolish">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedCategoryPolish" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Location">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Location" generated properties.</summary>

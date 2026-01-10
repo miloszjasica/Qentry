@@ -13,7 +13,7 @@ namespace Qentry.Services
     public class TokensService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = "http://192.168.201.1:8000/api/tokens";
+        private readonly string _baseUrl = "http://57.128.249.150/api/tokens";
 
         public TokensService(HttpClient httpClient) 
         { 
@@ -187,6 +187,36 @@ namespace Qentry.Services
 
             var resp = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<PayAttractionResponse>(resp, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        }
+
+        public async Task<List<TransactionDto>> GetMyTransactionsAsync(int? eventId = null, int? attractionId = null)
+        {
+            await AddAuthAsync();
+
+            var query = new List<string>();
+
+            if (eventId.HasValue)
+                query.Add($"id_event={eventId.Value}");
+
+            if (attractionId.HasValue)
+                query.Add($"id_attraction={attractionId.Value}");
+
+            var url = $"{_baseUrl}/transactions/";
+            if (query.Any())
+                url += "?" + string.Join("&", query);
+
+            var response = await _httpClient.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Nie udało się pobrać transakcji");
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            var result = JsonSerializer.Deserialize<TransactionsResponse>(
+                json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            return result?.Transactions ?? new List<TransactionDto>();
         }
     }
 }
