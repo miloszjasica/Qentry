@@ -1,4 +1,6 @@
 import { useEffect, useState} from "react";
+import { ChevronRight} from "lucide-react";
+import { BanknoteArrowDown, BanknoteArrowUp } from "lucide-react";
 
 export default function EventModal({ event, onClose }) {
     const [isJoined, setIsJoined] = useState(false);
@@ -6,6 +8,11 @@ export default function EventModal({ event, onClose }) {
     const [showQR, setShowQR] = useState(false);
     const [qrImage, setQrImage] = useState(null)
     const [qrId, setQrId] = useState(null);
+    const [balance, setBalance] = useState(null);
+    const [attractions, setAttractions] = useState([]);
+    const [isAttractionsExpanded, setIsAttractionsExpanded] = useState(false);
+    const [userRole, setUserRole] = useState(null);
+
     const dateObj = event ? new Date(event.start_date) : null;
     const date = new Intl.DateTimeFormat("pl-PL", { 
         day: "numeric",
@@ -55,11 +62,11 @@ export default function EventModal({ event, onClose }) {
 
           const events = await response.json();
 
-          // Znajdujemy event użytkownika i wyciągamy id_qr
           const joinedEvent = events.find(e => e.id_event === event.id_event);
 
           if (joinedEvent) {
             setQrId(joinedEvent.id_qr);
+            setUserRole(joinedEvent.user_role);
           }
 
         } catch (err) {
@@ -67,9 +74,25 @@ export default function EventModal({ event, onClose }) {
         }
       };
 
+      fetchAttractions();
       fetchStatus();
     }, [event, token]);
 
+    async function fetchAttractions() {
+      try {
+        const response = await fetch(
+          `http://localhost:8000/events/${event.id_event}/attractions/`
+        );
+
+        if (!response.ok) throw new Error("Błąd pobierania atrakcji");
+
+        const data = await response.json();
+        setAttractions(data);
+
+      } catch (err) {
+        console.error(err);
+      }
+    }
 
     async function fetchQR() {
       try {
@@ -89,12 +112,34 @@ export default function EventModal({ event, onClose }) {
 
         setQrImage(imageUrl);
         setShowQR(true);
+        fetchEventBalance();
 
       } catch (error) {
         console.error(error);
         alert("Nie udało się pobrać QR");
       }
     }
+
+    async function fetchEventBalance() {
+      try {
+        const token = localStorage.getItem("access");
+        if (!token) return;
+
+        const response = await fetch(
+          `http://localhost:8000/api/tokens/events/${event.id_event}/balance/`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        if (!response.ok) throw new Error("Błąd pobierania salda");
+
+        const data = await response.json();
+        setBalance(data.balance);
+
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
 
 
     if (!event) return null; 
@@ -142,6 +187,10 @@ export default function EventModal({ event, onClose }) {
         console.error("Błąd:", error);
         alert("Wystąpił błąd");
       }
+    }
+
+    function handleTokenActionClick() {
+      alert("Pobierz aplikację mobilną Qentry, aby zarządzać tokenami podczas wydarzenia.");
     }
 
   return (
@@ -224,6 +273,73 @@ export default function EventModal({ event, onClose }) {
             <div style={{ color: 'black', marginBottom: '8px' }}>O wydarzeniu</div>
             {event.description}
           </div>
+          {attractions.length > 0 && (
+            <div className=" font-['Arimo']">
+              <div 
+                className="flex items-center justify-between cursor-pointer hover:bg-gray-50 py-2 rounded-lg transition-colors group"
+                onClick={() => setIsAttractionsExpanded(!isAttractionsExpanded)}
+              >
+                <div>
+                  <h3 className="text-[16px] font-normal text-black font-['Arimo'] mb-2">Atrakcje</h3>
+                  <p className="text-[16px] font-normal text-[#4A5565] font-['Arimo']">
+                    {attractions.filter(a => a.is_active).length} dostępnych atrakcji
+                  </p>
+                </div>
+                
+                <div className="flex items-center gap-3">
+                  <ChevronRight className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${
+                    isAttractionsExpanded ? 'rotate-90' : ''
+                  }`} />
+                </div>
+              </div>
+
+              <div className={`overflow-hidden transition-all duration-300 ${
+                isAttractionsExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+              }`}>
+                <div className="mt-4 pt-4 border-t border-gray-100">
+                  {attractions.filter(a => a.is_active).length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {attractions
+                        .filter(a => a.is_active)
+                        .map((a) => (
+                          <div 
+                            key={a.id_attraction}
+                            className="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-xl p-4 hover:shadow-md transition-all duration-200 hover:border-[#9893da]/30"
+                          >
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-2">
+                                  <h4 className="font-semibold text-gray-900 font-['Arimo']">{a.name}</h4>
+                                </div>
+                                
+                                {a.description && (
+                                  <p className="text-gray-600 text-sm mb-3 font-['Arimo'] line-clamp-2">
+                                    {a.description}
+                                  </p>
+                                )}
+                              </div>
+                              
+                              <div className={`ml-3 px-3 py-1.5 rounded-lg font-bold text-sm font-['Arimo'] ${
+                                a.price > 0 
+                                  ? 'bg-[#9893da]/10 text-[#9893da]' 
+                                  : 'bg-green-100 text-green-700'
+                              }`}>
+                                {a.price > 0 ? `${a.price} Tokenów` : 'GRATIS'}
+                              </div>
+                            </div>
+                          </div>
+                        ))
+                      }
+                    </div>
+                  ) : (
+                    <div className="text-gray-500 text-sm font-['Arimo']">
+                      Brak atrakcji.
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
 
           <div style={{ display: "flex", gap: "12px", marginTop: "16px", alignItems: "center" }}>
             <button
@@ -249,22 +365,61 @@ export default function EventModal({ event, onClose }) {
             </button>
 
             {isJoined && (
-            <button
-              onClick={fetchQR}
-              style={{
-                width: "52px",
-                height: "52px",
-                borderRadius: "10px",
-                background: "white",
-                border: "1px solid #D1D5DC",
-                cursor: "pointer",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-              }}
-            >
-              <img src="/QRIcon.svg" alt="QR" style={{ width: "16px", height: "16px" }} />
-            </button>
+            <div style={{ display: "flex", gap: "12px" }}>
+              <button
+                onClick={fetchQR}
+                style={{
+                  width: "52px",
+                  height: "52px",
+                  borderRadius: "10px",
+                  background: "white",
+                  border: "1px solid #D1D5DC",
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <img src="/QRIcon.svg" alt="QR" style={{ width: "16px", height: "16px" }} />
+              </button>
+
+              {(userRole === 'token_seller' || userRole === 'staff') && (
+              <button
+                onClick={handleTokenActionClick}
+                style={{
+                  width: "52px",
+                  height: "52px",
+                  borderRadius: "10px",
+                  background: "white",
+                  border: "1px solid #D1D5DC",
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <BanknoteArrowUp size={16} color="black" />
+              </button>
+              )}
+              {(userRole === 'token_taker' || userRole === 'staff') && (
+              <button
+                onClick={handleTokenActionClick}
+                style={{
+                  width: "52px",
+                  height: "52px",
+                  borderRadius: "10px",
+                  background: "white",
+                  border: "1px solid #D1D5DC",
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <BanknoteArrowDown size={16} color="black" />
+              </button>
+              )}
+            </div>
 
             )}
 
@@ -288,8 +443,12 @@ export default function EventModal({ event, onClose }) {
                 borderRadius: "12px",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center"
               }}>
+                {balance !== null && (
+                  <div style={{ marginTop: "16px", fontSize: "16px", color: "#101828" }}>
+                    <strong>{balance} tokenów</strong> 
+                  </div>
+                )}
                 <img src={qrImage} alt="QR Code" style={{ width: "250px", height: "250px" }} />
                 <button 
                   onClick={() => setShowQR(false)}

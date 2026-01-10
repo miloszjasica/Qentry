@@ -12,10 +12,13 @@ export const registerUser = (data) => {
 
 export const logout = () => {
   const accessToken = localStorage.getItem("access");
+  const refreshToken = localStorage.getItem("refresh");
 
   return axios.post(
     `${API_URL}/logout/`,
-    {},
+    {
+      refresh: refreshToken,
+    },
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,

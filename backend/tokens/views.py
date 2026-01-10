@@ -16,6 +16,8 @@ from django.http import FileResponse, Http404, HttpResponse
 import uuid
 import qrcode
 from io import BytesIO
+from django.utils import timezone
+from decimal import Decimal, ROUND_HALF_UP
 
 @extend_schema(
     tags=['Tokens'],
@@ -34,7 +36,8 @@ def my_balance(request, id_event):
         event = Event.objects.get(pk=id_event)
         qr = QR.objects.get(id_user=request.user, id_event=event)
 
-
+        if not qr.is_active:
+            return Response({'error': 'Twój kod QR jest nieaktywny'}, status=400)
         
         return Response(BalanceSerializer({"balance": qr.balance}).data)
            
@@ -93,18 +96,34 @@ def add_tokens(request, qr_string, id_event):
         
         if operator_qr.user_role == 'token_seller' or operator_qr.user_role == 'staff':
 
-            amount = request.query_params.get('amount')
-            amount = Decimal(str(amount)).quantize(Decimal('0.01'), rounding=decimal)
-            if amount <= 0:
-                return Response({'error': 'Amount must be greater than zero'}, status=400)
+            amount = request.data.get('amount')
+            if amount is None:
+                return Response({'error': 'Kwota musi być wprowadzona'}, status=400)
+            
+            try:
+                amount = Decimal(str(amount)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+            except:
+                return Response({'error': 'Niepoprawna kwota'}, status=400)
 
+            old_balance = qr.balance
             qr.balance += amount
             qr.save()
+
+            Transaction.objects.create(
+                id_user=qr.id_user,
+                id_attraction=None,
+                amount=amount,
+                type ='topup'
+            )
+
+            data = {
+                'old_balance': old_balance,
+                'added_amount': amount,
+                'message': 'Tokeny zostały pomyślnie zakupione',
+                'type': type
+            }
             
-            return Response(AddTokensSerializer({
-                'new_balance': qr.balance,
-                'message': 'Tokeny zakupione pomyślnie'
-            }).data)
+            return Response(AddTokensSerializer(data).data)
         else:
             return Response({'error': 'Nie możesz sprzedawać tokenów jako gość lub kasjer'}, status=403)
     
@@ -353,6 +372,14 @@ def join_event(request, event_id):
             {"error": "Już jesteś zapisany na ten event"},
             status=status.HTTP_400_BAD_REQUEST
         )
+    
+    if event.participants.count() >= event.max_participants:
+        return Response(
+            {"error": "Brak wolnych miejsc"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    event.participants.add(user)
 
     qr_code = str(uuid.uuid4())
 
@@ -387,6 +414,18 @@ def join_event(request, event_id):
                 "tech", "wellness", "gaming", "film", "fashion", "books", "other"
             ]
         ),
+        OpenApiParameter(
+            name='date_from',
+            description='Filtr od daty (YYYY-MM-DD)',
+            required=False,
+            type=str
+        ),
+        OpenApiParameter(
+            name='date_to',
+            description='Filtr do daty (YYYY-MM-DD)',
+            required=False,
+            type=str
+        )
     ],
     responses={
         200: OpenApiResponse(response=QRSerializer, description='Lista zapisów użytkownika')
@@ -396,7 +435,62 @@ def join_event(request, event_id):
 @permission_classes([IsAuthenticated])
 def my_events(request):
     user = request.user
-    qrs = QR.objects.select_related('id_event').filter(id_user=user)
+    qrs = QR.objects.filter(id_user=user)
+    category = request.query_params.get('category', '')
+    name_filter = request.query_params.get('name', '')
+    
+    if name_filter:
+        qrs = qrs.filter(id_event__name__icontains=name_filter)
+
+    if category:
+        qrs = qrs.filter(id_event__category=category)
+    
+    return Response(QRSerializer(qrs, many=True).data)
+
+@extend_schema(
+    tags=['Events'],
+    summary='Lista eventów na które zapisany jest zalogowany użytkownik',
+    parameters=[
+        OpenApiParameter(
+            name='name',
+            description='Filtr po nazwie wydarzenia',
+            required=False,
+            type=str
+        ),
+        OpenApiParameter(
+            name='category',
+            description='Filtr po kategorii wydarzenia',
+            required=False,
+            type=str,
+            enum=[
+                "music", "art", "food", "sport", "business", "theatre",
+                "tech", "wellness", "gaming", "film", "fashion", "books", "other"
+            ]
+        ),
+        OpenApiParameter(
+            name='date_from',
+            description='Filtr od daty (YYYY-MM-DD)',
+            required=False,
+            type=str
+        ),
+        OpenApiParameter(
+            name='date_to',
+            description='Filtr do daty (YYYY-MM-DD)',
+            required=False,
+            type=str
+        )
+    ],
+    responses={
+        200: OpenApiResponse(response=QRSerializer, description='Lista zapisów użytkownika')
+    }
+)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def my_events_upcoming(request):
+    today = timezone.now().date()
+    user = request.user
+    qrs = QR.objects.filter(id_user=user)
+    qrs = qrs.filter(id_event__end_date__gte=today)
     category = request.query_params.get('category', '')
     name_filter = request.query_params.get('name', '')
     
@@ -431,6 +525,8 @@ def leave_event(request, event_id):
 
     try:
         qr = QR.objects.get(id_user=user, id_event_id=event_id)
+        event = qr.id_event
+        event.participants.remove(user)
         qr.delete()
         return Response({"message": "Wypisano z eventu"}, status=200)
 

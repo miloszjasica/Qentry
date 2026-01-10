@@ -15,6 +15,73 @@
                     BackgroundColor="White"
                     Padding="25"
                     StrokeShape="RoundRectangle 20">
+<<<<<<< HEAD
+
+                <VerticalStackLayout Spacing="20" HorizontalOptions="Center">
+
+                    <Border
+                        HeightRequest="110"
+                        WidthRequest="110"
+                        StrokeThickness="0"
+                        BackgroundColor="{StaticResource Primary}"
+                        StrokeShape="RoundRectangle 55">
+                        <Image 
+                            Source="{Binding ProfileVM.User.UserImage}"
+                            Aspect="AspectFill"/>
+                    </Border>
+
+                    <Border BackgroundColor="{StaticResource PrimaryDark}"
+                            WidthRequest="100"
+                            Padding="4,2"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 6"
+                            IsVisible="{Binding ProfileVM.User.WantsToBeOrganizer}">
+                        <Label HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   Text="Organizator"
+                                   FontSize="12"
+                                   TextColor="White"/>
+                    </Border>
+                    
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                        <Label 
+                            Text="{Binding ProfileVM.User.Name}"
+                            FontSize="24"
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource PrimaryDarkText}" />
+                        <Label 
+                            Text="{Binding ProfileVM.User.Surname}"
+                            FontSize="24"
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource PrimaryDarkText}" />
+                    </HorizontalStackLayout>
+
+                    <Label 
+                        Text="Członek od Listopada 2025"
+                        HorizontalOptions="Center"
+                        TextColor="{StaticResource Quaternary}"
+                        FontSize="14"/>
+
+                    <HorizontalStackLayout Spacing="6" HorizontalOptions="Center">
+                        <Image Source="email_icon.png" HeightRequest="16"/>
+                        <Label 
+                            Text="{Binding ProfileVM.User.Email}"
+                            FontSize="14"
+                            TextColor="{StaticResource PrimaryDarkText}"/>
+                    </HorizontalStackLayout>
+
+                    <Button Text="Edytuj profil"
+                            Command="{Binding EditProfileCommand}"
+                            CornerRadius="8"
+                            WidthRequest="180"
+                            BackgroundColor="{StaticResource Color2}"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+=======
+>>>>>>> patrykjas
 
                 <VerticalStackLayout Spacing="20" HorizontalOptions="Center">
 
@@ -80,6 +147,15 @@
                 </VerticalStackLayout>
             </Border>
 
+            <Button Text="Historia transakcji"
+                    Command="{Binding GoToTransactionsCommand}"
+                    BackgroundColor="{StaticResource Tertiary}"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HeightRequest="48"
+                    WidthRequest="200"
+                    HorizontalOptions="Center" />
+            
             <Button 
                 Text="Wyloguj"
                 Command="{Binding LogoutVM.LogoutCommand}"

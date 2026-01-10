@@ -19,6 +19,10 @@ namespace Qentry
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             Routing.RegisterRoute(nameof(EditProfilePage), typeof(EditProfilePage));
+<<<<<<< HEAD
+=======
+            Routing.RegisterRoute(nameof(TransactionsPage), typeof(TransactionsPage));
+>>>>>>> patrykjas
 
 
             _authService = authService;

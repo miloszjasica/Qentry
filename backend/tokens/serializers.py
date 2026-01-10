@@ -6,7 +6,8 @@ class BalanceSerializer(serializers.Serializer):
     balance = serializers.DecimalField(max_digits=10, decimal_places=2)
 
 class AddTokensSerializer(serializers.Serializer):
-    new_balance = serializers.DecimalField(max_digits=10, decimal_places=2)
+    old_balance = serializers.DecimalField(max_digits=10, decimal_places=2)
+    added_amount = serializers.DecimalField(max_digits=10, decimal_places=2)
     message = serializers.CharField()
 
 class NewTransactionSerializer(serializers.Serializer):
@@ -18,16 +19,45 @@ class NewTransactionSerializer(serializers.Serializer):
     new_balance = serializers.DecimalField(max_digits=10, decimal_places=2)
 
 class TransactionSerializer(serializers.ModelSerializer):
-    user_name = serializers.CharField(source='id_user.name', read_only=True)
-    user_surname = serializers.CharField(source='id_user.surname', read_only=True)
-    attraction_name = serializers.CharField(source='id_attraction.name', read_only=True)
-    price = serializers.DecimalField(source='id_attraction.price', max_digits=10, decimal_places=2, read_only=True)
-    event_name = serializers.CharField(source='id_attraction.id_event.name', read_only=True)
-    date = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", read_only=True)
+    user_name = serializers.CharField(source='id_user.name')
+    user_surname = serializers.CharField(source='id_user.surname')
+    event_name = serializers.SerializerMethodField()
+    attraction_name = serializers.SerializerMethodField()
+    price = serializers.SerializerMethodField()
 
     class Meta:
         model = Transaction
-        fields = ['id_transaction', 'user_name', 'user_surname', 'event_name', 'attraction_name', 'price', 'date']
+        fields = [
+            'id_transaction',
+            'user_name',
+            'user_surname',
+            'type',
+            'event_name',
+            'attraction_name',
+            'price',
+            'amount',
+            'date'
+        ]
+    def get_event_name(self, obj):
+        if obj.type == 'attraction' and obj.id_attraction:
+            return obj.id_attraction.id_event.name
+        return None
+
+    def get_attraction_name(self, obj):
+        if obj.type == 'attraction' and obj.id_attraction:
+            return obj.id_attraction.name
+        return None
+
+    def get_price(self, obj):
+        if obj.type == 'attraction':
+            return obj.amount
+        return None
+
+    def get_added_amount(self, obj):
+        if obj.type == 'topup':
+            return obj.amount
+        return None
+
     
 class ListTransactionsSerializer(serializers.Serializer):
     transactions = TransactionSerializer(many=True)
@@ -37,8 +67,11 @@ class QRSerializer(serializers.ModelSerializer):
     location = serializers.CharField(source="id_event.location", read_only=True)
     start_date = serializers.DateTimeField(source="id_event.start_date", read_only=True)
     event_end_date = serializers.DateTimeField(source="id_event.end_date", read_only=True)
-    image = serializers.ImageField(source="id_event.image", read_only=True)
-    participants = serializers.IntegerField(source="id_event.participants", read_only=True)
+    image = serializers.SerializerMethodField()
+    participants = serializers.IntegerField(
+            source='id_event.participants_count',
+            read_only=True
+        )    
     description = serializers.CharField(source="id_event.description", read_only = True)
     category = serializers.CharField(source="id_event.category", read_only=True)
 
@@ -47,6 +80,11 @@ class QRSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ['id_qr', 'generated_at', 'qr_string', 'id_user']
 
+    def get_image(self, obj):
+        if obj.id_event.image:
+            return obj.id_event.image  # zwróci URL
+        return None
+
 class AssignRoleSerializer(serializers.Serializer):
     email = serializers.EmailField()
     role = serializers.ChoiceField(choices=[
@@ -54,9 +92,10 @@ class AssignRoleSerializer(serializers.Serializer):
     ])
 
 class EventUserRoleSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(source='id_user.id')
     email = serializers.EmailField(source="id_user.email")
     role = serializers.CharField(source="user_role")
 
     class Meta:
         model = QR
-        fields = ["email", "role"]
+        fields = ["id", "email", "role"]

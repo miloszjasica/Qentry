@@ -38,5 +38,10 @@ namespace Qentry.Models
         [JsonPropertyName("category")]
         public string Category { get; set; }
         public string UserRole { get; set; }
+<<<<<<< HEAD
+=======
+
+        public bool IsExpired => EndDate.Date < DateTime.Today;
+>>>>>>> patrykjas
     }
 }

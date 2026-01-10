@@ -15,8 +15,9 @@ export default function Login() {
       const res = await login(email, password);
       localStorage.setItem("access", res.data.access);
       localStorage.setItem("refresh", res.data.refresh);
+      window.dispatchEvent(new Event("auth-change"));
       setApiError(null);
-      navigate("/"); // Przekierowanie do strony głównej
+      navigate("/");
     } catch (err) {
       if (err.response && err.response.data) {
         // Przygotowanie błędu do wyświetlenia w LoginView

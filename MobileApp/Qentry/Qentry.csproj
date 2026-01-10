@@ -68,6 +68,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+<<<<<<< HEAD
+=======
+		<MauiXaml Update="Platforms\Android\Resources\values\styles.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+>>>>>>> patrykjas
 		<MauiXaml Update="Views\AddAttractionPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -125,6 +131,12 @@
 		<MauiXaml Update="Views\StaffEventDetailsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+<<<<<<< HEAD
+=======
+		<MauiXaml Update="Views\TransactionsPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+>>>>>>> patrykjas
 	</ItemGroup>
 
 	<ItemGroup>

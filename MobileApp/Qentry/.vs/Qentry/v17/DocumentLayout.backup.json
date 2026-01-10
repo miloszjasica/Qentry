@@ -3,6 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\resources\\images\\profile.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:resources\\images\\profile.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
@@ -13,20 +14,62 @@
     {
       "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\resources\\images\\home.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:resources\\images\\home.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+=======
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\services\\eventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:services\\eventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\services\\tokensservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:services\\tokensservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\services\\tokenstorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:services\\tokenstorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\views\\myeventspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:views\\myeventspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\views\\myeventspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:views\\myeventspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\models\\eventmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:models\\eventmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\viewmodels\\myeventsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:viewmodels\\myeventsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\views\\transactionspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:views\\transactionspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+>>>>>>> patrykjas
     },
     {
       "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\views\\controls\\custombottomnavbar.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:views\\controls\\custombottomnavbar.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\resources\\images\\calendar.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:resources\\images\\calendar.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+=======
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:views\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> patrykjas
     },
     {
       "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\resources\\images\\edit.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:resources\\images\\edit.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\views\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:views\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
@@ -77,6 +120,22 @@
     {
       "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\views\\profilepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:views\\profilepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\views\\savedeventspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:views\\savedeventspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\views\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:views\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\viewmodels\\savedeventsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:viewmodels\\savedeventsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|c:\\users\\patryk\\desktop\\studia\\qentry\\viewmodels\\savedeventdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C7774BD-766E-4820-BA9D-B4C3B9CA2DEF}|Qentry.csproj|solutionrelative:viewmodels\\savedeventdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> patrykjas
     }
   ],
   "DocumentGroupContainers": [
@@ -86,7 +145,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< HEAD
           "SelectedChildIndex": 2,
+=======
+          "SelectedChildIndex": 3,
+>>>>>>> patrykjas
           "Children": [
             {
               "$type": "Bookmark",
@@ -95,6 +158,7 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+<<<<<<< HEAD
               "Title": "home.svg",
               "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Resources\\Images\\home.svg",
               "RelativeDocumentMoniker": "Resources\\Images\\home.svg",
@@ -103,11 +167,35 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKMSURBVDhPjZNLSFRhFMd/3507M/dKPsacsYelWGZZFFJRkdSmNrUoatMiKggSN2YFEUX3MvQiiBYWtFAyggoXPSGyhQuhFrXQFr7GMFOowcZMUO9MM3pPi9Eao6gf/Bcfh3PO/5yPo8jAsqxI5vtvKKXuhMPhK4jInIBlWRH5Bw0NDYOWZUVs264B0DILKEUXCCIpZOIi7uetpHpCxN8GiffU4rrThEIhXzgcXiEidbZtH/5ZQKTV\u002B72oItjSYfG5vxwneoX2/iW80dvxb4ji9D4BIBAIeBsbG4fSOXJWzSR7qpt9D\u002BvWndpTlNXL2HCQ28PXaIuVEB2Dmsp8DiZqyN35FAFiw19IJpPcbmrq0wCq7\u002BvHd5Y\u002B2rMy5y3OcBXmqtccq9rB/uUFKI/GzfZRPhRdBhEQIRgKUlxSAoAm0uqtWNB5Yu\u002Bier5\u002BWOoWbnxAwAwQzDao3lLIobX5ePxemiImroCIzFm\u002BztT7/CPLzi8ej\u002BVxdeyu1nJjgMR3FwDl0fD4dJRHozuWACStjM/TGDlZ50tNqHuxejo\u002B\u002BZPL8wwqCvxUFPhZFfBSbIBMJti0wJjpDpJRQXfjzr6uj9u\u002BtYysCWijA4OPqzeXpVLJtE010zS9cZDM1DTa9ASLmoaOnh4cEYaySsoa30T5Mp5kPD7Ni\u002B5Rtt7qofzqO553jqQHmHExi5p8RcRNsb6y7VWtnm1ecjUdcdM7QClwhQPl8zi3o\u002BiXdREMMwvbtvv0KYfmRJSBtvlVY93O6ujLlc8WdsYcdE1RmutlV3kO20tzcXFRohBFerQ/ccE6c11EJB53xIk7EndmNSnObxIRsSwrMucWUvh2AxiGiWmYGOassjB/0yxzzPzvOWfyAyvlXYiiBFoWAAAAAElFTkSuQmCC",
               "WhenOpened": "2025-12-04T10:52:13.745Z",
+=======
+              "Title": "TokenStorage.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Services\\TokenStorage.cs",
+              "RelativeDocumentMoniker": "Services\\TokenStorage.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Services\\TokenStorage.cs",
+              "RelativeToolTip": "Services\\TokenStorage.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T15:25:10.376Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TokensService.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Services\\TokensService.cs",
+              "RelativeDocumentMoniker": "Services\\TokensService.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Services\\TokensService.cs",
+              "RelativeToolTip": "Services\\TokensService.cs",
+              "ViewState": "AgIAAL4AAAAAAAAAAAAUwA8AAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T15:25:06.717Z",
+>>>>>>> patrykjas
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+<<<<<<< HEAD
               "Title": "profile.svg",
               "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Resources\\Images\\profile.svg",
               "RelativeDocumentMoniker": "Resources\\Images\\profile.svg",
@@ -155,11 +243,22 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKMSURBVDhPjZNLSFRhFMd/3507M/dKPsacsYelWGZZFFJRkdSmNrUoatMiKggSN2YFEUX3MvQiiBYWtFAyggoXPSGyhQuhFrXQFr7GMFOowcZMUO9MM3pPi9Eao6gf/Bcfh3PO/5yPo8jAsqxI5vtvKKXuhMPhK4jInIBlWRH5Bw0NDYOWZUVs264B0DILKEUXCCIpZOIi7uetpHpCxN8GiffU4rrThEIhXzgcXiEidbZtH/5ZQKTV\u002B72oItjSYfG5vxwneoX2/iW80dvxb4ji9D4BIBAIeBsbG4fSOXJWzSR7qpt9D\u002BvWndpTlNXL2HCQ28PXaIuVEB2Dmsp8DiZqyN35FAFiw19IJpPcbmrq0wCq7\u002BvHd5Y\u002B2rMy5y3OcBXmqtccq9rB/uUFKI/GzfZRPhRdBhEQIRgKUlxSAoAm0uqtWNB5Yu\u002Bier5\u002BWOoWbnxAwAwQzDao3lLIobX5ePxemiImroCIzFm\u002BztT7/CPLzi8ej\u002BVxdeyu1nJjgMR3FwDl0fD4dJRHozuWACStjM/TGDlZ50tNqHuxejo\u002B\u002BZPL8wwqCvxUFPhZFfBSbIBMJti0wJjpDpJRQXfjzr6uj9u\u002BtYysCWijA4OPqzeXpVLJtE010zS9cZDM1DTa9ASLmoaOnh4cEYaySsoa30T5Mp5kPD7Ni\u002B5Rtt7qofzqO553jqQHmHExi5p8RcRNsb6y7VWtnm1ecjUdcdM7QClwhQPl8zi3o\u002BiXdREMMwvbtvv0KYfmRJSBtvlVY93O6ujLlc8WdsYcdE1RmutlV3kO20tzcXFRohBFerQ/ccE6c11EJB53xIk7EndmNSnObxIRsSwrMucWUvh2AxiGiWmYGOassjB/0yxzzPzvOWfyAyvlXYiiBFoWAAAAAElFTkSuQmCC",
               "WhenOpened": "2025-12-04T10:50:53.215Z",
+=======
+              "Title": "EventService.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Services\\EventService.cs",
+              "RelativeDocumentMoniker": "Services\\EventService.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Services\\EventService.cs",
+              "RelativeToolTip": "Services\\EventService.cs",
+              "ViewState": "AgIAANUAAAAAAAAAAAAiwNQAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T15:25:02.377Z",
+>>>>>>> patrykjas
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+<<<<<<< HEAD
               "Title": "CustomBottomNavBar.xaml",
               "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\Controls\\CustomBottomNavBar.xaml",
               "RelativeDocumentMoniker": "Views\\Controls\\CustomBottomNavBar.xaml",
@@ -335,6 +434,162 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-12-04T10:28:50.225Z",
               "EditorCaption": ""
+=======
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Services\\AuthService.cs",
+              "RelativeToolTip": "Services\\AuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T15:24:49.368Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EventModel.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Models\\EventModel.cs",
+              "RelativeDocumentMoniker": "Models\\EventModel.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Models\\EventModel.cs",
+              "RelativeToolTip": "Models\\EventModel.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAwCkAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T11:26:41.868Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MyEventsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\ViewModels\\MyEventsViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\MyEventsViewModel.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\ViewModels\\MyEventsViewModel.cs",
+              "RelativeToolTip": "ViewModels\\MyEventsViewModel.cs",
+              "ViewState": "AgIAAD4BAAAAAAAAAAAqwGQBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T10:45:48.971Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MyEventsPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\MyEventsPage.xaml",
+              "RelativeDocumentMoniker": "Views\\MyEventsPage.xaml",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\MyEventsPage.xaml",
+              "RelativeToolTip": "Views\\MyEventsPage.xaml",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAAAIMAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-10T10:45:33.701Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TransactionsPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\TransactionsPage.xaml",
+              "RelativeDocumentMoniker": "Views\\TransactionsPage.xaml",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\TransactionsPage.xaml",
+              "RelativeToolTip": "Views\\TransactionsPage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-10T10:39:44.315Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SavedEventsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\ViewModels\\SavedEventsViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\SavedEventsViewModel.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\ViewModels\\SavedEventsViewModel.cs",
+              "RelativeToolTip": "ViewModels\\SavedEventsViewModel.cs",
+              "ViewState": "AgIAANUAAAAAAAAAAADwv/wAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T10:30:25.31Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "SavedEventDetailsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\ViewModels\\SavedEventDetailsViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\SavedEventDetailsViewModel.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\ViewModels\\SavedEventDetailsViewModel.cs",
+              "RelativeToolTip": "ViewModels\\SavedEventDetailsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T10:30:23.627Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "SavedEventsPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\SavedEventsPage.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\SavedEventsPage.xaml.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\SavedEventsPage.xaml.cs",
+              "RelativeToolTip": "Views\\SavedEventsPage.xaml.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAkwBcAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T10:30:18.885Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "SavedEventsPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\SavedEventsPage.xaml",
+              "RelativeDocumentMoniker": "Views\\SavedEventsPage.xaml",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\SavedEventsPage.xaml",
+              "RelativeToolTip": "Views\\SavedEventsPage.xaml",
+              "ViewState": "AgIAAOoAAAAAAAAAAAAgwBMBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-10T10:23:57.53Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "MainPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\MainPage.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\MainPage.xaml.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\MainPage.xaml.cs",
+              "RelativeToolTip": "Views\\MainPage.xaml.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAcwFMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T09:44:10.151Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CalendarViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\ViewModels\\CalendarViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\CalendarViewModel.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\ViewModels\\CalendarViewModel.cs",
+              "RelativeToolTip": "ViewModels\\CalendarViewModel.cs",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAswHUAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T09:32:36.494Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MyEventsPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\MyEventsPage.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\MyEventsPage.xaml.cs",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\MyEventsPage.xaml.cs",
+              "RelativeToolTip": "Views\\MyEventsPage.xaml.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAiwDUAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T09:32:13.917Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "MainPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\MainPage.xaml",
+              "RelativeDocumentMoniker": "Views\\MainPage.xaml",
+              "ToolTip": "C:\\Users\\Patryk\\Desktop\\Studia\\Qentry\\Views\\MainPage.xaml",
+              "RelativeToolTip": "Views\\MainPage.xaml",
+              "ViewState": "AgIAAAEBAAAAAAAAAAAgwCoBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-05T08:15:16.161Z"
+>>>>>>> patrykjas
             }
           ]
         }

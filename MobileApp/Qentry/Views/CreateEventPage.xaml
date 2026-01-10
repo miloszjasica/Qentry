@@ -141,7 +141,11 @@
                     </VerticalStackLayout>
 
                 </Border>
+<<<<<<< HEAD
 
+=======
+                <Grid BackgroundColor="{StaticResource Primary}" HeightRequest="100"/>
+>>>>>>> patrykjas
             </VerticalStackLayout>
         </ScrollView>
 
