@@ -141,7 +141,7 @@
                     </VerticalStackLayout>
 
                 </Border>
-
+                <Grid BackgroundColor="{StaticResource Primary}" HeightRequest="100"/>
             </VerticalStackLayout>
         </ScrollView>
 

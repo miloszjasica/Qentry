@@ -80,6 +80,15 @@
                 </VerticalStackLayout>
             </Border>
 
+            <Button Text="Historia transakcji"
+                    Command="{Binding GoToTransactionsCommand}"
+                    BackgroundColor="{StaticResource Tertiary}"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HeightRequest="48"
+                    WidthRequest="200"
+                    HorizontalOptions="Center" />
+            
             <Button 
                 Text="Wyloguj"
                 Command="{Binding LogoutVM.LogoutCommand}"

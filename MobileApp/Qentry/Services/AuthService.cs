@@ -9,7 +9,7 @@ namespace Qentry.Services
     public class AuthService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = "http://192.168.201.1:8000/api/users";
+        private readonly string _baseUrl = "http://57.128.249.150/api/users";
 
         public AuthService(HttpClient httpClient)
         {

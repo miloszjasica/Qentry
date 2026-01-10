@@ -14,6 +14,7 @@ namespace Qentry.ViewModels
         public LogoutViewModel LogoutVM { get; set; }
 
         public ICommand EditProfileCommand { get; }
+        public ICommand GoToTransactionsCommand { get; }
 
         public ProfilePageViewModel(ProfileViewModel profileVM, LogoutViewModel logoutVM) 
         { 
@@ -21,6 +22,7 @@ namespace Qentry.ViewModels
             LogoutVM = logoutVM;
 
             EditProfileCommand = new Command(async () => await GoToEditProfile());
+            GoToTransactionsCommand = new Command(async () => await GoToTransactions());
         }
 
         private async Task GoToEditProfile()
@@ -29,6 +31,11 @@ namespace Qentry.ViewModels
             {
                 { "User", ProfileVM.User }
             });
+        }
+
+        private async Task GoToTransactions()
+        {
+            await Shell.Current.GoToAsync(nameof(TransactionsPage));
         }
     }
 }

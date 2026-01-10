@@ -10,7 +10,6 @@ namespace Qentry
         {
             InitializeComponent();
         }
-
         protected override Window CreateWindow(IActivationState? activationState)
         {
             var shell = MauiProgram.Services.GetRequiredService<AppShell>();

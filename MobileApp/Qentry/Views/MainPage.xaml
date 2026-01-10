@@ -1,6 +1,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:Qentry.Views.Controls"
+             xmlns:conv="clr-namespace:Qentry.Converters"
              x:Class="Qentry.Views.MainPage"
              x:Name="RootPage"
              BackgroundColor="{StaticResource BgColor}">
@@ -115,22 +116,37 @@
                            FontAttributes="Bold"
                            TextColor="Black" />
 
-                    <CollectionView ItemsSource="{Binding Categories}"
-                                    SelectionMode="Single"
-                                    SelectedItem="{Binding SelectedCategory}">
+                    <CollectionView ItemsSource="{Binding CategoriesPolish}"
+                SelectionMode="None">
+
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Horizontal" />
                         </CollectionView.ItemsLayout>
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame Padding="8"
-                                       Margin="5"
-                                       CornerRadius="10"
-                                       BackgroundColor="{StaticResource BgColor}"
-                                       BorderColor="{StaticResource Primary}">
+                                <Border Stroke="{StaticResource Primary}"
+                    StrokeThickness="1"
+                    Margin="5"
+                    Padding="8"
+                    StrokeShape="RoundRectangle 10">
+
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                        Command="{Binding Source={x:Reference RootPage}, Path=BindingContext.SelectCategoryCommand}"
+                        CommandParameter="{Binding}" />
+                                    </Border.GestureRecognizers>
+
+                                    <Border.Background>
+                                        <MultiBinding Converter="{StaticResource CategoryToColorConverter}">
+                                            <Binding />
+                                            <Binding Path="BindingContext.SelectedCategoryPolish"
+                                 Source="{x:Reference RootPage}" />
+                                        </MultiBinding>
+                                    </Border.Background>
+
                                     <Label Text="{Binding}" TextColor="Black" />
-                                </Frame>
+                                </Border>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

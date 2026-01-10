@@ -44,6 +44,7 @@ namespace Qentry
             builder.Services.AddTransient<StaffEventDetailsViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<EditProfileViewModel>();
+            builder.Services.AddTransient<TransactionsPageViewModel>();
 
             builder.Services.AddSingleton<LoginPage>();
             builder.Services.AddSingleton<RegisterPage>();
@@ -59,6 +60,7 @@ namespace Qentry
             builder.Services.AddTransient<ManageRolesPage>();
             builder.Services.AddTransient<StaffEventDetailsPage>();
             builder.Services.AddTransient<EditProfilePage>();
+            builder.Services.AddTransient<TransactionsPage>();
 
 
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pl-PL");

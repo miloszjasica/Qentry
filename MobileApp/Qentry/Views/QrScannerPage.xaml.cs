@@ -5,11 +5,12 @@ namespace Qentry.Views;
 
 public partial class QrScannerPage : ContentPage
 {
-    public TaskCompletionSource<string> QrResultSource { get; } = new();
+    public TaskCompletionSource<string> QrResultSource;
 
     public QrScannerPage()
     {
         InitializeComponent();
+        QrResultSource = new TaskCompletionSource<string>();
     }
 
     private void CameraView_BarcodesDetected(object sender, BarcodeDetectionEventArgs e)
@@ -31,4 +32,12 @@ public partial class QrScannerPage : ContentPage
         }
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        // Jeśli użytkownik wrócił drugi raz — reset TCS
+        if (QrResultSource.Task.IsCompleted)
+            QrResultSource = new TaskCompletionSource<string>();
+    }
 }

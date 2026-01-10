@@ -14,102 +14,139 @@ namespace Qentry.ViewModels
     {
         private readonly Action _refreshAction;
 
-        public EventViewModel EventVM { get; set; }
+        public EventViewModel EventVM { get; }
 
-        [ObservableProperty] private int displayedMonth;
-        [ObservableProperty] private int displayedYear;
+        // ───────────── DATA WYŚWIETLANA ─────────────
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(CurrentMonthName))]
+        private DateTime displayedDate;
 
         public string CurrentMonthName =>
-            char.ToUpper(
-                new DateTime(DisplayedYear, DisplayedMonth, 1)
-                    .ToString("MMMM yyyy", new CultureInfo("pl-PL"))[0]
-            ) + new DateTime(DisplayedYear, DisplayedMonth, 1)
-                .ToString("MMMM yyyy", new CultureInfo("pl-PL"))
-                .Substring(1);
+            CultureInfo
+                .GetCultureInfo("pl-PL")
+                .TextInfo
+                .ToTitleCase(DisplayedDate.ToString("MMMM yyyy"));
 
+        // ───────────── FILTRY ─────────────
         [ObservableProperty] private bool isFilterPanelVisible;
-
-        [ObservableProperty] private string selectedCategory;
         [ObservableProperty] private string searchQuery;
         [ObservableProperty] private string locationFilter;
         [ObservableProperty] private string manualDateFilter;
+        [ObservableProperty] private DateTime selectedDate;
+        [ObservableProperty] private string selectedCategoryPolish;
 
         private string DateFilter { get; set; }
 
-        public ObservableCollection<string> Categories { get; } = new()
+        // ───────────── KATEGORIE ─────────────
+        public ObservableCollection<string> CategoriesPolish { get; } = new()
         {
-            "music", "art", "food", "sport", "business",
-            "theatre", "tech", "wellness", "gaming",
-            "film", "fashion", "books", "other"
+            "Muzyka","Sztuka","Jedzenie","Sport","Biznes","Teatr","Technologia",
+            "Wellness","Gry","Film","Moda","Książki","Inne"
         };
 
-        [ObservableProperty]
-        private DateTime selectedDate;
-
-        partial void OnSelectedDateChanged(DateTime value)
+        public Dictionary<string, string> CategoryMap { get; } = new()
         {
-            DateFilter = value.ToString("yyyy-MM-dd");
-            LoadEventsWithFilters();
-        }
+            { "Muzyka", "music" },
+            { "Sztuka", "art" },
+            { "Jedzenie", "food" },
+            { "Sport", "sport" },
+            { "Biznes", "business" },
+            { "Teatr", "theatre" },
+            { "Technologia", "tech" },
+            { "Wellness", "wellness" },
+            { "Gry", "gaming" },
+            { "Film", "film" },
+            { "Moda", "fashion" },
+            { "Książki", "books" },
+            { "Inne", "other" }
+        };
 
+        private string SelectedCategoryEnglish =>
+            selectedCategoryPolish != null &&
+            CategoryMap.TryGetValue(selectedCategoryPolish, out var en)
+                ? en
+                : null;
+
+        // ───────────── COMMANDY ─────────────
         public ICommand PrevMonthCommand { get; }
         public ICommand NextMonthCommand { get; }
         public ICommand ToggleFilterPanelCommand { get; }
-        public ICommand ApplyFiltersCommand { get; }
         public ICommand ResetFiltersCommand { get; }
         public ICommand SearchCommand { get; }
 
+        // ───────────── CTOR ─────────────
         public CalendarViewModel(Action refreshAction)
         {
             _refreshAction = refreshAction;
 
             var httpClient = new HttpClient();
-
             EventVM = new EventViewModel(
                 new EventService(httpClient),
                 new TokensService(httpClient));
 
             var now = DateTime.Now;
-            DisplayedMonth = now.Month;
-            DisplayedYear = now.Year;
-            SelectedDate = now;
 
-            PrevMonthCommand = new RelayCommand(PrevMonth);
-            NextMonthCommand = new RelayCommand(NextMonth);
+            DisplayedDate = new DateTime(now.Year, now.Month, 1);
+            SelectedDate = now;
+            DateFilter = now.ToString("yyyy-MM-dd");
+
+            PrevMonthCommand = new RelayCommand(() =>
+            {
+                DisplayedDate = DisplayedDate.AddMonths(-1);
+                _refreshAction();
+            });
+
+            NextMonthCommand = new RelayCommand(() =>
+            {
+                DisplayedDate = DisplayedDate.AddMonths(1);
+                _refreshAction();
+            });
 
             ToggleFilterPanelCommand = new RelayCommand(() =>
-            {
-                IsFilterPanelVisible = !IsFilterPanelVisible;
-            });
+                IsFilterPanelVisible = !IsFilterPanelVisible);
 
-            ApplyFiltersCommand = new AsyncRelayCommand(async () =>
-            {
-                await LoadEventsWithFilters();
-                IsFilterPanelVisible = false;
-            });
+            SearchCommand = new AsyncRelayCommand(ReloadEvents);
 
-            ResetFiltersCommand = new RelayCommand(async () =>
+            ResetFiltersCommand = new AsyncRelayCommand(async () =>
             {
-                SearchQuery = "";
-                SelectedCategory = null;
-                LocationFilter = "";
-                ManualDateFilter = "";
+                SearchQuery = null;
+                LocationFilter = null;
+                ManualDateFilter = null;
+                SelectedCategoryPolish = null;
+
+                SelectedDate = DateTime.Today; 
                 DateFilter = null;
 
-                await LoadEventsWithFilters();
+                await ReloadEvents();
             });
 
-            SearchCommand = new AsyncRelayCommand(async () =>
-            {
-                await LoadEventsWithFilters();
-            });
-
-            LoadEventsWithFilters();
+            ReloadEvents().ConfigureAwait(false);
         }
 
-        partial void OnSelectedCategoryChanged(string value)
+        // ───────────── INTERAKCJE ─────────────
+
+        public async void SelectDate(DateTime date)
         {
-            LoadEventsWithFilters();
+            SelectedDate = date;
+            DateFilter = date.ToString("yyyy-MM-dd");
+            await ReloadEvents();
+        }
+
+        [RelayCommand]
+        private async Task SelectCategory(string category)
+        {
+            SelectedCategoryPolish = category;
+            await ReloadEvents();
+        }
+
+        partial void OnSearchQueryChanged(string value)
+        {
+            ReloadEvents().ConfigureAwait(false);
+        }
+
+        partial void OnLocationFilterChanged(string value)
+        {
+            ReloadEvents().ConfigureAwait(false);
         }
 
         partial void OnManualDateFilterChanged(string value)
@@ -119,54 +156,30 @@ namespace Qentry.ViewModels
             else
                 DateFilter = null;
 
-            LoadEventsWithFilters();
+            ReloadEvents().ConfigureAwait(false);
         }
 
-        private void PrevMonth()
+        // ───────────── API ─────────────
+
+        private EventFilterModel BuildFilter()
         {
-            DisplayedMonth--;
-            if (DisplayedMonth < 1)
+            return new EventFilterModel
             {
-                DisplayedMonth = 12;
-                DisplayedYear--;
-            }
-            _refreshAction();
-        }
-
-        private void NextMonth()
-        {
-            DisplayedMonth++;
-            if (DisplayedMonth > 12)
-            {
-                DisplayedMonth = 1;
-                DisplayedYear++;
-            }
-            _refreshAction();
-        }
-
-        public void SelectDate(DateTime date)
-        {
-            SelectedDate = date;
-        }
-
-        private async Task LoadEventsWithFilters()
-        {
-            var filter = new EventFilterModel
-            {
-                Date = DateFilter,
                 Name = string.IsNullOrWhiteSpace(SearchQuery) ? null : SearchQuery,
-                Category = string.IsNullOrWhiteSpace(SelectedCategory) ? null : SelectedCategory,
-                Location = string.IsNullOrWhiteSpace(LocationFilter) ? SearchQuery : LocationFilter
+                Date = DateFilter,
+                Category = SelectedCategoryEnglish,
+                Location = string.IsNullOrWhiteSpace(LocationFilter) ? null : LocationFilter
             };
+        }
 
+        private async Task ReloadEvents()
+        {
+            var filter = BuildFilter();
             var results = await EventVM.EventService.GetEventsAsync(filter);
 
             EventVM.Events.Clear();
-
             foreach (var ev in results)
                 EventVM.Events.Add(ev);
-
-            OnPropertyChanged(nameof(EventVM));
         }
     }
 }

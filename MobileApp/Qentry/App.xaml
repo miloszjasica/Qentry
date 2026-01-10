@@ -9,6 +9,7 @@
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
             <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
             <converters:BoolToTextColorConverter x:Key="BoolToTextColorConverter"/>
+            <converters:CategoryToColorConverter x:Key="CategoryToColorConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />

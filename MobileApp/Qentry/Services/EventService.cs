@@ -15,7 +15,7 @@ namespace Qentry.Services
     public class EventService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = "http://192.168.201.1:8000/events";
+        private readonly string _baseUrl = "http://57.128.249.150/events";
 
         public EventService(HttpClient httpClient)
         {
@@ -118,7 +118,7 @@ namespace Qentry.Services
         {
             await AddAuthAsync();
 
-            var baseUrl = "http://192.168.201.1:8000/events/organizer-events/";
+            var baseUrl = "http://57.128.249.150/events/organizer-events/";
 
             var url = BuildUrlForOrganizer(baseUrl, filter);
 
@@ -201,7 +201,7 @@ namespace Qentry.Services
             var json = JsonSerializer.Serialize(updated);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PatchAsync($"http://192.168.201.1:8000/attractions/{attractionId}/update/", content);
+            var response = await _httpClient.PatchAsync($"http://57.128.249.150/attractions/{attractionId}/update/", content);
 
             return response.IsSuccessStatusCode;
         }
@@ -210,7 +210,7 @@ namespace Qentry.Services
         {
             await AddAuthAsync();
 
-            var url = $"http://192.168.201.1:8000/attractions/{attractionId}/";
+            var url = $"http://57.128.249.150/attractions/{attractionId}/";
 
             var response = await _httpClient.GetAsync(url);
 
