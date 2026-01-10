@@ -44,7 +44,7 @@ export default function Transactions() {
   if (transactions.length === 0) return <div style={{ padding: 24 }}>Brak transakcji</div>;
 
   return (
-    <div style={{ padding: "24px" }}>
+    <div className="p-6 max-w-5xl mx-auto">
         <button
           onClick={onBack}
           className="mb-6 flex items-center gap-2 text-gray-600 hover:text-[#9893da] transition-colors"

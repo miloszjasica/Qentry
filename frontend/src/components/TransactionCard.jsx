@@ -50,7 +50,7 @@ export default function TransactionCard({ transaction }) {
         <div>
           <p className="text-gray-500 mb-1">Typ</p>
           <p className="text-gray-900 font-medium">
-            {isTopUp ? "Doładowanie" : "Wydatek"}
+            {isTopUp ? "Doładowanie" : "Zakup"}
           </p>
         </div>
 
