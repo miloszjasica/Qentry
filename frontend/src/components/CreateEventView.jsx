@@ -105,12 +105,11 @@ export function CreateEventView({ onBack, onSubmit, isLoading }) {
                 value={description}
                 onChange={(e) => {
                   const value = e.target.value;
-                  // limit do 200 znaków
-                  if (value.length <= 1000) {
+                  if (value.length <= 500) {
                     setDescription(value);
-                    setErrors(prev => ({ ...prev, description: "" })); // usuń błąd jeśli jest ok
+                    setErrors(prev => ({ ...prev, description: "" }));
                   } else {
-                    setErrors(prev => ({ ...prev, description: "Opis nie może mieć więcej niż 1000 znaków" }));
+                    setErrors(prev => ({ ...prev, description: "Opis nie może mieć więcej niż 500 znaków" }));
                   }
                 }}
                 rows={4}
@@ -118,7 +117,7 @@ export function CreateEventView({ onBack, onSubmit, isLoading }) {
                 placeholder="Opisz swoje wydarzenie..."
               />
               {errors.description && <p className="mt-1 text-sm text-red-500">{errors.description}</p>}
-              <p className="mt-1 text-sm text-gray-500 text-right">{description.length}/1000</p>
+              <p className="mt-1 text-sm text-gray-500 text-right">{description.length}/500</p>
             </div>
 
 
