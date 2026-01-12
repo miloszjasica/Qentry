@@ -42,7 +42,7 @@ useEffect(() => {
     <Router>
       <div style={{ display: "flex" }}>
 
-        <div style={{ flex: 1, marginLeft: isSidebarExpanded ? 256 : 80, transition: "margin-left 0.3s",  marginTop: "72px" }}>
+        <div style={{ flex: 1, marginLeft: isMobile ? 0 : (isSidebarExpanded ? 256 : 80), transition: "margin-left 0.3s", marginTop: "0px", overflow: "visible"}}>
           <Routes>
             {/* <Route path="/" element={<Home search={search} />} /> */}
             <Route path="/login" element={<Login />} />

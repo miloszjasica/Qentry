@@ -49,6 +49,7 @@ export default function Header({
         style={{
           position: "fixed",
           top: 0,
+          
           left: isMobile ? 0 : isExpanded ? 256 : 80,
           right: 0,
           height: "72px",
@@ -135,7 +136,7 @@ export default function Header({
       {isMobile && showMobileSearch && (
         <div
           style={{
-            
+            position: "fixed",
             top: 72,
             left: 0,
             right: 0,

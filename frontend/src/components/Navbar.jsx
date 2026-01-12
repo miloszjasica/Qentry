@@ -58,7 +58,7 @@
             top: 0,
             left: isMobile ? (isOpen ? 0 : "-100vw") : 0,
             width: isMobile ? "100vw" : isExpanded ? 256 : 80,
-            height: "100vh",
+            height: "100dvh",
             background: "#544E61",
             display: "flex",
             flexDirection: "column",
@@ -133,6 +133,9 @@
               <NavLink
                 key={to}
                 to={to}
+                onClick={() => {
+                  if (isMobile) setIsOpen(false);
+                }}
                 style={({ isActive }) => ({
                   display: "flex",
                   alignItems: "center",
