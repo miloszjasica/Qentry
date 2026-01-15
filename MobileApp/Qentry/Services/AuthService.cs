@@ -9,7 +9,7 @@ namespace Qentry.Services
     public class AuthService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = "http://192.168.201.1:8000/api/users";
+        private readonly string _baseUrl = "http://57.128.249.150/api/users";
 
         public AuthService(HttpClient httpClient)
         {
@@ -79,7 +79,7 @@ namespace Qentry.Services
                 }
 
                 TokenStorage.ClearTokens();
-                Preferences.Set("RemeberMe", false);
+                Preferences.Set("RememberMe", false);
                 return true;
             }
             catch (Exception ex)
@@ -169,6 +169,60 @@ namespace Qentry.Services
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
                 return false;
+
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> RegisterAsync(RegisterModel model)
+        {
+            try
+            {
+                var validation = model.Validate();
+                if (validation != null)
+                {
+                    Console.WriteLine("[Register] Validation error: " + validation);
+                    return false;
+                }
+
+                var json = JsonSerializer.Serialize(model);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await _httpClient.PostAsync($"{_baseUrl}/register/", content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    var error = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine("[Register] Server error: " + error);
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Register] Exception: {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateUserAsync(UserModel updatedUser)
+        {
+            var accessToken = await TokenStorage.GetAccessTokenAsync();
+            if (string.IsNullOrEmpty(accessToken))
+                return false;
+
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", accessToken);
+
+            var json = JsonSerializer.Serialize(updatedUser);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var request = new HttpRequestMessage(HttpMethod.Patch, $"{_baseUrl}/me/")
+            {
+                Content = content
+            };
+
+            var response = await _httpClient.SendAsync(request);
 
             return response.IsSuccessStatusCode;
         }

@@ -1,51 +1,154 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:Qentry.Views.Controls"
-             x:Class="Qentry.Views.CreateEventPage">
-	<Grid>
-		<ScrollView>
-			<VerticalStackLayout Padding="20" Spacing="15">
+             x:Class="Qentry.Views.CreateEventPage"
+             BackgroundColor="{StaticResource Primary}">
 
-				<Entry Placeholder="Nazwa"
-					   Text="{Binding Name}" />
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="20">
 
-				<Editor Placeholder="Opis"
-						HeightRequest="100"
-						Text="{Binding Description}" />
 
-				<Entry Placeholder="Lokalizacja"
-					   Text="{Binding Location}" />
+                <Border Stroke="{StaticResource Color3}"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 12"
+                        BackgroundColor="{StaticResource BgColor}">
 
-				<Button Text="Pobierz lokalizację"
-						Command="{Binding GetLocationCommand}"
-						BackgroundColor="#2196F3"
-						TextColor="White" />
-				
-				<Entry Placeholder="Latitude"
-					   Text="{Binding Latitude}" />
+                    <VerticalStackLayout Padding="20" Spacing="18">
 
-				<Entry Placeholder="Longitude"
-					   Text="{Binding Longitude}" />
+                        <VerticalStackLayout>
+                            <Label Text="Nazwa wydarzenia *"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+                            <Entry Placeholder="Np. Koncert Muzyki Elektronicznej"
+                                   Text="{Binding Name}"
+                                   BackgroundColor="White"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+                        </VerticalStackLayout>
 
-				<DatePicker Date="{Binding StartDate}" />
-				<DatePicker Date="{Binding EndDate}" />
+                        <VerticalStackLayout>
+                            <Label Text="Opis *"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+                            <Editor Placeholder="Opisz swoje wydarzenie..."
+                                    HeightRequest="120"
+                                    BackgroundColor="White"
+                                    TextColor="{StaticResource PrimaryDarkText}"
+                                    PlaceholderColor="#9d9d9d"
+                                    Text="{Binding Description}" />
+                        </VerticalStackLayout>
 
-				<Entry Placeholder="Uczestnicy"
-					   Keyboard="Numeric"
-					   Text="{Binding Participants}" />
+                        <VerticalStackLayout>
+                            <Label Text="Lokalizacja *"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+                            <Entry Placeholder="Np. Klub Muzyczny 'Scena', Warszawa"
+                                   BackgroundColor="White"
+                                   TextColor="{StaticResource PrimaryDarkText}"
+                                   Text="{Binding Location}" />
+                        </VerticalStackLayout>
 
-				<Entry Placeholder="URL zdjęcia"
-					   Text="{Binding Image}" />
+                        <Button Text="Pobierz lokalizację"
+                                Command="{Binding GetLocationCommand}"
+                                BackgroundColor="{StaticResource Primary}"
+                                CornerRadius="8"
+                                TextColor="White" />
 
-				<Entry Placeholder="Kategoria"
-					   Text="{Binding Category}" />
+                        <Grid ColumnDefinitions="1*, 1*" ColumnSpacing="10">
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="Data rozpoczęcia *"
+                                       FontAttributes="Bold"
+                                       FontSize="14"
+                                       TextColor="{StaticResource PrimaryDarkText}" />
+                                <DatePicker Date="{Binding StartDate}"
+                                            TextColor="{StaticResource PrimaryDarkText}" 
+                                            BackgroundColor="White"/>
+                            </VerticalStackLayout>
 
-				<Button Text="Utwórz wydarzenie"
-						Command="{Binding CreateEventCommand}"
-						BackgroundColor="#4CAF50"
-						TextColor="White" />
-			</VerticalStackLayout>
-		</ScrollView>
-		<components:CustomBottomNavBar VerticalOptions="End" />
-	</Grid>
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label Text="Data zakończenia *"
+                                       FontAttributes="Bold"
+                                       FontSize="14"
+                                       TextColor="{StaticResource PrimaryDarkText}" />
+                                <DatePicker Date="{Binding EndDate}"
+                                            TextColor="{StaticResource PrimaryDarkText}"
+                                            BackgroundColor="White"/>
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <VerticalStackLayout>
+                            <Label Text="Maksymalna liczba uczestników *"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+                            <Entry Placeholder="Np. 100"
+                                   Keyboard="Numeric"
+                                   BackgroundColor="White"
+                                   TextColor="{StaticResource PrimaryDarkText}"
+                                   PlaceholderColor="#9d9d9d"
+                                   Text="{Binding Participants}" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout>
+                            <Label Text="Zdjęcie *"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+
+                            <Button Text="Wybierz zdjęcie"
+                                    Command="{Binding PickImageCommand}"
+                                    BackgroundColor="{StaticResource Tertiary}"
+                                    CornerRadius="8"
+                                    TextColor="White" />
+
+                            <Image Source="{Binding ImagePreview}"
+                                   HeightRequest="180"
+                                   Aspect="AspectFill"
+                                   Margin="0,10,0,0"
+                                   IsVisible="{Binding IsImageSelected}" />
+
+                            <Button Text="Usuń zdjęcie"
+                                    Command="{Binding RemoveImageCommand}"
+                                    BackgroundColor="{StaticResource Quaternary}"
+                                    CornerRadius="8"
+                                    TextColor="White"
+                                    IsVisible="{Binding IsImageSelected}" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout>
+                            <Label Text="Kategoria"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource PrimaryDarkText}" />
+                            <Picker Title=""
+                                    ItemsSource="{Binding Categories}"
+                                    SelectedItem="{Binding Category}"
+                                    TextColor="{StaticResource PrimaryDarkText}"
+                                    BackgroundColor="White"/>
+                        </VerticalStackLayout>
+
+                        <Button Text="Utwórz wydarzenie"
+                                Command="{Binding CreateEventCommand}"
+                                BackgroundColor="{StaticResource Secondary}"
+                                HeightRequest="50"
+                                CornerRadius="10"
+                                FontSize="16"
+                                TextColor="White" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+<<<<<<< HEAD
+
+=======
+                <Grid BackgroundColor="{StaticResource Primary}" HeightRequest="100"/>
+>>>>>>> patrykjas
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <components:CustomBottomNavBar VerticalOptions="End" />
+    </Grid>
 </ContentPage>

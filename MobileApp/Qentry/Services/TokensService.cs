@@ -13,7 +13,7 @@ namespace Qentry.Services
     public class TokensService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = "http://192.168.201.1:8000/api/tokens";
+        private readonly string _baseUrl = "http://57.128.249.150/api/tokens";
 
         public TokensService(HttpClient httpClient) 
         { 
@@ -115,5 +115,111 @@ namespace Qentry.Services
 
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<bool> AssignRoleAsync(int eventId, string email, string role)
+        {
+            await AddAuthAsync();
+
+            var payload = new
+            {
+                email = email,
+                role = role
+            };
+
+            var json = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync($"{_baseUrl}/events/{eventId}/assign-role/", json);
+
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<List<EventRoleModel>> GetEventRolesAsync(int eventId)
+        {
+            await AddAuthAsync();
+
+            var response = await _httpClient.GetAsync($"{_baseUrl}/events/{eventId}/roles/");
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Nie udało się pobrać ról uczestników");
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<List<EventRoleModel>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        }
+
+        public async Task<List<QrEventsModel>> GetAllUserEventRolesAsync()
+        {
+            await AddAuthAsync();
+
+            var response = await _httpClient.GetAsync($"{_baseUrl}/events/my/");
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Nie udało się pobrać zapisanych wydarzeń");
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<List<QrEventsModel>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        }
+
+        public async Task<AddTokensResponse> AddTokensAsync(string qrString, int eventId, int amount)
+        {
+            await AddAuthAsync();
+
+            var url = $"{_baseUrl}/users/{qrString}/{eventId}/add/?amount={amount}";
+
+            var response = await _httpClient.PostAsync(url, null);
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Nie udało się dodać tokenów.");
+
+            var resp = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<AddTokensResponse>(resp, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
+        }
+
+        public async Task<PayAttractionResponse> PayForAttractionAsync(string qrString, int attractionId)
+        {
+            await AddAuthAsync();
+
+            var response = await _httpClient.PostAsync($"{_baseUrl}/transactions/{qrString}/{attractionId}/", null);
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Nie udało się wykonać transakcji.");
+
+            var resp = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<PayAttractionResponse>(resp, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        }
+<<<<<<< HEAD
+=======
+
+        public async Task<List<TransactionDto>> GetMyTransactionsAsync(int? eventId = null, int? attractionId = null)
+        {
+            await AddAuthAsync();
+
+            var query = new List<string>();
+
+            if (eventId.HasValue)
+                query.Add($"id_event={eventId.Value}");
+
+            if (attractionId.HasValue)
+                query.Add($"id_attraction={attractionId.Value}");
+
+            var url = $"{_baseUrl}/transactions/";
+            if (query.Any())
+                url += "?" + string.Join("&", query);
+
+            var response = await _httpClient.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Nie udało się pobrać transakcji");
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            var result = JsonSerializer.Deserialize<TransactionsResponse>(
+                json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            return result?.Transactions ?? new List<TransactionDto>();
+        }
+>>>>>>> patrykjas
     }
 }

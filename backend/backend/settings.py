@@ -1,3 +1,4 @@
+import os
 """
 Django settings for backend project.
 
@@ -24,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$c2qk4j9i1jz#rs*@1*(2*t&6+td9*-@)y45js&*mj4j=6no)k'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '10.0.2.2','192.168.201.1', '*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '10.0.2.2','192.168.201.1', '57.128.249.150']
 
 
 # Application definition
@@ -134,6 +135,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

@@ -4,9 +4,15 @@ from .models import Event
 class EventSerializer(serializers.ModelSerializer):
 
     user_id = serializers.PrimaryKeyRelatedField(read_only=True)
+    participants = serializers.IntegerField(
+        source='participants_count',
+        read_only=True
+    )
+
     class Meta:
         model = Event
         fields = '__all__'
+        read_only_fields = ('latitude', 'longitude')
 
 
     def validate(self, data):

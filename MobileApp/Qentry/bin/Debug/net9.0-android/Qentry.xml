@@ -4,6 +4,21 @@
         <name>Qentry</name>
     </assembly>
     <members>
+        <member name="T:Qentry.ViewModels.AddAttractionViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:Qentry.ViewModels.AddAttractionViewModel.Name">
+            <inheritdoc cref="F:Qentry.ViewModels.AddAttractionViewModel.name"/>
+        </member>
+        <member name="P:Qentry.ViewModels.AddAttractionViewModel.Description">
+            <inheritdoc cref="F:Qentry.ViewModels.AddAttractionViewModel.description"/>
+        </member>
+        <member name="P:Qentry.ViewModels.AddAttractionViewModel.IsActive">
+            <inheritdoc cref="F:Qentry.ViewModels.AddAttractionViewModel.isActive"/>
+        </member>
+        <member name="P:Qentry.ViewModels.AddAttractionViewModel.Price">
+            <inheritdoc cref="F:Qentry.ViewModels.AddAttractionViewModel.price"/>
+        </member>
         <member name="T:Qentry.ViewModels.CalendarViewModel">
             <inheritdoc/>
         </member>
@@ -31,10 +46,41 @@
         <member name="P:Qentry.ViewModels.CalendarViewModel.SelectedDate">
             <inheritdoc cref="F:Qentry.ViewModels.CalendarViewModel.selectedDate"/>
         </member>
+<<<<<<< HEAD
+=======
+        <member name="P:Qentry.ViewModels.CalendarViewModel.SelectedCategoryPolish">
+            <inheritdoc cref="F:Qentry.ViewModels.CalendarViewModel.selectedCategoryPolish"/>
+        </member>
+>>>>>>> patrykjas
+        <member name="M:Qentry.ViewModels.CalendarViewModel.OnSelectedCategoryChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:Qentry.ViewModels.CalendarViewModel.SelectedCategory"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:Qentry.ViewModels.CalendarViewModel.SelectedCategory"/> is changed.</remarks>
+        </member>
+        <member name="M:Qentry.ViewModels.CalendarViewModel.OnManualDateFilterChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:Qentry.ViewModels.CalendarViewModel.ManualDateFilter"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:Qentry.ViewModels.CalendarViewModel.ManualDateFilter"/> is changed.</remarks>
+        </member>
         <member name="M:Qentry.ViewModels.CalendarViewModel.OnSelectedDateChanged(System.DateTime)">
             <summary>Executes the logic for when <see cref="P:Qentry.ViewModels.CalendarViewModel.SelectedDate"/> just changed.</summary>
             <param name="value">The new property value that was set.</param>
             <remarks>This method is invoked right after the value of <see cref="P:Qentry.ViewModels.CalendarViewModel.SelectedDate"/> is changed.</remarks>
+        </member>
+        <member name="T:Qentry.ViewModels.EditAttractionViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:Qentry.ViewModels.EditAttractionViewModel.Name">
+            <inheritdoc cref="F:Qentry.ViewModels.EditAttractionViewModel.name"/>
+        </member>
+        <member name="P:Qentry.ViewModels.EditAttractionViewModel.Description">
+            <inheritdoc cref="F:Qentry.ViewModels.EditAttractionViewModel.description"/>
+        </member>
+        <member name="P:Qentry.ViewModels.EditAttractionViewModel.IsActive">
+            <inheritdoc cref="F:Qentry.ViewModels.EditAttractionViewModel.isActive"/>
+        </member>
+        <member name="P:Qentry.ViewModels.EditAttractionViewModel.Price">
+            <inheritdoc cref="F:Qentry.ViewModels.EditAttractionViewModel.price"/>
         </member>
         <member name="T:Qentry.ViewModels.HorizontalCalendarViewModel">
             <inheritdoc/>
@@ -57,6 +103,27 @@
         </member>
         <member name="P:Qentry.ViewModels.LogoutViewModel.LogoutCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:Qentry.ViewModels.LogoutViewModel.LogoutAsync"/>.</summary>
+        </member>
+        <member name="T:Qentry.ViewModels.ManageRolesViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:Qentry.ViewModels.ManageRolesViewModel.EventId">
+            <inheritdoc cref="F:Qentry.ViewModels.ManageRolesViewModel.eventId"/>
+        </member>
+        <member name="P:Qentry.ViewModels.ManageRolesViewModel.Email">
+            <inheritdoc cref="F:Qentry.ViewModels.ManageRolesViewModel.email"/>
+        </member>
+        <member name="P:Qentry.ViewModels.ManageRolesViewModel.SelectedRole">
+            <inheritdoc cref="F:Qentry.ViewModels.ManageRolesViewModel.selectedRole"/>
+        </member>
+        <member name="T:Qentry.ViewModels.MyEventDetailsViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:Qentry.ViewModels.MyEventDetailsViewModel.EventModel">
+            <inheritdoc cref="F:Qentry.ViewModels.MyEventDetailsViewModel.eventModel"/>
+        </member>
+        <member name="P:Qentry.ViewModels.MyEventDetailsViewModel.IsOrganizer">
+            <inheritdoc cref="F:Qentry.ViewModels.MyEventDetailsViewModel.isOrganizer"/>
         </member>
         <member name="T:Qentry.ViewModels.MyEventsViewModel">
             <inheritdoc/>
@@ -81,6 +148,9 @@
         </member>
         <member name="P:Qentry.ViewModels.MyEventsViewModel.ManualDateFilter">
             <inheritdoc cref="F:Qentry.ViewModels.MyEventsViewModel.manualDateFilter"/>
+        </member>
+        <member name="P:Qentry.ViewModels.MyEventsViewModel.IsOrganizer">
+            <inheritdoc cref="F:Qentry.ViewModels.MyEventsViewModel.isOrganizer"/>
         </member>
         <member name="P:Qentry.ViewModels.MyEventsViewModel.IsCreatedSelected">
             <inheritdoc cref="F:Qentry.ViewModels.MyEventsViewModel.isCreatedSelected"/>
@@ -130,6 +200,7 @@
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
+            <inheritdoc/>
         </member>
         <member name="P:Qentry.ViewModels.SavedEventsViewModel.SelectedDateString">
             <inheritdoc cref="F:Qentry.ViewModels.SavedEventsViewModel.selectedDateString"/>
@@ -155,6 +226,9 @@
         <member name="P:Qentry.ViewModels.SavedEventsViewModel.IsCreatedSelected">
             <inheritdoc cref="F:Qentry.ViewModels.SavedEventsViewModel.isCreatedSelected"/>
         </member>
+        <member name="P:Qentry.ViewModels.SavedEventsViewModel.SelectedCategoryPolish">
+            <inheritdoc cref="F:Qentry.ViewModels.SavedEventsViewModel.selectedCategoryPolish"/>
+        </member>
         <member name="M:Qentry.ViewModels.SavedEventsViewModel.OnSelectedCategoryChanged(System.String)">
             <summary>Executes the logic for when <see cref="P:Qentry.ViewModels.SavedEventsViewModel.SelectedCategory"/> just changed.</summary>
             <param name="value">The new property value that was set.</param>
@@ -164,6 +238,17 @@
             <summary>Executes the logic for when <see cref="P:Qentry.ViewModels.SavedEventsViewModel.ManualDateFilter"/> just changed.</summary>
             <param name="value">The new property value that was set.</param>
             <remarks>This method is invoked right after the value of <see cref="P:Qentry.ViewModels.SavedEventsViewModel.ManualDateFilter"/> is changed.</remarks>
+        </member>
+        <member name="M:Qentry.ViewModels.SavedEventsViewModel.OnSelectedCategoryPolishChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:Qentry.ViewModels.SavedEventsViewModel.SelectedCategoryPolish"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:Qentry.ViewModels.SavedEventsViewModel.SelectedCategoryPolish"/> is changed.</remarks>
+        </member>
+        <member name="F:Qentry.ViewModels.SavedEventsViewModel.selectCategoryCommand">
+            <summary>The backing field for <see cref="P:Qentry.ViewModels.SavedEventsViewModel.SelectCategoryCommand"/>.</summary>
+        </member>
+        <member name="P:Qentry.ViewModels.SavedEventsViewModel.SelectCategoryCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:Qentry.ViewModels.SavedEventsViewModel.SelectCategory(System.String)"/>.</summary>
         </member>
         <member name="F:Qentry.ViewModels.SavedEventsViewModel.showCreatedCommand">
             <summary>The backing field for <see cref="P:Qentry.ViewModels.SavedEventsViewModel.ShowCreatedCommand"/>.</summary>
@@ -183,17 +268,65 @@
         <member name="P:Qentry.ViewModels.SavedEventsViewModel.ToggleFilterPanelCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:Qentry.ViewModels.SavedEventsViewModel.ToggleFilterPanel"/>.</summary>
         </member>
+        <member name="T:Qentry.ViewModels.StaffEventDetailsViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:Qentry.ViewModels.StaffEventDetailsViewModel.EventModel">
+            <inheritdoc cref="F:Qentry.ViewModels.StaffEventDetailsViewModel.eventModel"/>
+        </member>
+        <member name="P:Qentry.ViewModels.StaffEventDetailsViewModel.CanAddTokens">
+            <inheritdoc cref="F:Qentry.ViewModels.StaffEventDetailsViewModel.canAddTokens"/>
+        </member>
+        <member name="P:Qentry.ViewModels.StaffEventDetailsViewModel.CanTakeTokens">
+            <inheritdoc cref="F:Qentry.ViewModels.StaffEventDetailsViewModel.canTakeTokens"/>
+        </member>
+        <member name="P:Qentry.ViewModels.StaffEventDetailsViewModel.ScannedQr">
+            <inheritdoc cref="F:Qentry.ViewModels.StaffEventDetailsViewModel.scannedQr"/>
+        </member>
+        <member name="P:Qentry.ViewModels.StaffEventDetailsViewModel.AddTokensAmount">
+            <inheritdoc cref="F:Qentry.ViewModels.StaffEventDetailsViewModel.addTokensAmount"/>
+        </member>
+        <member name="P:Qentry.ViewModels.StaffEventDetailsViewModel.AttractionId">
+            <inheritdoc cref="F:Qentry.ViewModels.StaffEventDetailsViewModel.attractionId"/>
+        </member>
         <member name="T:Qentry.Resource">
             <summary>
             Android Resource Designer class.
             Exposes the Android Resource designer assembly into the project Namespace.
             </summary>
         </member>
+        <member name="T:EditEventViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:EditEventViewModel.Name">
+            <inheritdoc cref="F:EditEventViewModel.name"/>
+        </member>
+        <member name="P:EditEventViewModel.Description">
+            <inheritdoc cref="F:EditEventViewModel.description"/>
+        </member>
+        <member name="P:EditEventViewModel.Location">
+            <inheritdoc cref="F:EditEventViewModel.location"/>
+        </member>
+        <member name="P:EditEventViewModel.StartDate">
+            <inheritdoc cref="F:EditEventViewModel.startDate"/>
+        </member>
         <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
             <summary>
             A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instances
             for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
             </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Name">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Name" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Description">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Description" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsActive">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsActive" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Price">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Price" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DisplayedMonth">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DisplayedMonth" generated properties.</summary>
@@ -219,6 +352,18 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedDate">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedDate" generated properties.</summary>
         </member>
+<<<<<<< HEAD
+=======
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedCategoryPolish">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedCategoryPolish" generated properties.</summary>
+        </member>
+>>>>>>> patrykjas
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Location">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Location" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.StartDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "StartDate" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Days">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Days" generated properties.</summary>
         </member>
@@ -227,6 +372,21 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsBusy">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EventId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EventId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Email">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Email" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedRole">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedRole" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EventModel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EventModel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsOrganizer">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsOrganizer" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedDateString">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedDateString" generated properties.</summary>
@@ -246,11 +406,38 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedEvent">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedEvent" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CanAddTokens">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CanAddTokens" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CanTakeTokens">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CanTakeTokens" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ScannedQr">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ScannedQr" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AddTokensAmount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AddTokensAmount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AttractionId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AttractionId" generated properties.</summary>
+        </member>
         <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
             <summary>
             A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
             for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
             </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Name">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Name" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Description">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Description" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsActive">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsActive" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Price">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Price" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DisplayedMonth">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DisplayedMonth" generated properties.</summary>
@@ -276,6 +463,18 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedDate">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedDate" generated properties.</summary>
         </member>
+<<<<<<< HEAD
+=======
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedCategoryPolish">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedCategoryPolish" generated properties.</summary>
+        </member>
+>>>>>>> patrykjas
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Location">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Location" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.StartDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "StartDate" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Days">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Days" generated properties.</summary>
         </member>
@@ -284,6 +483,21 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsBusy">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EventId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EventId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Email">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Email" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedRole">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedRole" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EventModel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EventModel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsOrganizer">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsOrganizer" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedDateString">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedDateString" generated properties.</summary>
@@ -302,6 +516,21 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedEvent">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedEvent" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CanAddTokens">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CanAddTokens" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CanTakeTokens">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CanTakeTokens" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ScannedQr">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ScannedQr" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AddTokensAmount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AddTokensAmount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AttractionId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AttractionId" generated properties.</summary>
         </member>
     </members>
 </doc>

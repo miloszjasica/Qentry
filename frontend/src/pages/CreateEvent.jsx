@@ -81,7 +81,7 @@ export default function CreateEvent() {
       longitude: 0,
       start_date: formData.startDate,
       end_date: formData.endDate,
-      participants: formData.maxParticipants,
+      max_participants: formData.maxParticipants,
       image: formData.imageUrl,
       category: mapCategoryToBackend(formData.category)
     };

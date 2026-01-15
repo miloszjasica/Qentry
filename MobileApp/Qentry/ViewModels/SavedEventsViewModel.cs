@@ -70,6 +70,20 @@ namespace Qentry.ViewModels
             set => SetProperty(ref _screenHeight, value);
         }
 
+        [RelayCommand]
+        private void SelectCategory(string category)
+        {
+            SelectedCategoryPolish = category;
+
+            if (CategoryMap.TryGetValue(category, out var english))
+                SelectedCategory = english;
+            else
+                SelectedCategory = null;
+        }
+
+        [ObservableProperty]
+        private string selectedCategoryPolish;
+
         public SavedEventsViewModel(EventService eventService, TokensService tokensService)
         {
             _eventService = eventService;
@@ -140,6 +154,25 @@ namespace Qentry.ViewModels
             "music", "art", "food", "sport", "business", "theatre", "tech", "wellness", "gaming", "film", "fashion", "books", "other"
         };
 
+        public Dictionary<string, string> CategoryMap { get; } = new()
+        {
+            { "Muzyka", "music" },
+            { "Sztuka", "art" },
+            { "Jedzenie", "food" },
+            { "Sport", "sport" },
+            { "Biznes", "business" },
+            { "Teatr", "theatre" },
+            { "Technologia", "tech" },
+            { "Wellness", "wellness" },
+            { "Gry", "gaming" },
+            { "Film", "film" },
+            { "Moda", "fashion" },
+            { "Książki", "books" },
+            { "Inne", "other" }
+        };
+
+        public List<string> CategoriesPolish => CategoryMap.Keys.ToList();
+
         [RelayCommand]
         private void ToggleFilterPanel()
         {
@@ -202,6 +235,16 @@ namespace Qentry.ViewModels
             {
                 DateFilter = null;
             }
+
+            LoadSavedEventsCommand.Execute(null);
+        }
+
+        partial void OnSelectedCategoryPolishChanged(string value)
+        {
+            if (value != null && CategoryMap.TryGetValue(value, out var english))
+                SelectedCategory = english; 
+            else
+                SelectedCategory = null;
 
             LoadSavedEventsCommand.Execute(null);
         }

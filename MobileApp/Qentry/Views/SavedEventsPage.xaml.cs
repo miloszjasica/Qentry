@@ -12,7 +12,7 @@ namespace Qentry.Views
             InitializeComponent();
             BindingContext = vm;
 
-            double height = (DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Density);
+            double height = (DeviceDisplay.MainDisplayInfo.Height / (DeviceDisplay.MainDisplayInfo.Density*1.5));
             BindingContext.GetType().GetProperty("ScreenHeight")?.SetValue(BindingContext, height);
         }
 

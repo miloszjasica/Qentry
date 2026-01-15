@@ -3,13 +3,14 @@
              xmlns:components="clr-namespace:Qentry.Views.Controls"
              xmlns:viewmodels="clr-namespace:Qentry.ViewModels"
              xmlns:views="clr-namespace:Qentry.Views"
+             xmlns:conv="clr-namespace:Qentry.Converters"
              x:Class="Qentry.Views.SavedEventsPage"
              x:Name="SavedEventsRoot"
              BackgroundColor="{StaticResource BgColor}">
 
     <Grid>
         <ScrollView>
-            <VerticalStackLayout Spacing="0">
+            <VerticalStackLayout Spacing="0" Margin="0" Padding="0">
 
                 <!-- Kalendarz -->
                 <Grid Margin="0,50,0,0">
@@ -58,22 +59,35 @@
                            FontAttributes="Bold"
                            TextColor="Black" />
 
-                    <CollectionView ItemsSource="{Binding Categories}"
-                                    SelectionMode="Single"
-                                    SelectedItem="{Binding SelectedCategory}">
+                    <CollectionView ItemsSource="{Binding CategoriesPolish}"
+                                    SelectionMode="None">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Horizontal" />
                         </CollectionView.ItemsLayout>
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame Padding="8"
-                                       Margin="5"
-                                       CornerRadius="10"
-                                       BackgroundColor="{StaticResource BgColor}"
-                                       BorderColor="{StaticResource Primary}">
+                                <Border Stroke="{StaticResource Primary}"
+                                        StrokeThickness="1"
+                                        Margin="5"
+                                        Padding="8"
+                                        StrokeShape="RoundRectangle 10">
+
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.SelectCategoryCommand, Source={x:Reference SavedEventsRoot}}"
+                                                              CommandParameter="{Binding}" />
+                                    </Border.GestureRecognizers>
+
+                                    <Border.Background>
+                                        <MultiBinding Converter="{StaticResource CategoryToColorConverter}">
+                                            <Binding />
+                                            <Binding Path="BindingContext.SelectedCategoryPolish"
+                                                     Source="{x:Reference SavedEventsRoot}" />
+                                        </MultiBinding>
+                                    </Border.Background>
+
                                     <Label Text="{Binding}" TextColor="Black" />
-                                </Frame>
+                                </Border>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
@@ -109,11 +123,13 @@
                         Stroke="{StaticResource Primary}"
                         StrokeThickness="2"
                         MinimumHeightRequest="{Binding ScreenHeight}"
-                        StrokeShape="RoundRectangle 50,50,0,0">
+                        StrokeShape="RoundRectangle 50,50,0,0"
+                        VerticalOptions="End"
+                        Margin="0, 0, 0, -1"
+                        Padding="0">
 
                     <Grid>
-                        <VerticalStackLayout>
-
+                        <VerticalStackLayout Margin="0, 20, 0, 0">
                             <!-- Przełącznik: zapisane/archiwum -->
                             <Border HeightRequest="60"
                                     Stroke="Transparent"
@@ -126,7 +142,7 @@
                                         HorizontalOptions="Center"
                                         StrokeShape="RoundRectangle 50">
 
-                                    <Grid ColumnDefinitions="*,*">
+                                    <Grid>
 
                                         <!-- Zapisane -->
                                         <Border BackgroundColor="{Binding IsCreatedSelected, Converter={StaticResource BoolToColorConverter}, ConverterParameter=Selected}"
@@ -140,24 +156,6 @@
 
                                             <Label Text="Zapisane wydarzenia"
                                                    TextColor="{Binding IsCreatedSelected, Converter={StaticResource BoolToTextColorConverter}}"
-                                                   FontAttributes="Bold"
-                                                   HorizontalOptions="Center"
-                                                   VerticalOptions="Center" />
-                                        </Border>
-
-                                        <!-- Archiwum -->
-                                        <Border Grid.Column="1"
-                                                BackgroundColor="{Binding IsArchivedSelected, Converter={StaticResource BoolToColorConverter}, ConverterParameter=Selected}"
-                                                StrokeThickness="0"
-                                                StrokeShape="RoundRectangle 50"
-                                                VerticalOptions="Fill"
-                                                HorizontalOptions="Fill">
-                                            <Border.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding ShowArchivedCommand}" />
-                                            </Border.GestureRecognizers>
-
-                                            <Label Text="Polubione wydarzenia"
-                                                   TextColor="{Binding IsArchivedSelected, Converter={StaticResource BoolToTextColorConverter}}"
                                                    FontAttributes="Bold"
                                                    HorizontalOptions="Center"
                                                    VerticalOptions="Center" />
@@ -247,18 +245,15 @@
                             <!-- Archiwum -->
                             <StackLayout IsVisible="{Binding IsArchivedSelected}"
                                          Margin="0,20,0,0">
-                                <Label Text="🗄 Archiwum wydarzeń..."
-                                       FontSize="18"
-                                       TextColor="Black" />
                             </StackLayout>
 
                             <!-- Brak wydarzeń -->
                             <StackLayout IsVisible="{Binding NoEventsVisible}"
                                          HorizontalOptions="Center"
                                          Margin="0,40">
-                                <Image Source="empty.png"
-                                       WidthRequest="150"
-                                       HeightRequest="150"
+                                <Image Source="brakwydarzenia.png"
+                                       WidthRequest="450"
+                                       HeightRequest="450"
                                        Opacity="0.6" />
 
                                 <Label Text="Nie masz żadnych wydarzeń."
@@ -270,10 +265,10 @@
                         </VerticalStackLayout>
                     </Grid>
                 </Border>
-
+                <Grid BackgroundColor="{StaticResource Primary}" HeightRequest="100" Margin="0" Padding="0"/>
             </VerticalStackLayout>
         </ScrollView>
-
+        
         <!-- Dolny pasek -->
         <components:CustomBottomNavBar VerticalOptions="End" />
     </Grid>

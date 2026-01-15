@@ -3,22 +3,25 @@ using Qentry.Services;
 using Qentry.ViewModels;
 using Qentry.Views;
 using System.Globalization;
+using ZXing.Net.Maui.Controls;
 
 namespace Qentry
 {
     public static class MauiProgram
     {
+        public static IServiceProvider Services { get; private set; }
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseBarcodeReader()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-            builder.Services.AddSingleton<AppShell>();
+            builder.Services.AddTransient<AppShell>();
 
             builder.Services.AddSingleton<HttpClient>();
             builder.Services.AddSingleton<EventService>();
@@ -33,13 +36,37 @@ namespace Qentry
             builder.Services.AddTransient<MyEventsViewModel>();
             builder.Services.AddSingleton<EventDetailsViewModel>();
             builder.Services.AddTransient<SavedEventDetailsViewModel>();
+            builder.Services.AddTransient<MyEventDetailsViewModel>();
+            builder.Services.AddTransient<AddAttractionViewModel>();
+            builder.Services.AddTransient<EditAttractionViewModel>();
+            builder.Services.AddTransient<EditEventViewModel>();
+            builder.Services.AddTransient<ManageRolesViewModel>();
+            builder.Services.AddTransient<StaffEventDetailsViewModel>();
+            builder.Services.AddTransient<RegisterViewModel>();
+            builder.Services.AddTransient<EditProfileViewModel>();
+<<<<<<< HEAD
+=======
+            builder.Services.AddTransient<TransactionsPageViewModel>();
+>>>>>>> patrykjas
 
             builder.Services.AddSingleton<LoginPage>();
+            builder.Services.AddSingleton<RegisterPage>();
             builder.Services.AddSingleton<ProfilePage>();
             builder.Services.AddTransient<MyEventsPage>();
             builder.Services.AddTransient<SavedEventsPage>();
             builder.Services.AddTransient<EventDetailsPage>();
             builder.Services.AddTransient<SavedEventDetailsPage>();
+            builder.Services.AddTransient<MyEventDetailsPage>();
+            builder.Services.AddTransient<AddAttractionPage>();
+            builder.Services.AddTransient<EditAttractionPage>();
+            builder.Services.AddTransient<EditEventPage>();
+            builder.Services.AddTransient<ManageRolesPage>();
+            builder.Services.AddTransient<StaffEventDetailsPage>();
+            builder.Services.AddTransient<EditProfilePage>();
+<<<<<<< HEAD
+=======
+            builder.Services.AddTransient<TransactionsPage>();
+>>>>>>> patrykjas
 
 
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pl-PL");
@@ -48,8 +75,10 @@ namespace Qentry
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
-
-            return builder.Build();
+            var app = builder.Build();
+            Services = app.Services;
+            return app;
         }
+
     }
 }

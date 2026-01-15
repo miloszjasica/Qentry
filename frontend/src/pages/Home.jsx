@@ -7,12 +7,18 @@ export default function Home({ search }) {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [category, setCategory] = useState("all");
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const delay = setTimeout(() => {
       const fetchEvents = async () => {
         const token = localStorage.getItem("access");
-
         let url = "http://localhost:8000/events/";
 
         if (category !== "all") {
@@ -20,7 +26,7 @@ export default function Home({ search }) {
         }
 
         if (search.trim() !== "") {
-          url += url.includes("?") 
+          url += url.includes("?")
             ? `&name=${encodeURIComponent(search)}`
             : `?name=${encodeURIComponent(search)}`;
         }
@@ -46,12 +52,25 @@ export default function Home({ search }) {
     return () => clearTimeout(delay);
   }, [search, category]);
 
+  const getGridColumns = () => {
+    if (windowWidth >= 1536) return 5;
+    if (windowWidth >= 1280) return 4;
+    if (windowWidth >= 768) return 2;
+    return 1;
+  };
+
   return (
     <div style={{ padding: "20px" }}>
-
       <CategoryBar selected={category} onSelect={setCategory} />
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", marginTop: "20px" }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${getGridColumns()}, 1fr)`,
+          gap: "20px",
+          marginTop: "20px",
+        }}
+      >
         {events.map(ev => (
           <EventCard key={ev.id_event} event={ev} onOpen={setSelectedEvent} />
         ))}
