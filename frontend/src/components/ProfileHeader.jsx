@@ -40,14 +40,28 @@ export function ProfileHeader({ user, stats, onEditClick }) {
             <Edit className="w-3.5 h-3.5 md:w-4 md:h-4 text-white" />
           </button>
         </div>
+        
+        <div className="flex-1 flex flex-col justify-center text-gray-700 text-sm md:text-base gap-1 sm:gap-2 items-center sm:items-start">
+        {isOrganizer && (
+          <div>
+            <span className="inline-block bg-[#9893da] text-white text-xs md:text-sm px-4 py-1 rounded mt-1">
+              Organizator
+            </span>
+          </div>
+        )}
+          <div className="flex items-center gap-2">
+            <User className="w-4 h-4 md:w-5 md:h-5 text-gray-400 flex-shrink-0" />
+            <span className="truncate font-medium">{fullName}</span>
+          </div>
 
-        {/* Center: email & location */}
-        <div className="flex-1 flex flex-col justify-center text-gray-700 text-sm md:text-base gap-1 sm:gap-2 mx-4">
           <div className="flex items-center gap-2">
             <Mail className="w-4 h-4 md:w-5 md:h-5 text-gray-400 flex-shrink-0" />
             <span className="truncate">{user.email}</span>
           </div>
         </div>
+
+
+
 
         {/* Right: buttons, one under the other, full width on mobile */}
         <div className="flex flex-col gap-2 w-full sm:w-auto">

@@ -280,6 +280,34 @@ export function EventManager({ eventId, eventTitle, onClose, onUpdateRole, refre
     p.email && p.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const handleDeleteEvent = async () => {
+    if (!window.confirm(`Czy na pewno chcesz usunąć wydarzenie "${eventTitle}"?`)) return;
+      const token = localStorage.getItem("access");
+      try {
+        const res = await fetch(`http://localhost:8000/events/${eventId}/delete/`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!res.ok) {
+          let errorMessage = res.statusText;
+          try {
+            const errorData = await res.json();
+            errorMessage = errorData.detail || errorMessage;
+          } catch (e) {
+            // ignore JSON parse errors
+          }
+          throw new Error(errorMessage);
+        }
+        alert("Wydarzenie zostało usunięte.");
+        onClose();
+      } catch (err) {
+        console.error("Błąd usuwania wydarzenia:", err);
+        alert(`Błąd usuwania wydarzenia: ${err.message}`);
+      }
+    };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-5xl max-h-[80vh] flex flex-col">
@@ -573,7 +601,7 @@ export function EventManager({ eventId, eventTitle, onClose, onUpdateRole, refre
                             
                             <div className="flex items-center gap-4 text-sm">
                               <span className="font-medium text-[#9893da]">
-                                {attraction.price ? `${attraction.price} zł` : 'Bezpłatna'}
+                                {attraction.price ? `${attraction.price} Tokenów` : 'Bezpłatna'}
                               </span>
                               <span className="text-gray-500">
                                 Zakupów: {attraction.counter || 0}
@@ -608,16 +636,31 @@ export function EventManager({ eventId, eventTitle, onClose, onUpdateRole, refre
         )}
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-gray-200 bg-gray-50">
-          <div className="flex justify-between items-center">
-            <div>
-            </div>
+        <div className="flex justify-between items-center px-6 py-4 border-t border-gray-200">
+          <div>
             <button
-              onClick={onClose}
-              className="px-4 py-2 bg-[#9893da] hover:bg-[#a9a4e5] text-white rounded-lg transition-colors"
+              onClick={handleDeleteEvent}
+              disabled={participants.length > 0}
+              className={`px-4 py-2 rounded-lg transition-colors ${
+                participants.length === 0
+                  ? "bg-red-500 hover:bg-red-600 text-white cursor-pointer"
+                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
+              }`}
             >
-              Zamknij
+              Usuń wydarzenie
             </button>
+          </div>
+          <div className="px-6 py-4 border-t border-gray-200 bg-gray-50">
+            <div className="flex justify-between items-center">
+              <div>
+              </div>
+              <button
+                onClick={onClose}
+                className="px-4 py-2 bg-[#9893da] hover:bg-[#a9a4e5] text-white rounded-lg transition-colors"
+              >
+                Zamknij
+              </button>
+            </div>
           </div>
         </div>
       </div>

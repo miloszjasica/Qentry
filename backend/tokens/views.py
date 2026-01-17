@@ -96,7 +96,7 @@ def add_tokens(request, qr_string, id_event):
         
         if operator_qr.user_role == 'token_seller' or operator_qr.user_role == 'staff':
 
-            amount = request.data.get('amount')
+            amount = request.query_params.get('amount')
             if amount is None:
                 return Response({'error': 'Kwota musi być wprowadzona'}, status=400)
             
