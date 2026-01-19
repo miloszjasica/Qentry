@@ -17,7 +17,16 @@ export function ProfileEventCard({ event, onClick, onManageClick, statusLabel = 
 
   return (
     <div
-      onClick={() => onClick(event)}
+      onClick={() => {
+        const now = new Date();
+        const eventDate = new Date(event.start_date);
+        
+        if (eventDate < now) {
+          return;
+        }
+
+        onClick(event);
+      }}
       className="flex flex-col sm:flex-row items-start gap-3 md:gap-4 p-3 md:p-4 border border-gray-200 rounded-xl hover:border-[#9893da] hover:shadow-md transition-all cursor-pointer bg-white"
     >
       {/* Zdjęcie Wydarzenia */}

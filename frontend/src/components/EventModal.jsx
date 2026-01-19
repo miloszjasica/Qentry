@@ -31,7 +31,7 @@ export default function EventModal({ event, onClose }) {
       const fetchStatus = async () => {
         try {
           const response = await fetch(
-            `http://localhost:8000/events/events/${event.id_event}/status/`,
+            `/events/events/${event.id_event}/status/`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }

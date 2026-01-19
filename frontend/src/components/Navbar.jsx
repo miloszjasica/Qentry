@@ -16,7 +16,7 @@
       if (!token) return setUser(null);
 
       try {
-        const res = await fetch("http://localhost:8000/api/users/me/", {
+        const res = await fetch("/api/users/me/", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -139,7 +139,7 @@
                 style={({ isActive }) => ({
                   display: "flex",
                   alignItems: "center",
-                  padding: "12px 16px",
+                  padding: "12px 12px",
                   marginBottom: 8,
                   borderRadius: 10,
                   textDecoration: "none",
@@ -152,6 +152,7 @@
                     <img
                       src={`/${icon}`}
                       width={20}
+                      height={20}
                       style={{
                         filter: isActive
                           ? "brightness(0) invert(0)"
@@ -176,6 +177,7 @@
                 window.location.href = user ? "/" : "/login";
               }}
               style={{
+                padding: "0px 12px",
                 background: "transparent",
                 border: "none",
                 color: "white",

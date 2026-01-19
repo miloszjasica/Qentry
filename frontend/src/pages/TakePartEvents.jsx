@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import EventCard from "../components/EventCard";
 import EventModal from "../components/EventModal";
 import CategoryBar from "../components/CategoryBar";
+import { useNavigate } from "react-router-dom";
 
 export default function TakePartEvents({ search, radius = 30 }) {
+  const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [category, setCategory] = useState("all");
@@ -16,9 +18,17 @@ export default function TakePartEvents({ search, radius = 30 }) {
   }, []);
 
   useEffect(() => {
+    // 1. SPRAWDZENIE TOKENA NA WEJ�CIU
+    const token = localStorage.getItem("access");
+
+    if (!token) {
+      // Je�li nie ma tokena, natychmiast id� do logowania
+      navigate('/login');
+      return;
+    }
+
     const delay = setTimeout(() => {
       const fetchNearbyEvents = async () => {
-        const token = localStorage.getItem("access");
         const params = new URLSearchParams();
 
         if (category && category !== "all") {
@@ -34,17 +44,28 @@ export default function TakePartEvents({ search, radius = 30 }) {
           url += `?${params.toString()}`;
         }
 
-        const headers = { Accept: "application/json" };
-        if (token) headers["Authorization"] = `Bearer ${token}`;
+        const headers = { 
+            Accept: "application/json",
+            "Authorization": `Bearer ${token}`
+        };
 
         try {
           const res = await fetch(url, { headers });
-          if (!res.ok) throw new Error(`Błąd HTTP: ${res.status}`);
+
+          // 2. SPRAWDZENIE CZY TOKEN NIE WYGAS� (B��d 401)
+          if (res.status === 401 || res.status === 403) {
+             console.warn("Sesja wygas�a, przekierowanie...");
+             localStorage.removeItem("access"); // Czy�cimy stary token
+             navigate('/login');
+             return;
+          }
+
+          if (!res.ok) throw new Error(`Blad HTTP: ${res.status}`);
 
           const data = await res.json();
           setEvents(data);
         } catch (err) {
-          console.error("Błąd pobierania wydarzeń w pobliżu:", err);
+          console.error("Blad pobierania wydarzen w poblizu:", err);
           setEvents([]);
         }
       };
@@ -53,7 +74,7 @@ export default function TakePartEvents({ search, radius = 30 }) {
     }, 300);
 
     return () => clearTimeout(delay);
-  }, [search, category, radius]);
+  }, [search, category, radius, navigate]); // Dodano navigate do zale�no�ci
   
   const getGridColumns = () => {
     if (windowWidth >= 1536) return 5;

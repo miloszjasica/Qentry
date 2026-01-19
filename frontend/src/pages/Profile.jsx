@@ -12,6 +12,7 @@ export default function Profile() {
   const [participatingEvents, setParticipatingEvents] = useState([]);
   const [createdEvents, setCreatedEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [countParticipants, setCountParticipants] = useState(0);
 
   // Stan dla modala wydarzeń
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -19,6 +20,7 @@ export default function Profile() {
   const [selectedEventForManager, setSelectedEventForManager] = useState(null);
   const [isEventManagerOpen, setIsEventManagerOpen] = useState(false);
   const [refreshCounter, setRefreshCounter] = useState(0);
+
 
   const handleManageEvent = (event) => {
     const eventId = event.id || event.id_event;
