@@ -60,7 +60,7 @@ export function LoginView({ onLoginSubmit, apiError, onBack, onSwitchToRegister 
 
         {/* Logo/Brand */}
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-[#544e61] mb-2">QuentRy</h2>
+          <h2 className="text-2xl font-bold text-[#544e61] mb-2">QentRy</h2>
           <p className="text-gray-600">Zaloguj się do swojego konta</p>
         </div>
 

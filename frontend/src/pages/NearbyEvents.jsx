@@ -1,46 +1,66 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import EventCard from "../components/EventCard";
 import EventModal from "../components/EventModal";
 import CategoryBar from "../components/CategoryBar";
 
 export default function NearbyEvents({ search, radius = 30 }) {
+  const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [category, setCategory] = useState("all");
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
+    // 1. Sprawdzamy czy u�ytkownik jest zalogowany
+    const token = localStorage.getItem("access");
+
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+
     const delay = setTimeout(() => {
       const fetchNearbyEvents = async () => {
-        const token = localStorage.getItem("access");
+        const params = new URLSearchParams();
+        
+        // Dodajemy parametry do URL
+        params.append("radius", radius); 
 
-        let url = `http://localhost:8000/events/nearby-events/?radius=${radius}`;
-
-        if (category !== "all") {
-          url += `&category=${category}`;
+        if (category && category !== "all") {
+          params.append("category", category);
         }
 
         if (search?.trim()) {
-          url += `&name=${encodeURIComponent(search.trim())}`;
+          params.append("name", search.trim());
         }
 
-        const headers = { "Accept": "application/json" };
-        if (token) headers["Authorization"] = `Bearer ${token}`;
+        // 2. WA�NE: �cie�ka relatywna (bez localhost)
+        let url = "/events/nearby-events/";
+        if (params.toString()) {
+          url += `?${params.toString()}`;
+        }
+
+        const headers = { 
+            Accept: "application/json",
+            "Authorization": `Bearer ${token}`
+        };
 
         try {
           const res = await fetch(url, { headers });
-          if (!res.ok) throw new Error(`Błąd HTTP: ${res.status}`);
+
+          // 3. Obs�uga wyga�ni�cia sesji
+          if (res.status === 401 || res.status === 403) {
+            localStorage.removeItem('access');
+            navigate('/login');
+            return;
+          }
+
+          if (!res.ok) throw new Error(`B��d HTTP: ${res.status}`);
 
           const data = await res.json();
           setEvents(data);
         } catch (err) {
-          console.error("Błąd pobierania wydarzeń w pobliżu:", err);
+          console.error("Blad pobierania wydarzen w poblizu:", err);
           setEvents([]);
         }
       };
@@ -49,29 +69,28 @@ export default function NearbyEvents({ search, radius = 30 }) {
     }, 300);
 
     return () => clearTimeout(delay);
-  }, [search, category, radius]);
-
-  const getGridColumns = () => {
-    if (windowWidth >= 1536) return 5;
-    if (windowWidth >= 1280) return 4;
-    if (windowWidth >= 768) return 2;
-    return 1;
-  };
+  }, [search, category, radius, navigate]);
 
   return (
     <div style={{ padding: "20px" }}>
       <CategoryBar selected={category} onSelect={setCategory} />
 
+      {/* 4. CSS GRID - Naprawia rozje�d�anie si� kart */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: `repeat(${getGridColumns()}, 1fr)`,
+          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", 
           gap: "20px",
           marginTop: "20px",
+          alignItems: "stretch" 
         }}
       >
+        {events.length === 0 && <div>Brak wydarze� w pobli�u</div>}
+
         {events.map(ev => (
-          <EventCard key={ev.id_event} event={ev} onOpen={setSelectedEvent} />
+          <div key={ev.id || ev.id_event} style={{ height: '100%' }}>
+            <EventCard event={ev} onOpen={setSelectedEvent} />
+          </div>
         ))}
       </div>
 
