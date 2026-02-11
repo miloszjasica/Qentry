@@ -62,6 +62,7 @@ QentRy follows a client–server architecture built with technologies such as:
 # 4. Demo
 
 [Watch web application demo](demo/demo_web.mp4)
+
 [Watch mobile application demo](demo/demo_mobile.mp4)
 
 # 5. How to run
